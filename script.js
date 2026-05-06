@@ -1,29 +1,58 @@
 const grid = document.getElementById("grid");
+const searchInput = document.querySelector("input");
 
+// 🎬 Video data
 const videos = [
-  "https://www.youtube.com/embed/D97FoacuYxY",
-  "https://www.youtube.com/embed/t6bvt-vOtZI"
+  { id: "D97FoacuYxY", title: "Action Scene" },
+  { id: "t6bvt-vOtZI", title: "Short Clip" },
+  { id: "kXYiU_JCYtU", title: "Emotional Scene" }
 ];
 
-videos.forEach(link => {
-  const card = document.createElement("div");
-  card.className = "card";
+// 🔥 Load videos
+function loadVideos(list) {
+  grid.innerHTML = "";
 
-  card.innerHTML = `
-    <iframe src="${link}" allowfullscreen></iframe>
-    <div class="actions">
-      <button onclick="like(this)">❤️</button>
-      <button onclick="save(this)">🔖</button>
-    </div>
+  list.forEach(video => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <img src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
+      <div class="title">${video.title}</div>
+    `;
+
+    card.onclick = () => openVideo(video.id);
+    grid.appendChild(card);
+  });
+}
+
+// 🎬 Open video
+function openVideo(id) {
+  const player = document.createElement("div");
+  player.className = "player";
+
+  player.innerHTML = `
+    <iframe 
+      src="https://www.youtube.com/embed/${id}?autoplay=1"
+      allow="autoplay"
+      allowfullscreen>
+    </iframe>
   `;
 
-  grid.appendChild(card);
+  player.onclick = () => player.remove();
+  document.body.appendChild(player);
+}
+
+// 🔍 Search system
+searchInput.addEventListener("input", () => {
+  const value = searchInput.value.toLowerCase();
+
+  const filtered = videos.filter(v =>
+    v.title.toLowerCase().includes(value)
+  );
+
+  loadVideos(filtered);
 });
 
-function like(btn){
-  btn.style.color = "red";
-}
-
-function save(btn){
-  alert("Saved!");
-}
+// 🚀 Default load
+loadVideos(videos);
