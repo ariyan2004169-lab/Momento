@@ -1,26 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Momento</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Momento</title>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<h1 class="logo">Momento</h1>
+<header>
+  <h1>Momento</h1>
+  <input type="text" placeholder="Search moments...">
+</header>
 
-<div class="categories">
-  <button onclick="loadCategory('action')">Action</button>
-  <button onclick="loadCategory('sad')">Sad</button>
-  <button onclick="loadCategory('romantic')">Romantic</button>
-</div>
-
-<div id="grid" class="grid"></div>
-
-<div id="player" class="player hidden"></div>
+<main class="grid" id="grid"></main>
 
 <script src="script.js"></script>
-
 </body>
 </html>
