@@ -5,64 +5,78 @@ body {
   color: white;
 }
 
+/* HEADER */
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 15px;
   background: #111;
   position: sticky;
   top: 0;
+  z-index: 10;
+}
+
+header h1 {
+  font-size: 20px;
 }
 
 header input {
-  padding: 8px;
+  padding: 8px 12px;
   border-radius: 20px;
   border: none;
-  width: 40%;
+  width: 50%;
 }
 
+/* PINTEREST GRID */
 .grid {
   column-count: 2;
-  column-gap: 10px;
-  padding: 10px;
+  column-gap: 12px;
+  padding: 12px;
 }
 
+/* responsive columns */
+@media (min-width: 768px) {
+  .grid {
+    column-count: 3;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    column-count: 4;
+  }
+}
+
+/* CARD STYLE */
 .card {
   background: #1a1a1a;
-  margin-bottom: 10px;
-  border-radius: 12px;
+  margin-bottom: 12px;
+  border-radius: 16px;
   overflow: hidden;
   break-inside: avoid;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-iframe {
+.card:hover {
+  transform: scale(1.03);
+}
+
+/* THUMBNAIL */
+.card img {
   width: 100%;
-  height: 200px;
-  border: none;
+  display: block;
 }
 
-.actions {
-  display: flex;
-  justify-content: space-around;
-  padding: 10px;
-}
-
-button {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 18px;
-}
-img {
-  width: 100%;
-  border-radius: 10px;
-}
-
+/* TITLE */
 .title {
-  padding: 8px;
-  font-size: 14px;
+  padding: 10px;
+  font-size: 13px;
+  opacity: 0.9;
 }
 
+/* VIDEO OVERLAY */
 .player {
   position: fixed;
   top: 0;
@@ -70,9 +84,11 @@ img {
   width: 100%;
   height: 100%;
   background: black;
+  z-index: 100;
 }
 
 .player iframe {
   width: 100%;
   height: 100%;
+  border: none;
 }
