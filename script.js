@@ -1,59 +1,29 @@
-// 🔥 Your video categories
-const data = {
-  action: [
-    "D97FoacuYxY",
-    "t6bvt-vOtZI"
-  ],
-  sad: [
-    "kXYiU_JCYtU"
-  ],
-  romantic: [
-    "fLexgOxsZu0"
-  ]
-};
+const grid = document.getElementById("grid");
 
-// 📦 Load videos into grid
-function loadCategory(category) {
-  const grid = document.getElementById("grid");
-  grid.innerHTML = "";
+const videos = [
+  "https://www.youtube.com/embed/D97FoacuYxY",
+  "https://www.youtube.com/embed/t6bvt-vOtZI"
+];
 
-  data[category].forEach(id => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.innerText = "Play";
-    card.onclick = () => openVideo(id);
-    grid.appendChild(card);
-  });
-}
+videos.forEach(link => {
+  const card = document.createElement("div");
+  card.className = "card";
 
-// 🎬 Open video (FIXED VERSION)
-function openVideo(id) {
-  const player = document.getElementById("player");
-
-  player.innerHTML = `
-    <iframe 
-      src="https://www.youtube.com/embed/${id}?autoplay=1"
-      width="100%" 
-      height="100%" 
-      allow="autoplay"
-      allowfullscreen>
-    </iframe>
-
-    <button onclick="closeVideo()" 
-      style="position:absolute;top:20px;left:20px;z-index:10;">
-      Back
-    </button>
+  card.innerHTML = `
+    <iframe src="${link}" allowfullscreen></iframe>
+    <div class="actions">
+      <button onclick="like(this)">❤️</button>
+      <button onclick="save(this)">🔖</button>
+    </div>
   `;
 
-  player.classList.remove("hidden");
+  grid.appendChild(card);
+});
+
+function like(btn){
+  btn.style.color = "red";
 }
 
-// ❌ Close video
-function closeVideo() {
-  const player = document.getElementById("player");
-  player.classList.add("hidden");
-  player.innerHTML = "";
+function save(btn){
+  alert("Saved!");
 }
-
-// 🚀 Default load
-loadCategory("action");
