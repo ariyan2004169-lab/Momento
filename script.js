@@ -54,3 +54,28 @@ videos.forEach(v => {
   grid.appendChild(card);
 
 });
+const searchInput = document.getElementById("searchInput");
+
+if (searchInput) {
+
+  searchInput.addEventListener("input", function () {
+
+    const value = this.value.toLowerCase();
+
+    const cards = document.querySelectorAll(".video-card");
+
+    cards.forEach(card => {
+
+      const text = card.innerText.toLowerCase();
+
+      if (text.includes(value)) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+
+    });
+
+  });
+
+}
