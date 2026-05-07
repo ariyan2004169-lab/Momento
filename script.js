@@ -79,3 +79,44 @@ if (searchInput) {
   });
 
 }
+function addVideo(){
+
+  const input = document.getElementById("videoLink");
+
+  const url = input.value;
+
+  if(!url) return;
+
+  // extract video ID
+  const videoId = url.split("v=")[1];
+
+  if(!videoId) return;
+
+  const cleanId = videoId.split("&")[0];
+
+  const grid = document.getElementById("videoGrid");
+
+  const card = document.createElement("div");
+
+  card.className = "video-card";
+
+  card.innerHTML = `
+    <img src="https://img.youtube.com/vi/${cleanId}/maxresdefault.jpg">
+    <div class="video-info">
+      <h3>New Video</h3>
+      <p>Uploaded</p>
+    </div>
+  `;
+
+  card.onclick = () => {
+    window.open(
+      `https://www.youtube.com/watch?v=${cleanId}`,
+      "_blank"
+    );
+  };
+
+  grid.appendChild(card);
+
+  input.value = "";
+
+}
