@@ -2,219 +2,70 @@
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
-  <meta name="viewport"
-  content="width=device-width, initial-scale=1.0">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Platform</title>
 
-  <link rel="stylesheet"
-  href="style.css">
-
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- HOME PAGE -->
+<!-- HOME -->
+<div class="page active" id="home">
 
-  <div class="page active"
-  id="homePage">
+  <h1 class="title">Discover</h1>
 
-    <h1 class="main-title">
-      Discover
-    </h1>
-<!-- FEATURED BANNER -->
-
-<div class="featured-banner">
-
-  <img
-  src="https://img.youtube.com/vi/D97FoacuYxY/maxresdefault.jpg">
-
-  <div class="banner-overlay">
-
-    <h2>Featured Experience</h2>
-
-    <p>
-      Explore cinematic visuals,
-      creativity and inspiration.
-    </p>
-
-    <button>
-      Watch Now
-    </button>
-
-  </div>
+  <div class="video-grid" id="videoGrid"></div>
 
 </div>
-    <div class="video-grid">
-<!-- TRENDING SECTION -->
-
-<h2 class="section-title">
-  Trending
-</h2>
-
-<div class="scroll-row">
 
 
-  <div class="scroll-card">
+<!-- SEARCH -->
+<div class="page" id="search">
 
-    <img
-    src="https://img.youtube.com/vi/tgbNymZ7vqY/maxresdefault.jpg">
+  <h1 class="title">Search</h1>
 
-  </div>
-
-
-
-  <div class="scroll-card">
-
-    <img
-    src="https://img.youtube.com/vi/ysz5S6PUM-U/maxresdefault.jpg">
-
-  </div>
-
-
-
-  <div class="scroll-card">
-
-    <img
-    src="https://img.youtube.com/vi/ScMzIvxBSi4/maxresdefault.jpg">
-
-  </div>
-
-
-
-  <div class="scroll-card">
-
-    <img
-    src="https://img.youtube.com/vi/D97FoacuYxY/maxresdefault.jpg">
-
-  </div>
+  <input type="text" placeholder="Search videos...">
 
 </div>
-      <!-- CARD -->
-
-      <a href="https://www.youtube.com/watch?v=D97FoacuYxY"
-target="_blank"
-class="video-card">
-
-  <img src="https://img.youtube.com/vi/D97FoacuYxY/maxresdefault.jpg">
-
-  <div class="video-info">
-    <h3>Cinematic Visuals</h3>
-    <p>Trending • Creative</p>
-  </div>
-
-      </a>
 
 
+<!-- UPLOAD -->
+<div class="page" id="upload">
+
+  <h1 class="title">Upload</h1>
+
+  <input type="text" placeholder="Paste YouTube link">
+
+</div>
 
 
-      <div class="video-card">
+<!-- ACCOUNT -->
+<div class="page" id="account">
 
-        <img
-        src="https://img.youtube.com/vi/ScMzIvxBSi4/maxresdefault.jpg">
+  <h1 class="title">Account</h1>
 
-        <div class="video-info">
+  <p>Your profile will appear here</p>
 
-          <h3>Animation Ideas</h3>
-
-          <p>Animation • Motion</p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
+</div>
 
 
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
 
-  <!-- SEARCH PAGE -->
+  <button onclick="showPage('home')">Home</button>
+  <button onclick="showPage('search')">Search</button>
 
-  <div class="page"
-  id="searchPage">
+  <button class="upload-btn"
+  onclick="showPage('upload')">+</button>
 
-    <h1>Search</h1>
+  <button onclick="showPage('account')">Account</button>
 
-    <input type="text"
-    placeholder="Search content">
-
-  </div>
-
-
-
-  <!-- UPLOAD PAGE -->
-
-  <div class="page"
-  id="uploadPage">
-
-    <h1>Upload</h1>
-
-    <input type="text"
-    placeholder="Paste YouTube link">
-
-  </div>
+</div>
 
 
-
-  <!-- ACCOUNT PAGE -->
-
-  <div class="page"
-  id="accountPage">
-
-    <h1>Account</h1>
-
-    <p>Profile section</p>
-
-  </div>
-
-
-
-  <!-- BOTTOM NAV -->
-
-  <div class="bottom-nav">
-
-    <button
-    onclick="showPage('homePage')">
-
-      Home
-
-    </button>
-
-
-
-    <button
-    onclick="showPage('searchPage')">
-
-      Search
-
-    </button>
-
-
-
-    <button
-    class="upload-btn"
-    onclick="showPage('uploadPage')">
-
-      +
-
-    </button>
-
-
-
-    <button
-    onclick="showPage('accountPage')">
-
-      Account
-
-    </button>
-
-  </div>
-
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
