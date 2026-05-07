@@ -1,38 +1,64 @@
 const grid = document.getElementById("grid");
-const searchInput = document.querySelector("input");
 
-// 🎬 Video data
+// 🎬 Video collection
 const videos = [
-  { id: "D97FoacuYxY", title: "Action Scene" },
-  { id: "t6bvt-vOtZI", title: "Short Clip" },
-  { id: "kXYiU_JCYtU", title: "Emotional Scene" }
+  {
+    id: "D97FoacuYxY",
+    category: "action",
+    title: "Epic Action Scene"
+  },
+
+  {
+    id: "t6bvt-vOtZI",
+    category: "action",
+    title: "Short Cinematic Clip"
+  },
+
+  {
+    id: "ysz5S6PUM-U",
+    category: "sad",
+    title: "Emotional Moment"
+  },
+
+  {
+    id: "RgKAFK5djSk",
+    category: "romantic",
+    title: "Romantic Scene"
+  }
 ];
 
 // 🔥 Load videos
-function loadVideos(list) {
+function load(list) {
   grid.innerHTML = "";
 
-  list.forEach(video => {
+  list.forEach(v => {
+
     const card = document.createElement("div");
     card.className = "card";
 
     card.innerHTML = `
-      <img src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
-      <div class="title">${video.title}</div>
+      <img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg">
+
+      <div class="title">
+        ${v.title}
+      </div>
     `;
 
-    card.onclick = () => openVideo(video.id);
+    card.onclick = () => openVideo(v.id);
+
     grid.appendChild(card);
   });
 }
 
-// 🎬 Open video
+// 🎬 Open video player
 function openVideo(id) {
+
   const player = document.createElement("div");
+
   player.className = "player";
 
   player.innerHTML = `
-    <iframe 
+    <iframe
       src="https://www.youtube.com/embed/${id}?autoplay=1"
       allow="autoplay"
       allowfullscreen>
@@ -40,19 +66,26 @@ function openVideo(id) {
   `;
 
   player.onclick = () => player.remove();
+
   document.body.appendChild(player);
 }
 
-// 🔍 Search system
-searchInput.addEventListener("input", () => {
-  const value = searchInput.value.toLowerCase();
+// 🎯 Category filter
+function filter(type) {
 
-  const filtered = videos.filter(v =>
-    v.title.toLowerCase().includes(value)
-  );
+  if (type === "all") {
+    load(videos);
+  }
 
-  loadVideos(filtered);
-});
+  else {
+
+    const filtered = videos.filter(
+      v => v.category === type
+    );
+
+    load(filtered);
+  }
+}
 
 // 🚀 Default load
-loadVideos(videos);
+load(videos);
