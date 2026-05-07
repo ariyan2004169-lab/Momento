@@ -171,3 +171,14 @@ function filter(type) {
 
 // 🚀 DEFAULT LOAD
 load(videos);
+const loginBtn = document.getElementById("loginBtn");
+const loginPopup = document.getElementById("loginPopup");
+const closePopup = document.getElementById("closePopup");
+
+loginBtn.onclick = () => {
+  loginPopup.style.display = "flex";
+};
+
+closePopup.onclick = () => {
+  loginPopup.style.display = "none";
+};
