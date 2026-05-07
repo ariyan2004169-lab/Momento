@@ -246,3 +246,59 @@ input{
 
   cursor:pointer;
 }
+/* SECTION TITLE */
+
+.section-title{
+  margin-top:35px;
+  margin-bottom:18px;
+
+  font-size:24px;
+}
+
+/* HORIZONTAL SCROLL */
+
+.scroll-row{
+  display:flex;
+
+  gap:15px;
+
+  overflow-x:auto;
+
+  padding-bottom:10px;
+}
+
+/* REMOVE SCROLLBAR */
+
+.scroll-row::-webkit-scrollbar{
+  display:none;
+}
+
+/* SCROLL CARD */
+
+.scroll-card{
+  min-width:220px;
+
+  border-radius:18px;
+
+  overflow:hidden;
+
+  flex-shrink:0;
+
+  cursor:pointer;
+
+  transition:0.3s;
+}
+
+/* HOVER */
+
+.scroll-card:hover{
+  transform:scale(1.03);
+}
+
+/* IMAGE */
+
+.scroll-card img{
+  width:100%;
+
+  display:block;
+}
