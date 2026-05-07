@@ -1,91 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Momento</title>
-<link rel="stylesheet" href="style.css">
+
+  <meta charset="UTF-8">
+  <meta name="viewport"
+  content="width=device-width, initial-scale=1.0">
+
+  <title>My Platform</title>
+
+  <link rel="stylesheet"
+  href="style.css">
+
 </head>
+
 <body>
 
-<header>
-  <h1>Momento</h1>
-  <input type="text" placeholder="Search moments...">
-</header>
+  <!-- HOME PAGE -->
 
-<main class="grid" id="grid"></main>
+  <div class="page active"
+  id="homePage">
 
-<script src="script.js"></script>
-</body>
-</html>
-<div class="chips">
-  <button onclick="filter('all')">All</button>
-  <button onclick="filter('action')">Action</button>
-  <button onclick="filter('sad')">Sad</button>
-  <button onclick="filter('romantic')">Romantic</button>
-</div>
-<div class="chips">
+    <h1 class="main-title">
+      Discover
+    </h1>
 
-  <button onclick="filter('all')">All</button>
+    <div class="video-grid">
 
-  <button onclick="filter('action')">Action</button>
+      <!-- CARD -->
 
-  <button onclick="filter('sad')">Sad</button>
+      <div class="video-card">
 
-  <button onclick="filter('romantic')">Romantic</button>
+        <img
+        src="https://img.youtube.com/vi/D97FoacuYxY/maxresdefault.jpg">
 
-  <button onclick="filter('animation')">Animation</button>
+        <div class="video-info">
 
-</div>
-<button id="loginBtn">Login</button>
-<div class="login-popup" id="loginPopup">
+          <h3>Cinematic Visuals</h3>
 
-  <div class="login-box">
-    <h2>Login</h2>
+          <p>Trending • Creative</p>
 
-    <input type="email" placeholder="Email">
-    <input type="password" placeholder="Password">
+        </div>
 
-    <button>Sign In</button>
+      </div>
 
-    <span id="closePopup">X</span>
+
+
+      <div class="video-card">
+
+        <img
+        src="https://img.youtube.com/vi/ScMzIvxBSi4/maxresdefault.jpg">
+
+        <div class="video-info">
+
+          <h3>Animation Ideas</h3>
+
+          <p>Animation • Motion</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 
-</div>
-<!-- MAIN APP -->
-
-<div class="page active" id="homePage">
-  <h1>Home</h1>
-</div>
-
-<div class="page" id="searchPage">
-  <h1>Search</h1>
-</div>
-
-<div class="page" id="uploadPage">
-  <h1>Upload</h1>
-</div>
-
-<div class="page" id="accountPage">
-  <h1>Account</h1>
-</div>
 
 
-<!-- BOTTOM NAVIGATION -->
+  <!-- SEARCH PAGE -->
 
-<div class="bottom-nav">
+  <div class="page"
+  id="searchPage">
 
-  <button onclick="showPage('homePage')">Home</button>
+    <h1>Search</h1>
 
-  <button onclick="showPage('searchPage')">Search</button>
+    <input type="text"
+    placeholder="Search content">
 
-  <button class="upload-btn"
+  </div>
+
+
+
+  <!-- UPLOAD PAGE -->
+
+  <div class="page"
+  id="uploadPage">
+
+    <h1>Upload</h1>
+
+    <input type="text"
+    placeholder="Paste YouTube link">
+
+  </div>
+
+
+
+  <!-- ACCOUNT PAGE -->
+
+  <div class="page"
+  id="accountPage">
+
+    <h1>Account</h1>
+
+    <p>Profile section</p>
+
+  </div>
+
+
+
+  <!-- BOTTOM NAV -->
+
+  <div class="bottom-nav">
+
+    <button
+    onclick="showPage('homePage')">
+
+      Home
+
+    </button>
+
+
+
+    <button
+    onclick="showPage('searchPage')">
+
+      Search
+
+    </button>
+
+
+
+    <button
+    class="upload-btn"
     onclick="showPage('uploadPage')">
-    +
-  </button>
 
-  <button onclick="showPage('accountPage')">
-    Account
-  </button>
+      +
 
-</div>
+    </button>
+
+
+
+    <button
+    onclick="showPage('accountPage')">
+
+      Account
+
+    </button>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
