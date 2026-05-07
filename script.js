@@ -79,7 +79,11 @@ if (searchInput) {
   });
 
 }
-function addVideo(){
+function addVideo() {
+
+  console.log("clicked");
+
+}
 
   const input = document.getElementById("videoLink");
 
