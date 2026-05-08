@@ -70,7 +70,37 @@ document.getElementById("videoGrid");
 /* =========================
    RENDER VIDEOS
 ========================= */
+/* AUTO CATEGORY */
 
+function getCategory(video){
+
+  const text =
+  (
+    video.title +
+    " " +
+    video.desc
+  ).toLowerCase();
+
+
+
+  if(text.includes("animation"))
+    return "Animation";
+
+  if(text.includes("music"))
+    return "Music";
+
+  return "Trending";
+
+}
+
+
+
+/* RENDER VIDEOS */
+
+function renderVideos(){
+
+  ...
+}
 function renderVideos(){
 
   videoGrid.innerHTML = "";
