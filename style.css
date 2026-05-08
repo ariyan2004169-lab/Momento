@@ -1,125 +1,260 @@
+/* RESET */
+
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
 }
 
+
+/* BODY */
+
 body{
   background:#0f0f0f;
   color:white;
+
   font-family:sans-serif;
 }
 
-/* PAGE */
+
+/* PAGES */
 
 .page{
   display:none;
+
   min-height:100vh;
+
   padding:20px;
-  padding-bottom:90px;
+  padding-bottom:100px;
 }
 
 .page.active{
   display:block;
 }
 
-/* TITLE */
 
-.title{
-  font-size:30px;
-  margin-bottom:20px;
+/* TITLES */
+
+.main-title{
+  font-size:32px;
+
+  margin-bottom:25px;
 }
 
-/* GRID */
+
+/* VIDEO GRID */
 
 .video-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:15px;
+
+  grid-template-columns:
+  repeat(auto-fit,minmax(170px,1fr));
+
+  gap:18px;
 }
 
-/* CARD */
+
+/* VIDEO CARD */
 
 .video-card{
   background:#181818;
-  border-radius:18px;
+
+  border-radius:20px;
+
   overflow:hidden;
+
   cursor:pointer;
+
+  transition:0.3s;
 }
+
+
+/* HOVER */
+
+.video-card:hover{
+  transform:translateY(-5px);
+}
+
+
+/* IMAGE */
 
 .video-card img{
   width:100%;
+
   display:block;
 }
 
+
+/* VIDEO INFO */
+
 .video-info{
-  padding:10px;
+  padding:12px;
 }
 
 .video-info h3{
-  font-size:14px;
+  font-size:16px;
+
+  margin-bottom:6px;
 }
 
 .video-info p{
-  font-size:12px;
+  font-size:13px;
+
   opacity:0.7;
 }
+
 
 /* INPUT */
 
 input{
   width:100%;
-  padding:14px;
+
+  padding:15px;
+
   border:none;
-  border-radius:12px;
+
+  border-radius:14px;
+
   background:#1c1c1c;
+
   color:white;
+
+  outline:none;
 }
 
-/* NAV */
 
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  height:70px;
-  background:#111;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-}
+/* BUTTON */
 
-.bottom-nav button{
-  background:none;
-  border:none;
-  color:white;
-  font-size:14px;
-}
-
-.upload-btn{
-  width:55px;
-  height:55px;
-  border-radius:50%;
-  background:white !important;
-  color:black !important;
-  font-size:28px;
-}
 button{
   margin-top:15px;
 
-  padding:14px;
-
   width:100%;
+
+  padding:15px;
 
   border:none;
 
-  border-radius:12px;
+  border-radius:14px;
 
   background:white;
 
   color:black;
 
   font-weight:bold;
+
+  cursor:pointer;
+}
+
+
+/* BOTTOM NAVIGATION */
+
+.bottom-nav{
+  position:fixed;
+
+  bottom:0;
+
+  width:100%;
+  height:75px;
+
+  background:#111;
+
+  display:flex;
+
+  justify-content:space-around;
+  align-items:center;
+
+  border-top:1px solid #222;
+}
+
+
+/* NAV BUTTONS */
+
+.bottom-nav button{
+  background:none;
+
+  border:none;
+
+  color:white;
+
+  width:auto;
+
+  margin:0;
+
+  padding:0;
+
+  font-size:15px;
+}
+
+
+/* UPLOAD BUTTON */
+
+.upload-btn{
+  width:58px !important;
+  height:58px !important;
+
+  border-radius:50%;
+
+  background:white !important;
+
+  color:black !important;
+
+  font-size:30px !important;
+
+  margin-top:-25px !important;
+}
+
+
+/* VIDEO POPUP */
+
+#videoPopup{
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(0,0,0,0.9);
+
+  display:none;
+
+  justify-content:center;
+  align-items:center;
+
+  z-index:999;
+}
+
+
+/* POPUP CONTENT */
+
+.popup-content{
+  position:relative;
+
+  width:90%;
+  max-width:900px;
+
+  aspect-ratio:16/9;
+}
+
+
+/* VIDEO FRAME */
+
+#videoFrame{
+  width:100%;
+  height:100%;
+
+  border:none;
+
+  border-radius:18px;
+}
+
+
+/* CLOSE BUTTON */
+
+#closePopup{
+  position:absolute;
+
+  top:-40px;
+  right:0;
+
+  font-size:30px;
 
   cursor:pointer;
 }
