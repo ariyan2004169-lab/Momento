@@ -3,68 +3,139 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport"
+  content="width=device-width, initial-scale=1.0">
+
   <title>My Platform</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet"
+  href="style.css">
 </head>
 
 <body>
 
-<!-- HOME -->
-<div class="page active" id="home">
+<!-- HOME PAGE -->
 
-  <h1 class="title">Discover</h1>
+<div class="page active" id="homePage">
 
-  <div class="video-grid" id="videoGrid"></div>
+  <h1 class="main-title">
+    Discover
+  </h1>
 
-</div>
+  <!-- FUTURE BANNER AREA -->
+  <div id="bannerArea"></div>
 
-
-<!-- SEARCH -->
-<div class="page" id="search">
-
-  <h1 class="title">Search</h1>
-
-  <input type="text" id="searchInput" placeholder="Search videos...">
+  <!-- VIDEO FEED -->
+  <div class="video-grid"
+  id="videoGrid"></div>
 
 </div>
 
 
-<div class="page" id="upload">
 
-  <h1 class="title">Upload Video</h1>
+<!-- SEARCH PAGE -->
 
-  <input type="text" id="videoLink"
+<div class="page"
+id="searchPage">
+
+  <h1 class="main-title">
+    Search
+  </h1>
+
+  <input
+  type="text"
+  id="searchInput"
+  placeholder="Search videos...">
+
+</div>
+
+
+
+<!-- UPLOAD PAGE -->
+
+<div class="page"
+id="uploadPage">
+
+  <h1 class="main-title">
+    Upload
+  </h1>
+
+  <input
+  type="text"
+  id="videoLink"
   placeholder="Paste YouTube link">
 
-<button onclick="addVideo()">Add Video</button>
-    
-
-
-</div>
-
-
-<!-- ACCOUNT -->
-<div class="page" id="account">
-
-  <h1 class="title">Account</h1>
-
-  <p>Your profile will appear here</p>
+  <button onclick="addVideo()">
+    Add Video
+  </button>
 
 </div>
 
 
-<!-- BOTTOM NAV -->
+
+<!-- ACCOUNT PAGE -->
+
+<div class="page"
+id="accountPage">
+
+  <h1 class="main-title">
+    Account
+  </h1>
+
+  <p>
+    Future profile system
+  </p>
+
+</div>
+
+
+
+<!-- VIDEO PLAYER POPUP -->
+
+<div id="videoPopup">
+
+  <div class="popup-content">
+
+    <span id="closePopup">
+      ✕
+    </span>
+
+    <iframe
+    id="videoFrame"
+    frameborder="0"
+    allowfullscreen>
+    </iframe>
+
+  </div>
+
+</div>
+
+
+
+<!-- BOTTOM NAVIGATION -->
+
 <div class="bottom-nav">
 
-  <button onclick="showPage('home')">Home</button>
-  <button onclick="showPage('search')">Search</button>
+  <button
+  onclick="showPage('homePage')">
+    Home
+  </button>
 
-  <button class="upload-btn"
-  onclick="showPage('upload')">+</button>
+  <button
+  onclick="showPage('searchPage')">
+    Search
+  </button>
 
-  <button onclick="showPage('account')">Account</button>
+  <button
+  class="upload-btn"
+  onclick="showPage('uploadPage')">
+    +
+  </button>
+
+  <button
+  onclick="showPage('accountPage')">
+    Account
+  </button>
 
 </div>
 
