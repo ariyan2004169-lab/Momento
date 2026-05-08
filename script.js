@@ -309,7 +309,10 @@ function addVideo(){
     id: videoId
 
   });
-
+localStorage.setItem(
+  "videos",
+  JSON.stringify(videos)
+);
 
 
   renderVideos();
