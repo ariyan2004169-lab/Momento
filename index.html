@@ -1,180 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-  content="width=device-width, initial-scale=1.0">
-
-  <title>My Platform</title>
-
-  <link rel="stylesheet"
-  href="style.css">
+  <title>Premium Video App</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<!-- TOP NAV -->
+<div class="top-bar">
+  <h2>Discover</h2>
+
+  <input id="searchInput" placeholder="Search...">
+
+  <button onclick="showPage('home')">Home</button>
+  <button onclick="showPage('upload')">Upload</button>
+  <button onclick="showPage('account')">Account</button>
+</div>
+
 <!-- HOME PAGE -->
+<div id="home" class="page active">
 
-<div class="page active" id="homePage">
-
-  <h1 class="main-title">
-    Discover
-  </h1>
-<div class="category-bar">
-
-  <button>Trending</button>
-  <button>Music</button>
-  <button>Gaming</button>
-  <button>Design</button>
-  <button>Animation</button>
-  <button>Learning</button>
-
-</div>
-  <!-- FUTURE BANNER AREA -->
-  <div class="featured-banner">
-
-  <img
-  src="https://img.youtube.com/vi/D97FoacuYxY/maxresdefault.jpg">
-
-  <div class="banner-overlay">
-
-    <h2>
-      Featured Visuals
-    </h2>
-
-    <p>
-      Discover trending creative content
-    </p>
-
+  <div class="hero">
+    <h1>Premium Discovery</h1>
+    <p>Explore content in a new way</p>
   </div>
 
+  <div class="category-bar">
+    <button onclick="filterVideos('All')">All</button>
+    <button onclick="filterVideos('Trending')">Trending</button>
+    <button onclick="filterVideos('Music')">Music</button>
+    <button onclick="filterVideos('Gaming')">Gaming</button>
   </div>
-<div class="category-bar">
 
-  <button>Trending</button>
-  <button>Music</button>
-  <button>Gaming</button>
-  <button>Design</button>
-  <button>Animation</button>
-  <button>Learning</button>
-  <button>Shorts</button>
+  <div id="videoGrid"></div>
 
 </div>
-  <!-- VIDEO FEED -->
-  <div class="video-grid"
-  id="videoGrid"></div>
-
-</div>
-
-
-
-<!-- SEARCH PAGE -->
-
-<div class="page"
-id="searchPage">
-
-  <h1 class="main-title">
-    Search
-  </h1>
-
-  <input
-  type="text"
-  id="searchInput"
-  placeholder="Search videos...">
-
-</div>
-
-
 
 <!-- UPLOAD PAGE -->
+<div id="upload" class="page">
 
-<div class="page"
-id="uploadPage">
+  <h2>Upload Video</h2>
 
-  <h1 class="main-title">
-    Upload
-  </h1>
+  <input id="videoLink" placeholder="YouTube link">
 
-  <input
-  type="text"
-  id="videoLink"
-  placeholder="Paste YouTube link">
-
-  <button onclick="addVideo()">
-    Add Video
-  </button>
+  <button onclick="addVideo()">Add</button>
 
 </div>
-
-
 
 <!-- ACCOUNT PAGE -->
+<div id="account" class="page">
 
-<div class="page"
-id="accountPage">
-
-  <h1 class="main-title">
-    Account
-  </h1>
-
-  <p>
-    Future profile system
-  </p>
+  <h2>Profile</h2>
+  <p>Your uploads will appear here later</p>
 
 </div>
 
+<!-- VIDEO POPUP -->
+<div id="popup" class="popup">
 
+  <iframe id="videoFrame"></iframe>
 
-<!-- VIDEO PLAYER POPUP -->
-
-<div id="videoPopup">
-
-  <div class="popup-content">
-
-    <span id="closePopup">
-      ✕
-    </span>
-
-    <iframe
-    id="videoFrame"
-    frameborder="0"
-    allowfullscreen>
-    </iframe>
-
-  </div>
+  <button onclick="closeVideo()">Close</button>
 
 </div>
-
-
-
-<!-- BOTTOM NAVIGATION -->
-
-<div class="bottom-nav">
-
-  <button
-  onclick="showPage('homePage')">
-    Home
-  </button>
-
-  <button
-  onclick="showPage('searchPage')">
-    Search
-  </button>
-
-  <button
-  class="upload-btn"
-  onclick="showPage('uploadPage')">
-    +
-  </button>
-
-  <button
-  onclick="showPage('accountPage')">
-    Account
-  </button>
-
-</div>
-
 
 <script src="script.js"></script>
 
