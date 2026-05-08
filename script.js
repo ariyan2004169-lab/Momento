@@ -1,126 +1,329 @@
+/* =========================
+   PAGE NAVIGATION
+========================= */
+
 function showPage(pageId){
 
-  document.querySelectorAll('.page')
-  .forEach(p => p.classList.remove('active'));
+  document
+  .querySelectorAll(".page")
+  .forEach(page => {
+    page.classList.remove("active");
+  });
 
-  document.getElementById(pageId)
-  .classList.add('active');
+  document
+  .getElementById(pageId)
+  .classList.add("active");
+
 }
 
 
-/* VIDEO DATA */
+
+/* =========================
+   VIDEO DATA
+========================= */
 
 const videos = [
+
   {
     title: "Cinematic Visuals",
-    desc: "Trending",
+    desc: "Trending • Creative",
     id: "D97FoacuYxY"
   },
+
   {
     title: "Animation Ideas",
-    desc: "Creative",
+    desc: "Animation • Motion",
     id: "ScMzIvxBSi4"
   },
+
   {
     title: "Modern Design",
-    desc: "UI Inspiration",
+    desc: "UI • Inspiration",
     id: "ysz5S6PUM-U"
+  },
+
+  {
+    title: "Creative Platform",
+    desc: "Featured • Popular",
+    id: "tgbNymZ7vqY"
   }
+
 ];
 
-const grid = document.getElementById("videoGrid");
 
 
-videos.forEach(v => {
+/* =========================
+   VIDEO GRID
+========================= */
 
-  const card = document.createElement("div");
-  card.className = "video-card";
+const videoGrid =
+document.getElementById("videoGrid");
 
-  card.innerHTML = `
-    <img src="https://img.youtube.com/vi/${v.id}/maxresdefault.jpg">
-    <div class="video-info">
-      <h3>${v.title}</h3>
-      <p>${v.desc}</p>
-    </div>
-  `;
 
-  card.onclick = () => {
-    window.open(
-      `https://www.youtube.com/watch?v=${v.id}`,
-      "_blank"
-    );
-  };
 
-  grid.appendChild(card);
+/* =========================
+   RENDER VIDEOS
+========================= */
 
-});
-const searchInput = document.getElementById("searchInput");
+function renderVideos(){
 
-if (searchInput) {
+  videoGrid.innerHTML = "";
 
-  searchInput.addEventListener("input", function () {
+  videos.forEach(video => {
 
-    const value = this.value.toLowerCase();
+    const card =
+    document.createElement("div");
 
-    const cards = document.querySelectorAll(".video-card");
+    card.className = "video-card";
 
-    cards.forEach(card => {
+    card.innerHTML = `
 
-      const text = card.innerText.toLowerCase();
+      <img
+      src="https://img.youtube.com/vi/${video.id}/maxresdefault.jpg">
 
-      if (text.includes(value)) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
+      <div class="video-info">
 
-    });
+        <h3>${video.title}</h3>
+
+        <p>${video.desc}</p>
+
+      </div>
+
+    `;
+
+
+
+    /* OPEN POPUP */
+
+    card.onclick = () => {
+
+      openVideo(video.id);
+
+    };
+
+
+
+    videoGrid.appendChild(card);
 
   });
 
 }
-function addVideo() {
 
-  console.log("clicked");
+
+
+/* =========================
+   OPEN VIDEO
+========================= */
+
+function openVideo(videoId){
+
+  const popup =
+  document.getElementById("videoPopup");
+
+  const frame =
+  document.getElementById("videoFrame");
+
+  popup.style.display = "flex";
+
+  frame.src =
+  `https://www.youtube.com/embed/${videoId}`;
 
 }
 
-  const input = document.getElementById("videoLink");
 
-  const url = input.value;
 
-  if(!url) return;
+/* =========================
+   CLOSE VIDEO
+========================= */
 
-  // extract video ID
-  const videoId = url.split("v=")[1];
+document
+.getElementById("closePopup")
+.onclick = () => {
 
-  if(!videoId) return;
+  document
+  .getElementById("videoPopup")
+  .style.display = "none";
 
-  const cleanId = videoId.split("&")[0];
+  document
+  .getElementById("videoFrame")
+  .src = "";
 
-  const grid = document.getElementById("videoGrid");
+};
 
-  const card = document.createElement("div");
 
-  card.className = "video-card";
 
-  card.innerHTML = `
-    <img src="https://img.youtube.com/vi/${cleanId}/maxresdefault.jpg">
-    <div class="video-info">
-      <h3>New Video</h3>
-      <p>Uploaded</p>
-    </div>
-  `;
+/* =========================
+   SEARCH SYSTEM
+========================= */
 
-  card.onclick = () => {
-    window.open(
-      `https://www.youtube.com/watch?v=${cleanId}`,
-      "_blank"
+const searchInput =
+document.getElementById("searchInput");
+
+
+
+searchInput.addEventListener("input", () => {
+
+  const value =
+  searchInput.value.toLowerCase();
+
+
+
+  const filtered =
+  videos.filter(video => {
+
+    return (
+
+      video.title
+      .toLowerCase()
+      .includes(value)
+
+      ||
+
+      video.desc
+      .toLowerCase()
+      .includes(value)
+
     );
-  };
 
-  grid.appendChild(card);
+  });
+
+
+
+  videoGrid.innerHTML = "";
+
+
+
+  filtered.forEach(video => {
+
+    const card =
+    document.createElement("div");
+
+    card.className = "video-card";
+
+    card.innerHTML = `
+
+      <img
+      src="https://img.youtube.com/vi/${video.id}/maxresdefault.jpg">
+
+      <div class="video-info">
+
+        <h3>${video.title}</h3>
+
+        <p>${video.desc}</p>
+
+      </div>
+
+    `;
+
+
+
+    card.onclick = () => {
+
+      openVideo(video.id);
+
+    };
+
+
+
+    videoGrid.appendChild(card);
+
+  });
+
+});
+
+
+
+/* =========================
+   UPLOAD SYSTEM
+========================= */
+
+function addVideo(){
+
+  const input =
+  document.getElementById("videoLink");
+
+  const url =
+  input.value.trim();
+
+
+
+  if(!url){
+
+    alert("Paste YouTube link");
+
+    return;
+  }
+
+
+
+  let videoId = "";
+
+
+
+  /* NORMAL LINK */
+
+  if(url.includes("v=")){
+
+    videoId =
+    url.split("v=")[1]
+    .split("&")[0];
+
+  }
+
+
+
+  /* SHORT LINK */
+
+  else if(url.includes("youtu.be/")){
+
+    videoId =
+    url.split("youtu.be/")[1];
+
+  }
+
+
+
+  if(!videoId){
+
+    alert("Invalid YouTube link");
+
+    return;
+  }
+
+
+
+  /* ADD NEW VIDEO */
+
+  videos.unshift({
+
+    title: "New Upload",
+
+    desc: "User Uploaded",
+
+    id: videoId
+
+  });
+
+
+
+  renderVideos();
+
+
 
   input.value = "";
 
+
+
+  /* GO HOME */
+
+  showPage("homePage");
+
 }
+
+
+
+/* =========================
+   INITIAL RENDER
+========================= */
+
+renderVideos();
