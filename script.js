@@ -19,33 +19,39 @@ function showPage(pageId){
 
 
 /* =========================
-   VIDEO DATA
+   LOCAL STORAGE
 ========================= */
 
-const videos = [
+let videos = JSON.parse(
+  localStorage.getItem("videos")
+) || [
 
   {
     title: "Cinematic Visuals",
     desc: "Trending • Creative",
-    id: "D97FoacuYxY"
+    id: "D97FoacuYxY",
+    category: "Design"
   },
 
   {
     title: "Animation Ideas",
     desc: "Animation • Motion",
-    id: "ScMzIvxBSi4"
+    id: "ScMzIvxBSi4",
+    category: "Animation"
   },
 
   {
     title: "Modern Design",
     desc: "UI • Inspiration",
-    id: "ysz5S6PUM-U"
+    id: "ysz5S6PUM-U",
+    category: "Design"
   },
 
   {
     title: "Creative Platform",
     desc: "Featured • Popular",
-    id: "tgbNymZ7vqY"
+    id: "tgbNymZ7vqY",
+    category: "Trending"
   }
 
 ];
