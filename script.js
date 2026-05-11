@@ -1,4 +1,50 @@
 /* =========================
+   VIDEO DATA
+========================= */
+
+let videos = [
+
+  {
+    id: "D97FoacuYxY",
+    title: "Premium Visuals",
+    desc: "Trending cinematic content"
+  },
+
+  {
+    id: "ScMzIvxBSi4",
+    title: "Animation Ideas",
+    desc: "Creative animation showcase"
+  },
+
+  {
+    id: "ysz5S6PUM-U",
+    title: "Music Experience",
+    desc: "Immersive music visuals"
+  },
+
+  {
+    id: "tgbNymZ7vqY",
+    title: "Gaming World",
+    desc: "Gaming highlights"
+  }
+
+];
+
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const videoGrid =
+document.getElementById("videoGrid");
+
+const searchInput =
+document.getElementById("searchInput");
+
+
+
+/* =========================
    PAGE NAVIGATION
 ========================= */
 
@@ -7,70 +53,24 @@ function showPage(pageId){
   document
   .querySelectorAll(".page")
   .forEach(page => {
-    page.classList.remove("active");
+
+    page.style.display = "none";
+
   });
+
+
 
   document
   .getElementById(pageId)
-  .classList.add("active");
+  .style.display = "block";
 
 }
 
 
 
 /* =========================
-   LOCAL STORAGE
+   CATEGORY DETECTION
 ========================= */
-
-let videos = JSON.parse(
-  localStorage.getItem("videos")
-) || [
-
-  {
-    title: "Cinematic Visuals",
-    desc: "Trending • Creative",
-    id: "D97FoacuYxY",
-    category: "Design"
-  },
-
-  {
-    title: "Animation Ideas",
-    desc: "Animation • Motion",
-    id: "ScMzIvxBSi4",
-    category: "Animation"
-  },
-
-  {
-    title: "Modern Design",
-    desc: "UI • Inspiration",
-    id: "ysz5S6PUM-U",
-    category: "Design"
-  },
-
-  {
-    title: "Creative Platform",
-    desc: "Featured • Popular",
-    id: "tgbNymZ7vqY",
-    category: "Trending"
-  }
-
-];
-
-
-
-/* =========================
-   VIDEO GRID
-========================= */
-
-const videoGrid =
-document.getElementById("videoGrid");
-
-
-
-/* =========================
-   RENDER VIDEOS
-========================= */
-/* AUTO CATEGORY */
 
 function getCategory(video){
 
@@ -83,11 +83,13 @@ function getCategory(video){
 
 
 
-  if(text.includes("animation"))
-    return "Animation";
-
   if(text.includes("music"))
     return "Music";
+
+  if(text.includes("gaming"))
+    return "Gaming";
+
+
 
   return "Trending";
 
@@ -95,22 +97,24 @@ function getCategory(video){
 
 
 
-/* RENDER VIDEOS */
+/* =========================
+   RENDER VIDEOS
+========================= */
 
-function renderVideos(){
-
-  ...
-}
-function renderVideos(){
+function renderVideos(list = videos){
 
   videoGrid.innerHTML = "";
 
-  videos.forEach(video => {
+
+
+  list.forEach(video => {
 
     const card =
     document.createElement("div");
 
     card.className = "video-card";
+
+
 
     card.innerHTML = `
 
@@ -129,8 +133,6 @@ function renderVideos(){
 
 
 
-    /* OPEN POPUP */
-
     card.onclick = () => {
 
       openVideo(video.id);
@@ -148,54 +150,40 @@ function renderVideos(){
 
 
 /* =========================
-   OPEN VIDEO
+   CATEGORY FILTER
 ========================= */
 
-function openVideo(videoId){
+function filterVideos(category){
 
-  const popup =
-  document.getElementById("videoPopup");
+  if(category === "All"){
 
-  const frame =
-  document.getElementById("videoFrame");
+    renderVideos();
 
-  popup.style.display = "flex";
+    return;
 
-  frame.src =
-  `https://www.youtube.com/embed/${videoId}`;
+  }
+
+
+
+  const filtered =
+  videos.filter(video => {
+
+    return getCategory(video)
+    === category;
+
+  });
+
+
+
+  renderVideos(filtered);
 
 }
 
 
 
 /* =========================
-   CLOSE VIDEO
-========================= */
-
-document
-.getElementById("closePopup")
-.onclick = () => {
-
-  document
-  .getElementById("videoPopup")
-  .style.display = "none";
-
-  document
-  .getElementById("videoFrame")
-  .src = "";
-
-};
-
-
-
-/* =========================
    SEARCH SYSTEM
 ========================= */
-
-const searchInput =
-document.getElementById("searchInput");
-
-
 
 searchInput.addEventListener("input", () => {
 
@@ -225,47 +213,54 @@ searchInput.addEventListener("input", () => {
 
 
 
-  videoGrid.innerHTML = "";
-
-
-
-  filtered.forEach(video => {
-
-    const card =
-    document.createElement("div");
-
-    card.className = "video-card";
-
-    card.innerHTML = `
-
-      <img
-      src="https://img.youtube.com/vi/${video.id}/maxresdefault.jpg">
-
-      <div class="video-info">
-
-        <h3>${video.title}</h3>
-
-        <p>${video.desc}</p>
-
-      </div>
-
-    `;
-
-
-
-    card.onclick = () => {
-
-      openVideo(video.id);
-
-    };
-
-
-
-    videoGrid.appendChild(card);
-
-  });
+  renderVideos(filtered);
 
 });
+
+
+
+/* =========================
+   VIDEO PLAYER
+========================= */
+
+function openVideo(videoId){
+
+  const popup =
+  document.getElementById("popup");
+
+  const frame =
+  document.getElementById("videoFrame");
+
+
+
+  popup.style.display = "flex";
+
+
+
+  frame.src =
+  `https://www.youtube.com/embed/${videoId}`;
+
+}
+
+
+
+/* =========================
+   CLOSE VIDEO
+========================= */
+
+function closeVideo(){
+
+  document
+  .getElementById("popup")
+  .style.display = "none";
+
+
+
+  document
+  .getElementById("videoFrame")
+  .src = "";
+
+}
 
 
 
@@ -288,6 +283,7 @@ function addVideo(){
     alert("Paste YouTube link");
 
     return;
+
   }
 
 
@@ -296,8 +292,6 @@ function addVideo(){
 
 
 
-  /* NORMAL LINK */
-
   if(url.includes("v=")){
 
     videoId =
@@ -305,10 +299,6 @@ function addVideo(){
     .split("&")[0];
 
   }
-
-
-
-  /* SHORT LINK */
 
   else if(url.includes("youtu.be/")){
 
@@ -324,25 +314,19 @@ function addVideo(){
     alert("Invalid YouTube link");
 
     return;
+
   }
 
 
 
-  /* ADD NEW VIDEO */
-
   videos.unshift({
 
+    id: videoId,
     title: "New Upload",
-
-    desc: "User Uploaded",
-
-    id: videoId
+    desc: "User uploaded content"
 
   });
-localStorage.setItem(
-  "videos",
-  JSON.stringify(videos)
-);
+
 
 
   renderVideos();
@@ -353,16 +337,14 @@ localStorage.setItem(
 
 
 
-  /* GO HOME */
-
-  showPage("homePage");
+  showPage("home");
 
 }
 
 
 
 /* =========================
-   INITIAL RENDER
+   INITIAL LOAD
 ========================= */
 
 renderVideos();
