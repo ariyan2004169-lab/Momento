@@ -1,36 +1,142 @@
 /* =========================
-   STORAGE + VIDEO DATA
+   MASSIVE CATEGORY DATABASE
 ========================= */
 
-let videos = JSON.parse(
+const categories = {
+
+  cinematic: [
+
+    "D97FoacuYxY",
+    "ysz5S6PUM-U",
+    "ScMzIvxBSi4"
+
+  ],
+
+
+
+  gaming: [
+
+    "tgbNymZ7vqY",
+    "2Vv-BfVoq4g",
+    "kXYiU_JCYtU"
+
+  ],
+
+
+
+  music: [
+
+    "JGwWNGJdvx8",
+    "RgKAFK5djSk",
+    "09R8_2nJtjg"
+
+  ],
+
+
+
+  horror: [
+
+    "dQw4w9WgXcQ",
+    "9bZkp7q19f0",
+    "OPf0YbXqDm0"
+
+  ],
+
+
+
+  animation: [
+
+    "aqz-KE-bpKQ",
+    "e-ORhEE9VVg",
+    "60ItHLz5WEA"
+
+  ],
+
+
+
+  motivation: [
+
+    "ZXsQAXx_ao0",
+    "mgmVOuLgFB0",
+    "wnHW6o8WMas"
+
+  ],
+
+
+
+  action: [
+
+    "uelHwf8o7_U",
+    "fLexgOxsZu0",
+    "hTWKbfoikeg"
+
+  ]
+
+};
+
+
+
+/* =========================
+   STORAGE
+========================= */
+
+let savedVideos = JSON.parse(
   localStorage.getItem("videos")
-) || [
+) || [];
 
-  {
-    id: "D97FoacuYxY",
-    title: "Premium Visuals",
-    desc: "Trending cinematic content"
-  },
 
-  {
-    id: "ScMzIvxBSi4",
-    title: "Animation Ideas",
-    desc: "Creative animation showcase"
-  },
 
-  {
-    id: "ysz5S6PUM-U",
-    title: "Music Experience",
-    desc: "Immersive music visuals"
-  },
+/* =========================
+   FINAL VIDEO SYSTEM
+========================= */
 
-  {
-    id: "tgbNymZ7vqY",
-    title: "Gaming World",
-    desc: "Gaming highlights"
-  }
+let videos = [];
 
-];
+
+
+/* =========================
+   BUILD VIDEO DATABASE
+========================= */
+
+function buildVideos(){
+
+  videos = [];
+
+
+
+  Object.keys(categories)
+  .forEach(category => {
+
+    categories[category]
+    .forEach(id => {
+
+      videos.push({
+
+        id:id,
+
+        title:
+        category.toUpperCase(),
+
+        desc:
+        "Immersive discovery content",
+
+        category:category
+
+      });
+
+    });
+
+  });
+
+
+
+  savedVideos.forEach(video => {
+
+    videos.unshift(video);
+
+  });
+
+}
 
 
 
@@ -71,38 +177,6 @@ function showPage(pageId){
 
 
 /* =========================
-   CATEGORY DETECTION
-========================= */
-
-function getCategory(video){
-
-  const text =
-  (
-    video.title +
-    " " +
-    video.desc
-  ).toLowerCase();
-
-
-
-  if(text.includes("music"))
-    return "Music";
-
-  if(text.includes("gaming"))
-    return "Gaming";
-
-  if(text.includes("animation"))
-    return "Animation";
-
-
-
-  return "Trending";
-
-}
-
-
-
-/* =========================
    MAIN FEED
 ========================= */
 
@@ -117,7 +191,10 @@ function renderVideos(list = videos){
     const card =
     document.createElement("div");
 
-    card.className = "video-card";
+
+
+    card.className =
+    "video-card";
 
 
 
@@ -169,10 +246,13 @@ function renderTrending(){
 
 
 
-  videos.slice(0,6).forEach(video => {
+  videos.slice(0,10)
+  .forEach(video => {
 
     const card =
     document.createElement("div");
+
+
 
     card.className =
     "trend-card";
@@ -225,8 +305,11 @@ function filterVideos(category){
   const filtered =
   videos.filter(video => {
 
-    return getCategory(video)
-    === category;
+    return (
+      video.category &&
+      video.category.toLowerCase()
+      === category.toLowerCase()
+    );
 
   });
 
@@ -285,12 +368,15 @@ function openVideo(videoId){
   const popup =
   document.getElementById("popup");
 
+
+
   const frame =
   document.getElementById("videoFrame");
 
 
 
-  popup.style.display = "flex";
+  popup.style.display =
+  "flex";
 
 
 
@@ -309,7 +395,8 @@ function closeVideo(){
 
   document
   .getElementById("popup")
-  .style.display = "none";
+  .style.display =
+  "none";
 
 
 
@@ -322,13 +409,15 @@ function closeVideo(){
 
 
 /* =========================
-   UPLOAD SYSTEM
+   MANUAL UPLOAD SYSTEM
 ========================= */
 
 function addVideo(){
 
   const input =
   document.getElementById("videoLink");
+
+
 
   const url =
   input.value.trim();
@@ -376,22 +465,31 @@ function addVideo(){
 
 
 
-  videos.unshift({
+  savedVideos.unshift({
 
-    id: videoId,
-    title: "New Upload",
-    desc: "User uploaded content"
+    id:videoId,
+
+    title:"USER UPLOAD",
+
+    desc:"Community content",
+
+    category:"custom"
 
   });
 
 
 
   localStorage.setItem(
+
     "videos",
-    JSON.stringify(videos)
+
+    JSON.stringify(savedVideos)
+
   );
 
 
+
+  buildVideos();
 
   renderVideos();
 
@@ -412,6 +510,8 @@ function addVideo(){
 /* =========================
    INITIAL LOAD
 ========================= */
+
+buildVideos();
 
 renderVideos();
 
