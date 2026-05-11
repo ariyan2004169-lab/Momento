@@ -1,69 +1,165 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Premium Video App</title>
+
+  <title>Premium Discovery</title>
+
+  <meta name="viewport"
+  content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
-<!-- TOP NAV -->
+
+
+<!-- TOP BAR -->
+
 <div class="top-bar">
+
   <h2>Discover</h2>
 
-  <input id="searchInput" placeholder="Search...">
+  <input
+  id="searchInput"
+  placeholder="Search...">
 
-  <button onclick="showPage('home')">Home</button>
-  <button onclick="showPage('upload')">Upload</button>
-  <button onclick="showPage('account')">Account</button>
+  <button onclick="showPage('home')">
+    Home
+  </button>
+
+  <button onclick="showPage('upload')">
+    Upload
+  </button>
+
+  <button onclick="showPage('account')">
+    Account
+  </button>
+
 </div>
 
+
+
 <!-- HOME PAGE -->
+
 <div id="home" class="page active">
 
+
+
+  <!-- HERO -->
+
   <div class="hero">
-    <h1>Premium Discovery</h1>
-    <p>Explore content in a new way</p>
+
+    <div class="hero-content">
+
+      <h1>Premium Discovery</h1>
+
+      <p>
+        Explore cinematic content,
+        creators & ideas
+      </p>
+
+    </div>
+
   </div>
 
+
+
+  <!-- CATEGORY BAR -->
+
   <div class="category-bar">
-    <button onclick="filterVideos('All')">All</button>
-    <button onclick="filterVideos('Trending')">Trending</button>
-    <button onclick="filterVideos('Music')">Music</button>
-    <button onclick="filterVideos('Gaming')">Gaming</button>
+
+    <button onclick="filterVideos('All')">
+      All
+    </button>
+
+    <button onclick="filterVideos('Trending')">
+      Trending
+    </button>
+
+    <button onclick="filterVideos('Music')">
+      Music
+    </button>
+
+    <button onclick="filterVideos('Gaming')">
+      Gaming
+    </button>
+
+    <button onclick="filterVideos('Animation')">
+      Animation
+    </button>
+
   </div>
+
+
+
+  <!-- VIDEO GRID -->
 
   <div id="videoGrid"></div>
 
 </div>
 
+
+
 <!-- UPLOAD PAGE -->
+
 <div id="upload" class="page">
 
-  <h2>Upload Video</h2>
+  <div class="upload-box">
 
-  <input id="videoLink" placeholder="YouTube link">
+    <h2>Creator Studio</h2>
 
-  <button onclick="addVideo()">Add</button>
+    <input
+    id="videoLink"
+    placeholder="Paste YouTube link">
+
+    <button onclick="addVideo()">
+      Publish
+    </button>
+
+  </div>
 
 </div>
+
+
 
 <!-- ACCOUNT PAGE -->
+
 <div id="account" class="page">
 
-  <h2>Profile</h2>
-  <p>Your uploads will appear here later</p>
+  <div class="account-box">
+
+    <h2>Your Space</h2>
+
+    <p>
+      Favorites, uploads and collections
+      will appear here.
+    </p>
+
+  </div>
 
 </div>
 
-<!-- VIDEO POPUP -->
+
+
+<!-- POPUP PLAYER -->
+
 <div id="popup" class="popup">
 
-  <iframe id="videoFrame"></iframe>
+  <iframe
+  id="videoFrame"
+  allowfullscreen>
+  </iframe>
 
-  <button onclick="closeVideo()">Close</button>
+  <button onclick="closeVideo()">
+    Close
+  </button>
 
 </div>
+
+
 
 <script src="script.js"></script>
 
