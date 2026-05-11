@@ -11,6 +11,8 @@ body{
   overflow-x:hidden;
 }
 
+/* PAGE SYSTEM */
+
 .page{
   display:none;
 }
@@ -22,16 +24,24 @@ body{
 /* TOP BAR */
 
 .top-bar{
+
   position:sticky;
   top:0;
   z-index:1000;
+
   display:flex;
   align-items:center;
   gap:10px;
+
   padding:15px;
+
   background:rgba(8,8,8,0.88);
+
   backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(255,255,255,0.05);
+
+  border-bottom:
+  1px solid rgba(255,255,255,0.05);
+
 }
 
 .top-bar h2{
@@ -40,53 +50,86 @@ body{
 }
 
 .top-bar input{
+
   flex:1;
+
   background:#121212;
+
   border:none;
   outline:none;
+
   color:white;
+
   padding:12px 16px;
+
   border-radius:20px;
+
 }
 
 .top-bar button{
+
   background:#121212;
+
   color:white;
+
   border:none;
+
   padding:10px 14px;
+
   border-radius:16px;
+
 }
 
 /* HERO */
 
 .hero{
+
   margin:15px;
-  height:260px;
+
+  min-height:260px;
+
   border-radius:34px;
-  background:linear-gradient(135deg,#111,#1d1d1d);
+
+  background:
+  linear-gradient(
+    135deg,
+    #111,
+    #1d1d1d
+  );
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   text-align:center;
+
+  padding:30px;
+
 }
 
 .hero h1{
-  font-size:36px;
+  font-size:38px;
   margin-bottom:10px;
 }
 
 .hero p{
   opacity:0.7;
-  line-height:1.5;
+  line-height:1.6;
+  max-width:700px;
 }
 
 /* CATEGORY BAR */
 
 .category-bar{
+
   display:flex;
+
   gap:12px;
+
   overflow-x:auto;
+
   padding:10px 15px;
+
 }
 
 .category-bar::-webkit-scrollbar{
@@ -94,42 +137,65 @@ body{
 }
 
 .category-bar button{
+
   white-space:nowrap;
+
   background:#121212;
+
   color:white;
+
   border:none;
+
   padding:10px 18px;
+
   border-radius:30px;
+
 }
 
 /* SECTION TITLES */
 
 .section-title{
+
   font-size:24px;
-  padding:12px 18px;
+
+  padding:14px 18px;
+
 }
 
-/* FEED */
+/* HORIZONTAL FEEDS */
 
 .horizontal-feed{
+
   display:flex;
+
   gap:15px;
+
   overflow-x:auto;
+
   padding:15px;
+
 }
 
 .horizontal-feed::-webkit-scrollbar{
   display:none;
 }
 
-/* CARDS */
+/* VIDEO CARDS */
 
 .trend-card{
+
   min-width:230px;
+
   background:#111;
+
   border-radius:24px;
+
   overflow:hidden;
+
   transition:0.3s;
+
+  flex-shrink:0;
+
 }
 
 .trend-card:hover{
@@ -137,53 +203,93 @@ body{
 }
 
 .trend-card img{
+
   width:100%;
+
   height:150px;
+
   object-fit:cover;
+
 }
 
 .trend-card h4{
+
   padding:14px;
+
   font-size:15px;
+
 }
 
 /* SEARCH RESULTS */
 
 #videoGrid{
+
   display:grid;
+
   grid-template-columns:
-  repeat(auto-fit,minmax(180px,1fr));
+  repeat(
+    auto-fit,
+    minmax(180px,1fr)
+  );
+
   gap:15px;
+
   padding:15px;
+
 }
 
 /* POPUP */
 
 .popup{
+
   position:fixed;
+
   inset:0;
-  background:rgba(0,0,0,0.94);
+
+  background:
+  rgba(0,0,0,0.94);
+
   display:none;
+
   align-items:center;
   justify-content:center;
+
   flex-direction:column;
+
   z-index:3000;
+
+  padding:20px;
+
 }
 
 .popup iframe{
-  width:92%;
-  height:300px;
+
+  width:100%;
+
+  max-width:1000px;
+
+  height:60vh;
+
   border:none;
+
   border-radius:22px;
+
 }
 
 .popup button{
+
   margin-top:20px;
+
   border:none;
+
   padding:12px 22px;
+
   border-radius:20px;
+
   background:white;
+
   color:black;
+
 }
 
 /* UPLOAD */
@@ -193,10 +299,19 @@ body{
 }
 
 .upload-box{
+
   margin-top:40px;
+
   background:#101010;
+
   border-radius:34px;
+
   padding:25px;
+
+  max-width:700px;
+
+  margin-inline:auto;
+
 }
 
 .upload-box h2{
@@ -204,23 +319,38 @@ body{
 }
 
 .upload-box input{
+
   width:100%;
+
   background:#1a1a1a;
+
   color:white;
+
   border:none;
   outline:none;
+
   padding:16px;
+
   border-radius:18px;
+
   margin-bottom:15px;
+
 }
 
 .upload-box button{
+
   width:100%;
+
   background:white;
+
   color:black;
+
   border:none;
+
   padding:16px;
+
   border-radius:18px;
+
 }
 
 /* ACCOUNT */
@@ -230,14 +360,129 @@ body{
 }
 
 .account-box{
+
   margin-top:40px;
+
   background:#101010;
+
   border-radius:34px;
+
   padding:25px;
+
+  max-width:700px;
+
+  margin-inline:auto;
+
 }
 
 .account-box p{
+
   margin-top:10px;
+
   opacity:0.7;
+
   line-height:1.6;
+
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media(min-width:768px){
+
+  .hero{
+    min-height:320px;
+  }
+
+  .hero h1{
+    font-size:52px;
+  }
+
+  .trend-card{
+    min-width:280px;
+  }
+
+  .trend-card img{
+    height:180px;
+  }
+
+}
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media(min-width:1024px){
+
+  .top-bar{
+
+    padding-inline:40px;
+
+  }
+
+  .hero{
+
+    margin:30px auto;
+
+    max-width:1400px;
+
+  }
+
+  .horizontal-feed{
+
+    padding-inline:40px;
+
+  }
+
+  .section-title{
+
+    padding-inline:40px;
+
+  }
+
+  #videoGrid{
+
+    padding-inline:40px;
+
+    grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(250px,1fr)
+    );
+
+  }
+
+  .trend-card{
+
+    min-width:320px;
+
+  }
+
+  .trend-card img{
+
+    height:200px;
+
+  }
+
+}
+
+/* =========================
+   LARGE DESKTOP
+========================= */
+
+@media(min-width:1440px){
+
+  body{
+    font-size:18px;
+  }
+
+  .hero h1{
+    font-size:64px;
+  }
+
+  .trend-card{
+    min-width:360px;
+  }
+
 }
