@@ -103,7 +103,7 @@ function getCategory(video){
 
 
 /* =========================
-   RENDER VIDEOS
+   MAIN FEED
 ========================= */
 
 function renderVideos(list = videos){
@@ -155,6 +155,58 @@ function renderVideos(list = videos){
 
 
 /* =========================
+   TRENDING ROW
+========================= */
+
+function renderTrending(){
+
+  const row =
+  document.getElementById("trendingRow");
+
+
+
+  row.innerHTML = "";
+
+
+
+  videos.slice(0,6).forEach(video => {
+
+    const card =
+    document.createElement("div");
+
+    card.className =
+    "trend-card";
+
+
+
+    card.innerHTML = `
+
+      <img
+      src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
+
+      <h4>${video.title}</h4>
+
+    `;
+
+
+
+    card.onclick = () => {
+
+      openVideo(video.id);
+
+    };
+
+
+
+    row.appendChild(card);
+
+  });
+
+}
+
+
+
+/* =========================
    CATEGORY FILTER
 ========================= */
 
@@ -187,7 +239,7 @@ function filterVideos(category){
 
 
 /* =========================
-   SEARCH SYSTEM
+   SEARCH
 ========================= */
 
 searchInput.addEventListener("input", () => {
@@ -343,6 +395,8 @@ function addVideo(){
 
   renderVideos();
 
+  renderTrending();
+
 
 
   input.value = "";
@@ -360,3 +414,5 @@ function addVideo(){
 ========================= */
 
 renderVideos();
+
+renderTrending();
