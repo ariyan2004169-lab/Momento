@@ -1,8 +1,10 @@
 /* =========================
-   VIDEO DATA
+   STORAGE + VIDEO DATA
 ========================= */
 
-let videos = [
+let videos = JSON.parse(
+  localStorage.getItem("videos")
+) || [
 
   {
     id: "D97FoacuYxY",
@@ -54,7 +56,7 @@ function showPage(pageId){
   .querySelectorAll(".page")
   .forEach(page => {
 
-    page.style.display = "none";
+    page.classList.remove("active");
 
   });
 
@@ -62,7 +64,7 @@ function showPage(pageId){
 
   document
   .getElementById(pageId)
-  .style.display = "block";
+  .classList.add("active");
 
 }
 
@@ -88,6 +90,9 @@ function getCategory(video){
 
   if(text.includes("gaming"))
     return "Gaming";
+
+  if(text.includes("animation"))
+    return "Animation";
 
 
 
@@ -245,7 +250,7 @@ function openVideo(videoId){
 
 
 /* =========================
-   CLOSE VIDEO
+   CLOSE PLAYER
 ========================= */
 
 function closeVideo(){
@@ -326,6 +331,13 @@ function addVideo(){
     desc: "User uploaded content"
 
   });
+
+
+
+  localStorage.setItem(
+    "videos",
+    JSON.stringify(videos)
+  );
 
 
 
