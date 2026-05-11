@@ -4,16 +4,6 @@
 
 const categories = {
 
-  cinematic: [
-
-    "D97FoacuYxY",
-    "ysz5S6PUM-U",
-    "ScMzIvxBSi4"
-
-  ],
-
-
-
   gaming: [
 
     "tgbNymZ7vqY",
@@ -44,21 +34,21 @@ const categories = {
 
 
 
-  animation: [
-
-    "aqz-KE-bpKQ",
-    "e-ORhEE9VVg",
-    "60ItHLz5WEA"
-
-  ],
-
-
-
   motivation: [
 
     "ZXsQAXx_ao0",
     "mgmVOuLgFB0",
     "wnHW6o8WMas"
+
+  ],
+
+
+
+  animation: [
+
+    "aqz-KE-bpKQ",
+    "e-ORhEE9VVg",
+    "60ItHLz5WEA"
 
   ],
 
@@ -87,7 +77,7 @@ let savedVideos = JSON.parse(
 
 
 /* =========================
-   FINAL VIDEO SYSTEM
+   VIDEO SYSTEM
 ========================= */
 
 let videos = [];
@@ -95,7 +85,7 @@ let videos = [];
 
 
 /* =========================
-   BUILD VIDEO DATABASE
+   BUILD VIDEOS
 ========================= */
 
 function buildVideos(){
@@ -144,16 +134,13 @@ function buildVideos(){
    ELEMENTS
 ========================= */
 
-const videoGrid =
-document.getElementById("videoGrid");
-
 const searchInput =
 document.getElementById("searchInput");
 
 
 
 /* =========================
-   PAGE NAVIGATION
+   NAVIGATION
 ========================= */
 
 function showPage(pageId){
@@ -177,53 +164,75 @@ function showPage(pageId){
 
 
 /* =========================
-   MAIN FEED
+   VIDEO CARD
 ========================= */
 
-function renderVideos(list = videos){
+function createCard(video){
 
-  videoGrid.innerHTML = "";
-
-
-
-  list.forEach(video => {
-
-    const card =
-    document.createElement("div");
+  const card =
+  document.createElement("div");
 
 
 
-    card.className =
-    "video-card";
+  card.className =
+  "trend-card";
 
 
 
-    card.innerHTML = `
+  card.innerHTML = `
 
-      <img
-      src="https://img.youtube.com/vi/${video.id}/maxresdefault.jpg">
+    <img
+    src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
 
-      <div class="video-info">
+    <h4>${video.title}</h4>
 
-        <h3>${video.title}</h3>
-
-        <p>${video.desc}</p>
-
-      </div>
-
-    `;
+  `;
 
 
 
-    card.onclick = () => {
+  card.onclick = () => {
 
-      openVideo(video.id);
+    openVideo(video.id);
 
-    };
+  };
 
 
 
-    videoGrid.appendChild(card);
+  return card;
+
+}
+
+
+
+/* =========================
+   RENDER ROW
+========================= */
+
+function renderRow(rowId,category){
+
+  const row =
+  document.getElementById(rowId);
+
+
+
+  row.innerHTML = "";
+
+
+
+  videos
+  .filter(video => {
+
+    return (
+      video.category === category
+    );
+
+  })
+
+  .forEach(video => {
+
+    row.appendChild(
+      createCard(video)
+    );
 
   });
 
@@ -232,7 +241,7 @@ function renderVideos(list = videos){
 
 
 /* =========================
-   TRENDING ROW
+   TRENDING
 ========================= */
 
 function renderTrending(){
@@ -246,39 +255,12 @@ function renderTrending(){
 
 
 
-  videos.slice(0,10)
+  videos.slice(0,12)
   .forEach(video => {
 
-    const card =
-    document.createElement("div");
-
-
-
-    card.className =
-    "trend-card";
-
-
-
-    card.innerHTML = `
-
-      <img
-      src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
-
-      <h4>${video.title}</h4>
-
-    `;
-
-
-
-    card.onclick = () => {
-
-      openVideo(video.id);
-
-    };
-
-
-
-    row.appendChild(card);
+    row.appendChild(
+      createCard(video)
+    );
 
   });
 
@@ -287,35 +269,42 @@ function renderTrending(){
 
 
 /* =========================
-   CATEGORY FILTER
+   RENDER ALL
 ========================= */
 
-function filterVideos(category){
+function renderSections(){
 
-  if(category === "All"){
+  renderTrending();
 
-    renderVideos();
+  renderRow(
+    "gamingRow",
+    "gaming"
+  );
 
-    return;
+  renderRow(
+    "musicRow",
+    "music"
+  );
 
-  }
+  renderRow(
+    "horrorRow",
+    "horror"
+  );
 
+  renderRow(
+    "motivationRow",
+    "motivation"
+  );
 
+  renderRow(
+    "animationRow",
+    "animation"
+  );
 
-  const filtered =
-  videos.filter(video => {
-
-    return (
-      video.category &&
-      video.category.toLowerCase()
-      === category.toLowerCase()
-    );
-
-  });
-
-
-
-  renderVideos(filtered);
+  renderRow(
+    "actionRow",
+    "action"
+  );
 
 }
 
@@ -329,6 +318,23 @@ searchInput.addEventListener("input", () => {
 
   const value =
   searchInput.value.toLowerCase();
+
+
+
+  const results =
+  document.getElementById("videoGrid");
+
+
+
+  results.innerHTML = "";
+
+
+
+  if(value === ""){
+
+    return;
+
+  }
 
 
 
@@ -353,14 +359,66 @@ searchInput.addEventListener("input", () => {
 
 
 
-  renderVideos(filtered);
+  filtered.forEach(video => {
+
+    results.appendChild(
+      createCard(video)
+    );
+
+  });
 
 });
 
 
 
 /* =========================
-   VIDEO PLAYER
+   FILTER
+========================= */
+
+function filterVideos(category){
+
+  const results =
+  document.getElementById("videoGrid");
+
+
+
+  results.innerHTML = "";
+
+
+
+  if(category === "All"){
+
+    renderSections();
+
+    return;
+
+  }
+
+
+
+  videos
+  .filter(video => {
+
+    return (
+      video.category === category
+    );
+
+  })
+
+  .forEach(video => {
+
+    results.appendChild(
+      createCard(video)
+    );
+
+  });
+
+}
+
+
+
+/* =========================
+   PLAYER
 ========================= */
 
 function openVideo(videoId){
@@ -409,7 +467,7 @@ function closeVideo(){
 
 
 /* =========================
-   MANUAL UPLOAD SYSTEM
+   UPLOAD SYSTEM
 ========================= */
 
 function addVideo(){
@@ -491,9 +549,7 @@ function addVideo(){
 
   buildVideos();
 
-  renderVideos();
-
-  renderTrending();
+  renderSections();
 
 
 
@@ -513,6 +569,4 @@ function addVideo(){
 
 buildVideos();
 
-renderVideos();
-
-renderTrending();
+renderSections();
