@@ -1,122 +1,90 @@
 /* =========================
-   CONTENT SOURCES
+   MASSIVE CONTENT SOURCES
 ========================= */
 
 const sources = [
 
-  {
+{
+category:"gaming",
+source:"Gaming Universe",
 
-    category:"gaming",
+videos:[
 
-    source:"Gaming Universe",
+{id:"3fumBcKC6RE",title:"Epic Gaming Moments"},
+{id:"1roy4o4tqQM",title:"Competitive Gameplay"},
+{id:"2g811Eo7K8U",title:"Open World Adventure"},
+{id:"kXYiU_JCYtU",title:"Battle Royale Chaos"},
+{id:"fJ9rUzIMcZQ",title:"Elite Gaming Skills"},
+{id:"hTWKbfoikeg",title:"FPS Combat Experience"},
+{id:"uelHwf8o7_U",title:"Warzone Domination"},
+{id:"ktvTqknDobU",title:"High Intensity Missions"},
+{id:"60ItHLz5WEA",title:"Fantasy Game Universe"},
+{id:"OPf0YbXqDm0",title:"Multiplayer Action"}
 
-    videos:[
-
-      {
-        id:"3fumBcKC6RE",
-        title:"Epic Gaming Moments"
-      },
-
-      {
-        id:"1roy4o4tqQM",
-        title:"Competitive Gameplay"
-      },
-
-      {
-        id:"2g811Eo7K8U",
-        title:"Open World Adventure"
-      }
-
-    ]
-
-  },
+]
+},
 
 
 
-  {
+{
+category:"music",
+source:"Music World",
 
-    category:"music",
+videos:[
 
-    source:"Music World",
+{id:"JGwWNGJdvx8",title:"Global Music Hits"},
+{id:"RgKAFK5djSk",title:"Chill Music Experience"},
+{id:"09R8_2nJtjg",title:"Modern Pop Visuals"},
+{id:"kJQP7kiw5Fk",title:"Rhythm Universe"},
+{id:"YQHsXMglC9A",title:"Emotional Music Journey"},
+{id:"fRh_vgS2dFE",title:"Electro Energy"},
+{id:"lp-EO5I60KA",title:"Modern Music Atmosphere"},
+{id:"CevxZvSJLk8",title:"Night Drive Music"},
+{id:"2Vv-BfVoq4g",title:"Romantic Audio Visual"},
+{id:"SlPhMPnQ58k",title:"Cinematic Sound Experience"}
 
-    videos:[
-
-      {
-        id:"JGwWNGJdvx8",
-        title:"Global Music Hits"
-      },
-
-      {
-        id:"RgKAFK5djSk",
-        title:"Chill Music Experience"
-      },
-
-      {
-        id:"09R8_2nJtjg",
-        title:"Modern Pop Visuals"
-      }
-
-    ]
-
-  },
+]
+},
 
 
 
-  {
+{
+category:"horror",
+source:"Dark Stories",
 
-    category:"horror",
+videos:[
 
-    source:"Dark Stories",
+{id:"7afcZaq1wY8",title:"Dark Horror Atmosphere"},
+{id:"9eDIMXxY9j0",title:"Creepy Cinematic Mystery"},
+{id:"gFDCHdKbKBY",title:"Analog Horror Experience"},
+{id:"sNPnbI1arSE",title:"Haunted Discovery"},
+{id:"2OEL4P1Rz04",title:"Fear Dimension"},
+{id:"L_jWHffIx5E",title:"Shadow Investigation"},
+{id:"eBGIQ7ZuuiU",title:"Midnight Horror"},
+{id:"ub82Xb1C8os",title:"Psychological Terror"}
 
-    videos:[
-
-      {
-        id:"7afcZaq1wY8",
-        title:"Dark Horror Atmosphere"
-      },
-
-      {
-        id:"9eDIMXxY9j0",
-        title:"Creepy Cinematic Mystery"
-      },
-
-      {
-        id:"gFDCHdKbKBY",
-        title:"Analog Horror Experience"
-      }
-
-    ]
-
-  },
+]
+},
 
 
 
-  {
+{
+category:"motivation",
+source:"Mindset Evolution",
 
-    category:"motivation",
+videos:[
 
-    source:"Mindset Evolution",
+{id:"mgmVOuLgFB0",title:"Powerful Motivation"},
+{id:"wnHW6o8WMas",title:"Discipline Mindset"},
+{id:"ZXsQAXx_ao0",title:"Success Journey"},
+{id:"26U_seo0a1g",title:"Focus Evolution"},
+{id:"UNQhuFL6CWg",title:"Mental Strength"},
+{id:"Tuw8hxrFBH8",title:"Rise Again"},
+{id:"IdTMDpizis8",title:"Warrior Mindset"},
+{id:"QJO3ROT-A4E",title:"Self Growth Path"}
 
-    videos:[
-
-      {
-        id:"mgmVOuLgFB0",
-        title:"Powerful Motivation"
-      },
-
-      {
-        id:"wnHW6o8WMas",
-        title:"Discipline Mindset"
-      },
-
-      {
-        id:"ZXsQAXx_ao0",
-        title:"Success Journey"
-      }
-
-    ]
-
-  }
+]
+}
 
 ];
 
@@ -126,8 +94,9 @@ const sources = [
    STORAGE
 ========================= */
 
-let savedVideos = JSON.parse(
-  localStorage.getItem("videos")
+let savedVideos =
+JSON.parse(
+localStorage.getItem("videos")
 ) || [];
 
 
@@ -144,152 +113,66 @@ let videos = [];
    ELEMENTS
 ========================= */
 
-const searchInput =
-document.getElementById("searchInput");
-
-
-
 const videoGrid =
 document.getElementById("videoGrid");
 
 
 
-/* =========================
-   LOADING SCREEN
-========================= */
-
-function showLoader(){
-
-  videoGrid.innerHTML = `
-
-    <div class="loader">
-
-      Loading Discovery Universe...
-
-    </div>
-
-  `;
-
-}
+const searchInput =
+document.getElementById("searchInput");
 
 
 
 /* =========================
-   SIMULATED API FETCH
+   BUILD DATABASE
 ========================= */
 
-async function fetchVideos(){
+function buildVideos(){
 
-  showLoader();
-
-
-
-  return new Promise(resolve => {
-
-    setTimeout(() => {
-
-      let fetchedVideos = [];
+videos = [];
 
 
 
-      sources.forEach(source => {
+sources.forEach(source => {
 
-        source.videos.forEach(video => {
+source.videos.forEach(video => {
 
-          fetchedVideos.push({
+videos.push({
 
-            id:video.id,
+id:video.id,
 
-            title:video.title,
+title:video.title,
 
-            desc:source.source,
+desc:source.source,
 
-            category:source.category,
+category:source.category,
 
-            score:
-            Math.floor(
-              Math.random() * 100
-            )
+score:
+Math.floor(
+Math.random()*100
+)
 
-          });
+});
 
-        });
+});
 
-      });
-
-
-
-      savedVideos.forEach(video => {
-
-        fetchedVideos.unshift(video);
-
-      });
+});
 
 
 
-      resolve(fetchedVideos);
+savedVideos.forEach(video => {
 
-    },1200);
+videos.unshift(video);
 
-  });
-
-}
+});
 
 
 
-/* =========================
-   LOAD DATABASE
-========================= */
+videos.sort((a,b)=>{
 
-async function loadPlatform(){
+return b.score-a.score;
 
-  videos = await fetchVideos();
-
-  intelligentSort();
-
-  renderSections();
-
-  generateInfiniteFeed();
-
-}
-
-
-
-/* =========================
-   INTELLIGENT SORT
-========================= */
-
-function intelligentSort(){
-
-  videos.sort((a,b) => {
-
-    return b.score - a.score;
-
-  });
-
-}
-
-
-
-/* =========================
-   NAVIGATION
-========================= */
-
-function showPage(pageId){
-
-  document
-  .querySelectorAll(".page")
-  .forEach(page => {
-
-    page.classList.remove("active");
-
-  });
-
-
-
-  document
-  .getElementById(pageId)
-  .classList.add("active");
+});
 
 }
 
@@ -301,79 +184,93 @@ function showPage(pageId){
 
 function createCard(video){
 
-  const card =
-  document.createElement("div");
+const card =
+document.createElement("div");
 
 
 
-  card.className =
-  "trend-card";
+card.className =
+"trend-card";
 
 
 
-  card.innerHTML = `
+card.innerHTML = `
 
-    <img
-    loading="lazy"
-    src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
+<div class="thumb-wrap">
 
-    <div class="card-content">
+<img
+loading="lazy"
+src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
 
-      <h4>${video.title}</h4>
+<div class="thumb-overlay">
 
-      <p>${video.desc}</p>
+<span>${video.category}</span>
 
-    </div>
+</div>
 
-  `;
+</div>
+
+<div class="card-content">
+
+<h4>${video.title}</h4>
+
+<p>${video.desc}</p>
+
+</div>
+
+`;
 
 
 
-  card.onclick = () => {
+card.onclick = ()=>{
 
-    openVideo(video.id);
+openVideo(video.id);
 
-  };
+};
 
 
 
-  return card;
+return card;
 
 }
 
 
 
 /* =========================
-   ROWS
+   RENDER ROW
 ========================= */
 
 function renderRow(rowId,category){
 
-  const row =
-  document.getElementById(rowId);
+const row =
+document.getElementById(rowId);
 
 
 
-  row.innerHTML = "";
+if(!row) return;
 
 
 
-  videos
-  .filter(video => {
+row.innerHTML = "";
 
-    return (
-      video.category === category
-    );
 
-  })
 
-  .forEach(video => {
+videos
+.filter(video=>{
 
-    row.appendChild(
-      createCard(video)
-    );
+return (
+video.category===category
+);
 
-  });
+})
+
+.forEach(video=>{
+
+row.appendChild(
+createCard(video)
+);
+
+});
 
 }
 
@@ -385,23 +282,30 @@ function renderRow(rowId,category){
 
 function renderTrending(){
 
-  const row =
-  document.getElementById("trendingRow");
+const row =
+document.getElementById(
+"trendingRow"
+);
 
 
 
-  row.innerHTML = "";
+if(!row) return;
 
 
 
-  videos.slice(0,10)
-  .forEach(video => {
+row.innerHTML = "";
 
-    row.appendChild(
-      createCard(video)
-    );
 
-  });
+
+videos
+.slice(0,12)
+.forEach(video=>{
+
+row.appendChild(
+createCard(video)
+);
+
+});
 
 }
 
@@ -413,27 +317,27 @@ function renderTrending(){
 
 function renderSections(){
 
-  renderTrending();
+renderTrending();
 
-  renderRow(
-    "gamingRow",
-    "gaming"
-  );
+renderRow(
+"gamingRow",
+"gaming"
+);
 
-  renderRow(
-    "musicRow",
-    "music"
-  );
+renderRow(
+"musicRow",
+"music"
+);
 
-  renderRow(
-    "horrorRow",
-    "horror"
-  );
+renderRow(
+"horrorRow",
+"horror"
+);
 
-  renderRow(
-    "motivationRow",
-    "motivation"
-  );
+renderRow(
+"motivationRow",
+"motivation"
+);
 
 }
 
@@ -443,55 +347,75 @@ function renderSections(){
    SEARCH
 ========================= */
 
-searchInput.addEventListener("input", () => {
+function performSearch(){
 
-  const value =
-  searchInput.value.toLowerCase();
-
-
-
-  videoGrid.innerHTML = "";
+const value =
+searchInput.value
+.toLowerCase();
 
 
 
-  if(value === ""){
-
-    return;
-
-  }
+videoGrid.innerHTML = "";
 
 
 
-  const filtered =
-  videos.filter(video => {
+if(value===""){
 
-    return (
+generateInfiniteFeed();
 
-      video.title
-      .toLowerCase()
-      .includes(value)
+return;
 
-      ||
-
-      video.desc
-      .toLowerCase()
-      .includes(value)
-
-    );
-
-  });
+}
 
 
 
-  filtered.forEach(video => {
+const filtered =
+videos.filter(video=>{
 
-    videoGrid.appendChild(
-      createCard(video)
-    );
+return (
 
-  });
+video.title
+.toLowerCase()
+.includes(value)
+
+||
+
+video.desc
+.toLowerCase()
+.includes(value)
+
+||
+
+video.category
+.toLowerCase()
+.includes(value)
+
+);
 
 });
+
+
+
+filtered.forEach(video=>{
+
+videoGrid.appendChild(
+createCard(video)
+);
+
+});
+
+}
+
+
+
+/* =========================
+   SEARCH EVENTS
+========================= */
+
+searchInput.addEventListener(
+"input",
+performSearch
+);
 
 
 
@@ -501,44 +425,156 @@ searchInput.addEventListener("input", () => {
 
 function openVideo(videoId){
 
-  const popup =
-  document.getElementById("popup");
+const popup =
+document.getElementById(
+"popup"
+);
 
 
 
-  const frame =
-  document.getElementById("videoFrame");
+const frame =
+document.getElementById(
+"videoFrame"
+);
 
 
 
-  popup.style.display =
-  "flex";
+popup.style.display =
+"block";
 
 
 
-  frame.src =
-  `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+frame.src =
+`https://www.youtube.com/embed/${videoId}?autoplay=1`;
+
+
+
+const current =
+videos.find(video=>{
+
+return video.id===videoId;
+
+});
+
+
+
+if(current){
+
+document.getElementById(
+"playerTitle"
+).textContent =
+current.title;
+
+
+
+document.getElementById(
+"playerDesc"
+).textContent =
+current.desc;
+
+}
+
+
+
+renderRecommendations(
+videoId
+);
 
 }
 
 
 
 /* =========================
-   CLOSE PLAYER
+   CLOSE VIDEO
 ========================= */
 
 function closeVideo(){
 
-  document
-  .getElementById("popup")
-  .style.display =
-  "none";
+document.getElementById(
+"popup"
+).style.display =
+"none";
 
 
 
-  document
-  .getElementById("videoFrame")
-  .src = "";
+document.getElementById(
+"videoFrame"
+).src = "";
+
+}
+
+
+
+/* =========================
+   RECOMMENDATIONS
+========================= */
+
+function renderRecommendations(currentId){
+
+const container =
+document.getElementById(
+"recommendedVideos"
+);
+
+
+
+if(!container) return;
+
+
+
+container.innerHTML = "";
+
+
+
+videos
+.filter(video=>{
+
+return video.id!==currentId;
+
+})
+
+.slice(0,8)
+
+.forEach(video=>{
+
+const card =
+document.createElement("div");
+
+
+
+card.className =
+"recommend-card";
+
+
+
+card.innerHTML = `
+
+<img
+src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
+
+<div class="recommend-info">
+
+<h4>${video.title}</h4>
+
+<p>${video.desc}</p>
+
+</div>
+
+`;
+
+
+
+card.onclick = ()=>{
+
+openVideo(video.id);
+
+};
+
+
+
+container.appendChild(card);
+
+});
 
 }
 
@@ -550,99 +586,151 @@ function closeVideo(){
 
 function addVideo(){
 
-  const input =
-  document.getElementById("videoLink");
+const input =
+document.getElementById(
+"videoLink"
+);
 
 
 
-  const url =
-  input.value.trim();
+const url =
+input.value.trim();
 
 
 
-  if(!url){
+if(!url){
 
-    alert("Paste YouTube link");
+showToast(
+"Paste YouTube link"
+);
 
-    return;
+return;
 
-  }
-
-
-
-  let videoId = "";
+}
 
 
 
-  if(url.includes("v=")){
-
-    videoId =
-    url.split("v=")[1]
-    .split("&")[0];
-
-  }
-
-  else if(url.includes("youtu.be/")){
-
-    videoId =
-    url.split("youtu.be/")[1];
-
-  }
+let videoId = "";
 
 
 
-  if(!videoId){
+if(url.includes("v=")){
 
-    alert("Invalid link");
+videoId =
+url.split("v=")[1]
+.split("&")[0];
 
-    return;
+}
 
-  }
+else if(
+url.includes("youtu.be/")
+){
 
+videoId =
+url.split(
+"youtu.be/"
+)[1];
 
-
-  savedVideos.unshift({
-
-    id:videoId,
-
-    title:"User Upload",
-
-    desc:"Community Content",
-
-    category:"custom",
-
-    score:999
-
-  });
+}
 
 
 
-  localStorage.setItem(
+if(!videoId){
 
-    "videos",
+showToast(
+"Invalid YouTube link"
+);
 
-    JSON.stringify(savedVideos)
+return;
 
-  );
-
-
-
-  loadPlatform();
+}
 
 
 
-  input.value = "";
+savedVideos.unshift({
+
+id:videoId,
+
+title:"User Upload",
+
+desc:"Community Content",
+
+category:"custom",
+
+score:999
+
+});
 
 
 
-  showPage("home");
+localStorage.setItem(
+
+"videos",
+
+JSON.stringify(savedVideos)
+
+);
+
+
+
+buildVideos();
+
+renderSections();
+
+generateInfiniteFeed();
+
+
+
+input.value = "";
+
+
+
+showToast(
+"Upload Successful"
+);
 
 }
 
 
 
 /* =========================
-   SMART DISCOVERY
+   TOAST
+========================= */
+
+function showToast(message){
+
+const toast =
+document.getElementById(
+"toast"
+);
+
+
+
+toast.textContent =
+message;
+
+
+
+toast.classList.add(
+"show-toast"
+);
+
+
+
+setTimeout(()=>{
+
+toast.classList.remove(
+"show-toast"
+);
+
+},2500);
+
+}
+
+
+
+/* =========================
+   INFINITE FEED
 ========================= */
 
 let usedVideos = [];
@@ -651,92 +739,97 @@ let usedVideos = [];
 
 function generateInfiniteFeed(){
 
-  const remaining =
-  videos.filter(video => {
+const remaining =
+videos.filter(video=>{
 
-    return !usedVideos.includes(
-      video.id
-    );
+return !usedVideos.includes(
+video.id
+);
 
-  });
-
-
-
-  if(remaining.length === 0){
-
-    usedVideos = [];
-
-    return;
-  }
+});
 
 
 
-  const nextVideos =
-  remaining
-  .sort(() => Math.random() - 0.5)
-  .slice(0,6);
+if(remaining.length===0){
+
+usedVideos=[];
+
+return;
+
+}
 
 
 
-  nextVideos.forEach(video => {
+const next =
+remaining
+.sort(()=>Math.random()-0.5)
+.slice(0,8);
 
-    usedVideos.push(video.id);
 
-    videoGrid.appendChild(
-      createCard(video)
-    );
 
-  });
+next.forEach(video=>{
+
+usedVideos.push(video.id);
+
+videoGrid.appendChild(
+createCard(video)
+);
+
+});
 
 }
 
 
 
 /* =========================
-   SMART SCROLL
+   SCROLL
 ========================= */
 
-let loading = false;
+let loading=false;
 
 
 
-window.addEventListener("scroll", () => {
+window.addEventListener(
+"scroll",
+()=>{
 
-  if(loading) return;
+if(loading) return;
 
 
 
-  if(
+if(
 
-    window.innerHeight
-    +
-    window.scrollY
+window.innerHeight+
+window.scrollY
 
-    >=
+>=
 
-    document.body.offsetHeight
-    - 500
+document.body.offsetHeight-500
 
-  ){
+){
 
-    loading = true;
+loading=true;
 
-    generateInfiniteFeed();
+generateInfiniteFeed();
 
-    setTimeout(() => {
+setTimeout(()=>{
 
-      loading = false;
+loading=false;
 
-    },600);
+},500);
 
-  }
+}
 
 });
 
 
 
 /* =========================
-   INITIALIZE
+   INIT
 ========================= */
 
-loadPlatform();
+buildVideos();
+
+renderSections();
+
+generateInfiniteFeed();
