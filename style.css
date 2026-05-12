@@ -4,40 +4,124 @@
   box-sizing:border-box;
 }
 
-body{
-  background:#050505;
-  color:white;
-  font-family:Arial,sans-serif;
-  overflow-x:hidden;
+html{
+  scroll-behavior:smooth;
 }
 
-/* PAGE SYSTEM */
+body{
+
+  background:#050505;
+
+  color:white;
+
+  font-family:Arial,sans-serif;
+
+  overflow-x:hidden;
+
+}
+
+
+
+/* =========================
+   GLOBAL ANIMATIONS
+========================= */
+
+@keyframes fadeUp{
+
+  from{
+    opacity:0;
+    transform:
+    translateY(40px);
+  }
+
+  to{
+    opacity:1;
+    transform:
+    translateY(0);
+  }
+
+}
+
+
+
+@keyframes heroGlow{
+
+  0%{
+    background-position:0% 50%;
+  }
+
+  50%{
+    background-position:100% 50%;
+  }
+
+  100%{
+    background-position:0% 50%;
+  }
+
+}
+
+
+
+@keyframes floating{
+
+  0%{
+    transform:
+    translateY(0px);
+  }
+
+  50%{
+    transform:
+    translateY(-8px);
+  }
+
+  100%{
+    transform:
+    translateY(0px);
+  }
+
+}
+
+
+
+/* =========================
+   PAGE SYSTEM
+========================= */
 
 .page{
   display:none;
+  animation:fadeUp 0.5s ease;
 }
 
 .page.active{
   display:block;
 }
 
-/* TOP BAR */
+
+
+/* =========================
+   TOP BAR
+========================= */
 
 .top-bar{
 
   position:sticky;
+
   top:0;
+
   z-index:1000;
 
   display:flex;
+
   align-items:center;
+
   gap:10px;
 
   padding:15px;
 
-  background:rgba(8,8,8,0.88);
+  background:
+  rgba(8,8,8,0.75);
 
-  backdrop-filter:blur(14px);
+  backdrop-filter:blur(18px);
 
   border-bottom:
   1px solid rgba(255,255,255,0.05);
@@ -45,8 +129,13 @@ body{
 }
 
 .top-bar h2{
+
   font-size:22px;
+
   white-space:nowrap;
+
+  letter-spacing:1px;
+
 }
 
 .top-bar input{
@@ -56,6 +145,7 @@ body{
   background:#121212;
 
   border:none;
+
   outline:none;
 
   color:white;
@@ -63,6 +153,16 @@ body{
   padding:12px 16px;
 
   border-radius:20px;
+
+  transition:0.3s;
+
+}
+
+.top-bar input:focus{
+
+  background:#1a1a1a;
+
+  transform:scale(1.02);
 
 }
 
@@ -78,9 +178,24 @@ body{
 
   border-radius:16px;
 
+  transition:0.3s;
+
 }
 
-/* HERO */
+.top-bar button:hover{
+
+  background:#1d1d1d;
+
+  transform:
+  translateY(-2px);
+
+}
+
+
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
 
@@ -92,33 +207,96 @@ body{
 
   background:
   linear-gradient(
-    135deg,
+    -45deg,
     #111,
-    #1d1d1d
+    #1d1d1d,
+    #0f0f0f,
+    #181818
   );
 
+  background-size:400% 400%;
+
+  animation:
+  heroGlow 12s ease infinite;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
 
   text-align:center;
 
   padding:30px;
 
+  position:relative;
+
+  overflow:hidden;
+
+}
+
+
+
+.hero::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:300px;
+  height:300px;
+
+  background:
+  radial-gradient(
+    rgba(255,255,255,0.08),
+    transparent
+  );
+
+  border-radius:50%;
+
+  top:-100px;
+  right:-100px;
+
+}
+
+
+
+.hero-content{
+
+  position:relative;
+
+  z-index:2;
+
+  animation:
+  floating 6s ease infinite;
+
 }
 
 .hero h1{
+
   font-size:38px;
+
   margin-bottom:10px;
+
+  letter-spacing:1px;
+
 }
 
 .hero p{
-  opacity:0.7;
+
+  opacity:0.72;
+
   line-height:1.6;
+
   max-width:700px;
+
 }
 
-/* CATEGORY BAR */
+
+
+/* =========================
+   CATEGORY BAR
+========================= */
 
 .category-bar{
 
@@ -150,9 +328,24 @@ body{
 
   border-radius:30px;
 
+  transition:0.3s;
+
 }
 
-/* SECTION TITLES */
+.category-bar button:hover{
+
+  background:#1d1d1d;
+
+  transform:
+  translateY(-3px);
+
+}
+
+
+
+/* =========================
+   TITLES
+========================= */
 
 .section-title{
 
@@ -160,19 +353,28 @@ body{
 
   padding:14px 18px;
 
+  animation:
+  fadeUp 0.7s ease;
+
 }
 
-/* HORIZONTAL FEEDS */
+
+
+/* =========================
+   FEEDS
+========================= */
 
 .horizontal-feed{
 
   display:flex;
 
-  gap:15px;
+  gap:18px;
 
   overflow-x:auto;
 
   padding:15px;
+
+  scroll-behavior:smooth;
 
 }
 
@@ -180,47 +382,90 @@ body{
   display:none;
 }
 
-/* VIDEO CARDS */
+
+
+/* =========================
+   CARDS
+========================= */
 
 .trend-card{
 
-  min-width:230px;
+  min-width:240px;
 
-  background:#111;
+  background:#101010;
 
-  border-radius:24px;
+  border-radius:26px;
 
   overflow:hidden;
 
-  transition:0.3s;
-
   flex-shrink:0;
+
+  transition:
+  transform 0.35s ease,
+  box-shadow 0.35s ease;
+
+  animation:
+  fadeUp 0.6s ease;
 
 }
 
 .trend-card:hover{
-  transform:translateY(-5px);
+
+  transform:
+  translateY(-8px)
+  scale(1.03);
+
+  box-shadow:
+  0 18px 45px
+  rgba(0,0,0,0.45);
+
 }
+
+
 
 .trend-card img{
 
   width:100%;
 
-  height:150px;
+  height:160px;
 
   object-fit:cover;
 
 }
 
-.trend-card h4{
 
-  padding:14px;
 
-  font-size:15px;
+.card-content{
+
+  padding:15px;
 
 }
 
-/* SEARCH RESULTS */
+
+
+.card-content h4{
+
+  font-size:16px;
+
+  margin-bottom:8px;
+
+}
+
+
+
+.card-content p{
+
+  opacity:0.65;
+
+  font-size:13px;
+
+}
+
+
+
+/* =========================
+   SEARCH GRID
+========================= */
 
 #videoGrid{
 
@@ -238,7 +483,11 @@ body{
 
 }
 
-/* POPUP */
+
+
+/* =========================
+   POPUP
+========================= */
 
 .popup{
 
@@ -247,11 +496,12 @@ body{
   inset:0;
 
   background:
-  rgba(0,0,0,0.94);
+  rgba(0,0,0,0.95);
 
   display:none;
 
   align-items:center;
+
   justify-content:center;
 
   flex-direction:column;
@@ -259,6 +509,9 @@ body{
   z-index:3000;
 
   padding:20px;
+
+  animation:
+  fadeUp 0.4s ease;
 
 }
 
@@ -272,7 +525,11 @@ body{
 
   border:none;
 
-  border-radius:22px;
+  border-radius:24px;
+
+  box-shadow:
+  0 25px 80px
+  rgba(0,0,0,0.5);
 
 }
 
@@ -282,7 +539,7 @@ body{
 
   border:none;
 
-  padding:12px 22px;
+  padding:12px 24px;
 
   border-radius:20px;
 
@@ -290,9 +547,22 @@ body{
 
   color:black;
 
+  transition:0.3s;
+
 }
 
-/* UPLOAD */
+.popup button:hover{
+
+  transform:
+  scale(1.05);
+
+}
+
+
+
+/* =========================
+   UPLOAD
+========================= */
 
 #upload{
   padding:20px;
@@ -311,6 +581,9 @@ body{
   max-width:700px;
 
   margin-inline:auto;
+
+  animation:
+  fadeUp 0.6s ease;
 
 }
 
@@ -351,9 +624,22 @@ body{
 
   border-radius:18px;
 
+  transition:0.3s;
+
 }
 
-/* ACCOUNT */
+.upload-box button:hover{
+
+  transform:
+  translateY(-2px);
+
+}
+
+
+
+/* =========================
+   ACCOUNT
+========================= */
 
 #account{
   padding:20px;
@@ -373,6 +659,9 @@ body{
 
   margin-inline:auto;
 
+  animation:
+  fadeUp 0.6s ease;
+
 }
 
 .account-box p{
@@ -385,6 +674,74 @@ body{
 
 }
 
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:768px){
+
+  .top-bar{
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+  }
+
+  .top-bar h2{
+
+    width:100%;
+
+    font-size:32px;
+
+  }
+
+  .top-bar input{
+
+    width:100%;
+
+    flex:none;
+
+  }
+
+  .top-bar button{
+
+    flex:1;
+
+  }
+
+  .hero{
+
+    min-height:220px;
+
+    border-radius:28px;
+
+  }
+
+  .hero h1{
+
+    font-size:44px;
+
+  }
+
+  .section-title{
+
+    font-size:34px;
+
+  }
+
+  .trend-card{
+
+    min-width:280px;
+
+  }
+
+}
+
+
+
 /* =========================
    TABLET
 ========================= */
@@ -396,18 +753,12 @@ body{
   }
 
   .hero h1{
-    font-size:52px;
-  }
-
-  .trend-card{
-    min-width:280px;
-  }
-
-  .trend-card img{
-    height:180px;
+    font-size:56px;
   }
 
 }
+
+
 
 /* =========================
    DESKTOP
@@ -416,29 +767,23 @@ body{
 @media(min-width:1024px){
 
   .top-bar{
-
     padding-inline:40px;
-
   }
 
   .hero{
 
-    margin:30px auto;
-
     max-width:1400px;
+
+    margin:30px auto;
 
   }
 
   .horizontal-feed{
-
     padding-inline:40px;
-
   }
 
   .section-title{
-
     padding-inline:40px;
-
   }
 
   #videoGrid{
@@ -467,133 +812,20 @@ body{
 
 }
 
+
+
 /* =========================
    LARGE DESKTOP
 ========================= */
 
 @media(min-width:1440px){
 
-  body{
-    font-size:18px;
-  }
-
   .hero h1{
-    font-size:64px;
+    font-size:72px;
   }
 
   .trend-card{
     min-width:360px;
   }
 
-}
-/* =========================
-   MOBILE FIX
-========================= */
-
-@media(max-width:768px){
-
-  /* TOP BAR */
-
-  .top-bar{
-
-    flex-wrap:wrap;
-
-    padding:12px;
-
-    gap:12px;
-
   }
-
-  .top-bar h2{
-
-    width:100%;
-
-    font-size:34px;
-
-  }
-
-  .top-bar input{
-
-    width:100%;
-
-    flex:none;
-
-  }
-
-  .top-bar button{
-
-    flex:1;
-
-    min-width:90px;
-
-  }
-
-
-
-  /* HERO */
-
-  .hero{
-
-    min-height:220px;
-
-    border-radius:28px;
-
-    padding:25px;
-
-  }
-
-  .hero h1{
-
-    font-size:48px;
-
-    line-height:1;
-
-  }
-
-  .hero p{
-
-    font-size:15px;
-
-    margin-top:15px;
-
-  }
-
-
-
-  /* CARDS */
-
-  .trend-card{
-
-    min-width:280px;
-
-  }
-
-  .trend-card img{
-
-    height:180px;
-
-  }
-
-
-
-  /* CATEGORY BAR */
-
-  .category-bar{
-
-    padding-top:5px;
-
-  }
-
-
-
-  /* SECTION TITLES */
-
-  .section-title{
-
-    font-size:38px;
-
-    padding-top:25px;
-
-  }
-
-}
