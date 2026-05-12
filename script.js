@@ -1,7 +1,3 @@
-/* =========================
-   MASSIVE CONTENT SOURCES
-========================= */
-
 const sources = [
 
 {
@@ -9,90 +5,50 @@ category:"gaming",
 source:"Gaming Universe",
 
 videos:[
-
 {id:"3fumBcKC6RE",title:"Epic Gaming Moments"},
 {id:"1roy4o4tqQM",title:"Competitive Gameplay"},
 {id:"2g811Eo7K8U",title:"Open World Adventure"},
-{id:"kXYiU_JCYtU",title:"Battle Royale Chaos"},
-{id:"fJ9rUzIMcZQ",title:"Elite Gaming Skills"},
-{id:"hTWKbfoikeg",title:"FPS Combat Experience"},
-{id:"uelHwf8o7_U",title:"Warzone Domination"},
-{id:"ktvTqknDobU",title:"High Intensity Missions"},
-{id:"60ItHLz5WEA",title:"Fantasy Game Universe"},
-{id:"OPf0YbXqDm0",title:"Multiplayer Action"}
-
+{id:"kXYiU_JCYtU",title:"Battle Royale Chaos"}
 ]
 },
-
-
 
 {
 category:"music",
 source:"Music World",
 
 videos:[
-
 {id:"JGwWNGJdvx8",title:"Global Music Hits"},
 {id:"RgKAFK5djSk",title:"Chill Music Experience"},
 {id:"09R8_2nJtjg",title:"Modern Pop Visuals"},
-{id:"kJQP7kiw5Fk",title:"Rhythm Universe"},
-{id:"YQHsXMglC9A",title:"Emotional Music Journey"},
-{id:"fRh_vgS2dFE",title:"Electro Energy"},
-{id:"lp-EO5I60KA",title:"Modern Music Atmosphere"},
-{id:"CevxZvSJLk8",title:"Night Drive Music"},
-{id:"2Vv-BfVoq4g",title:"Romantic Audio Visual"},
-{id:"SlPhMPnQ58k",title:"Cinematic Sound Experience"}
-
+{id:"kJQP7kiw5Fk",title:"Rhythm Universe"}
 ]
 },
-
-
 
 {
 category:"horror",
 source:"Dark Stories",
 
 videos:[
-
 {id:"7afcZaq1wY8",title:"Dark Horror Atmosphere"},
 {id:"9eDIMXxY9j0",title:"Creepy Cinematic Mystery"},
-{id:"gFDCHdKbKBY",title:"Analog Horror Experience"},
-{id:"sNPnbI1arSE",title:"Haunted Discovery"},
-{id:"2OEL4P1Rz04",title:"Fear Dimension"},
-{id:"L_jWHffIx5E",title:"Shadow Investigation"},
-{id:"eBGIQ7ZuuiU",title:"Midnight Horror"},
-{id:"ub82Xb1C8os",title:"Psychological Terror"}
-
+{id:"gFDCHdKbKBY",title:"Analog Horror Experience"}
 ]
 },
-
-
 
 {
 category:"motivation",
 source:"Mindset Evolution",
 
 videos:[
-
 {id:"mgmVOuLgFB0",title:"Powerful Motivation"},
 {id:"wnHW6o8WMas",title:"Discipline Mindset"},
-{id:"ZXsQAXx_ao0",title:"Success Journey"},
-{id:"26U_seo0a1g",title:"Focus Evolution"},
-{id:"UNQhuFL6CWg",title:"Mental Strength"},
-{id:"Tuw8hxrFBH8",title:"Rise Again"},
-{id:"IdTMDpizis8",title:"Warrior Mindset"},
-{id:"QJO3ROT-A4E",title:"Self Growth Path"}
-
+{id:"ZXsQAXx_ao0",title:"Success Journey"}
 ]
 }
 
 ];
 
 
-
-/* =========================
-   STORAGE
-========================= */
 
 let savedVideos =
 JSON.parse(
@@ -101,41 +57,33 @@ localStorage.getItem("videos")
 
 
 
-/* =========================
-   DATABASE
-========================= */
-
 let videos = [];
 
 
 
-/* =========================
-   ELEMENTS
-========================= */
-
 const videoGrid =
-document.getElementById("videoGrid");
+document.getElementById(
+"videoGrid"
+);
 
 
 
 const searchInput =
-document.getElementById("searchInput");
+document.getElementById(
+"searchInput"
+);
 
 
-
-/* =========================
-   BUILD DATABASE
-========================= */
 
 function buildVideos(){
 
-videos = [];
+videos=[];
 
 
 
-sources.forEach(source => {
+sources.forEach(source=>{
 
-source.videos.forEach(video => {
+source.videos.forEach(video=>{
 
 videos.push({
 
@@ -160,7 +108,7 @@ Math.random()*100
 
 
 
-savedVideos.forEach(video => {
+savedVideos.forEach(video=>{
 
 videos.unshift(video);
 
@@ -177,10 +125,6 @@ return b.score-a.score;
 }
 
 
-
-/* =========================
-   VIDEO CARD
-========================= */
 
 function createCard(video){
 
@@ -222,7 +166,7 @@ src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
 
 
 
-card.onclick = ()=>{
+card.onclick=()=>{
 
 openVideo(video.id);
 
@@ -236,14 +180,12 @@ return card;
 
 
 
-/* =========================
-   RENDER ROW
-========================= */
-
 function renderRow(rowId,category){
 
 const row =
-document.getElementById(rowId);
+document.getElementById(
+rowId
+);
 
 
 
@@ -251,16 +193,14 @@ if(!row) return;
 
 
 
-row.innerHTML = "";
+row.innerHTML="";
 
 
 
 videos
 .filter(video=>{
 
-return (
-video.category===category
-);
+return video.category===category;
 
 })
 
@@ -276,10 +216,6 @@ createCard(video)
 
 
 
-/* =========================
-   TRENDING
-========================= */
-
 function renderTrending(){
 
 const row =
@@ -289,11 +225,7 @@ document.getElementById(
 
 
 
-if(!row) return;
-
-
-
-row.innerHTML = "";
+row.innerHTML="";
 
 
 
@@ -310,10 +242,6 @@ createCard(video)
 }
 
 
-
-/* =========================
-   RENDER
-========================= */
 
 function renderSections(){
 
@@ -343,10 +271,6 @@ renderRow(
 
 
 
-/* =========================
-   SEARCH
-========================= */
-
 function performSearch(){
 
 const value =
@@ -355,7 +279,7 @@ searchInput.value
 
 
 
-videoGrid.innerHTML = "";
+videoGrid.innerHTML="";
 
 
 
@@ -408,20 +332,12 @@ createCard(video)
 
 
 
-/* =========================
-   SEARCH EVENTS
-========================= */
-
 searchInput.addEventListener(
 "input",
 performSearch
 );
 
 
-
-/* =========================
-   PLAYER
-========================= */
 
 function openVideo(videoId){
 
@@ -484,10 +400,6 @@ videoId
 
 
 
-/* =========================
-   CLOSE VIDEO
-========================= */
-
 function closeVideo(){
 
 document.getElementById(
@@ -499,15 +411,11 @@ document.getElementById(
 
 document.getElementById(
 "videoFrame"
-).src = "";
+).src="";
 
 }
 
 
-
-/* =========================
-   RECOMMENDATIONS
-========================= */
 
 function renderRecommendations(currentId){
 
@@ -518,11 +426,7 @@ document.getElementById(
 
 
 
-if(!container) return;
-
-
-
-container.innerHTML = "";
+container.innerHTML="";
 
 
 
@@ -547,7 +451,7 @@ card.className =
 
 
 
-card.innerHTML = `
+card.innerHTML=`
 
 <img
 src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
@@ -564,7 +468,7 @@ src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
 
 
 
-card.onclick = ()=>{
+card.onclick=()=>{
 
 openVideo(video.id);
 
@@ -579,10 +483,6 @@ container.appendChild(card);
 }
 
 
-
-/* =========================
-   UPLOAD
-========================= */
 
 function addVideo(){
 
@@ -610,7 +510,7 @@ return;
 
 
 
-let videoId = "";
+let videoId="";
 
 
 
@@ -681,7 +581,7 @@ generateInfiniteFeed();
 
 
 
-input.value = "";
+input.value="";
 
 
 
@@ -693,10 +593,6 @@ showToast(
 
 
 
-/* =========================
-   TOAST
-========================= */
-
 function showToast(message){
 
 const toast =
@@ -706,7 +602,7 @@ document.getElementById(
 
 
 
-toast.textContent =
+toast.textContent=
 message;
 
 
@@ -729,11 +625,7 @@ toast.classList.remove(
 
 
 
-/* =========================
-   INFINITE FEED
-========================= */
-
-let usedVideos = [];
+let usedVideos=[];
 
 
 
@@ -781,10 +673,6 @@ createCard(video)
 
 
 
-/* =========================
-   SCROLL
-========================= */
-
 let loading=false;
 
 
@@ -823,10 +711,6 @@ loading=false;
 });
 
 
-
-/* =========================
-   INIT
-========================= */
 
 buildVideos();
 
