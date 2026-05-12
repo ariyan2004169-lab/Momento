@@ -1,253 +1,226 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-  <title>Premium Discovery</title>
+<meta charset="UTF-8">
 
-  <meta name="viewport"
-  content="width=device-width, initial-scale=1.0">
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="style.css">
+<title>Discovery Universe</title>
+
+<link
+rel="stylesheet"
+href="style.css">
 
 </head>
 
 <body>
 
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+<h1 class="logo">
+DISCOVERY
+</h1>
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search universe...">
+
+<button onclick="performSearch()">
+Search
+</button>
+
+</div>
+
+</header>
 
 
-<!-- TOP BAR -->
 
-<div class="top-bar">
+<!-- HERO -->
 
-  <h2>Discover</h2>
+<section class="hero">
 
-  <input
-  id="searchInput"
-  placeholder="Search...">
+<h2>
+Enter The Discovery Universe
+</h2>
 
-  <button onclick="showPage('home')">
-    Home
-  </button>
+<p>
+Explore cinematic worlds,
+music, gaming, horror,
+motivation and more.
+</p>
 
-  <button onclick="showPage('upload')">
-    Upload
-  </button>
+</section>
 
-  <button onclick="showPage('account')">
-    Account
-  </button>
+
+
+<!-- UPLOAD -->
+
+<section class="upload-section">
+
+<input
+type="text"
+id="videoLink"
+placeholder="Paste YouTube link">
+
+<button onclick="addVideo()">
+Upload
+</button>
+
+</section>
+
+
+
+<!-- VIDEO GRID -->
+
+<div id="videoGrid"
+class="video-grid">
+</div>
+
+
+
+<!-- TRENDING -->
+
+<section class="category-section">
+
+<h2>Trending</h2>
+
+<div
+class="row"
+id="trendingRow">
+</div>
+
+</section>
+
+
+
+<!-- GAMING -->
+
+<section class="category-section">
+
+<h2>Gaming</h2>
+
+<div
+class="row"
+id="gamingRow">
+</div>
+
+</section>
+
+
+
+<!-- MUSIC -->
+
+<section class="category-section">
+
+<h2>Music</h2>
+
+<div
+class="row"
+id="musicRow">
+</div>
+
+</section>
+
+
+
+<!-- HORROR -->
+
+<section class="category-section">
+
+<h2>Horror</h2>
+
+<div
+class="row"
+id="horrorRow">
+</div>
+
+</section>
+
+
+
+<!-- MOTIVATION -->
+
+<section class="category-section">
+
+<h2>Motivation</h2>
+
+<div
+class="row"
+id="motivationRow">
+</div>
+
+</section>
+
+
+
+<!-- TOAST -->
+
+<div id="toast"></div>
+
+
+
+<!-- PREMIUM PLAYER -->
+
+<div
+id="popup"
+class="premium-player">
+
+<div class="player-layout">
+
+<div class="player-main">
+
+<iframe
+id="videoFrame"
+allowfullscreen>
+</iframe>
+
+<div class="player-info">
+
+<h2 id="playerTitle">
+Cinematic Experience
+</h2>
+
+<p id="playerDesc">
+Discovery Universe
+</p>
+
+</div>
 
 </div>
 
 
 
-<!-- HOME -->
+<div class="player-sidebar">
 
-<div id="home" class="page active">
+<h3>
+More Discovery
+</h3>
 
+<div id="recommendedVideos">
+</div>
 
-
-  <!-- HERO -->
-
-  <div class="hero">
-
-    <div class="hero-content">
-
-      <h1>Premium Discovery</h1>
-
-      <p>
-        Explore immersive worlds,
-        creators & cinematic experiences
-      </p>
-
-    </div>
-
-  </div>
-
-
-
-  <!-- CATEGORY BAR -->
-
-  <div class="category-bar">
-
-    <button onclick="filterVideos('All')">
-      All
-    </button>
-
-    <button onclick="filterVideos('gaming')">
-      Gaming
-    </button>
-
-    <button onclick="filterVideos('music')">
-      Music
-    </button>
-
-    <button onclick="filterVideos('horror')">
-      Horror
-    </button>
-
-    <button onclick="filterVideos('motivation')">
-      Motivation
-    </button>
-
-    <button onclick="filterVideos('animation')">
-      Animation
-    </button>
-
-    <button onclick="filterVideos('action')">
-      Action
-    </button>
-
-  </div>
-
-
-
-  <!-- TRENDING -->
-
-  <div class="section-title">
-    Trending
-  </div>
-
-  <div id="trendingRow"
-  class="horizontal-feed">
-  </div>
-
-
-
-  <!-- GAMING -->
-
-  <div class="section-title">
-    Gaming
-  </div>
-
-  <div id="gamingRow"
-  class="horizontal-feed">
-  </div>
-
-
-
-  <!-- MUSIC -->
-
-  <div class="section-title">
-    Music
-  </div>
-
-  <div id="musicRow"
-  class="horizontal-feed">
-  </div>
-
-
-
-  <!-- HORROR -->
-
-  <div class="section-title">
-    Horror
-  </div>
-
-  <div id="horrorRow"
-  class="horizontal-feed">
-  </div>
-
-
-
-  <!-- MOTIVATION -->
-
-  <div class="section-title">
-    Motivation
-  </div>
-
-  <div id="motivationRow"
-  class="horizontal-feed">
-  </div>
-
-
-
-  <!-- ANIMATION -->
-
-  <div class="section-title">
-    Animation
-  </div>
-
-  <div id="animationRow"
-  class="horizontal-feed">
-  </div>
-
-
-
-  <!-- ACTION -->
-
-  <div class="section-title">
-    Action
-  </div>
-
-  <div id="actionRow"
-  class="horizontal-feed">
-  </div>
-
-
-
-  <!-- SEARCH RESULTS -->
-
-  <div id="videoGrid"></div>
+</div>
 
 </div>
 
 
 
-<!-- UPLOAD PAGE -->
+<button
+class="close-btn"
+onclick="closeVideo()">
 
-<div id="upload" class="page">
+✕
 
-  <div class="upload-box">
-
-    <h2>Creator Studio</h2>
-
-    <input
-    id="videoLink"
-    placeholder="Paste YouTube link">
-
-    <button onclick="addVideo()">
-      Publish
-    </button>
-
-  </div>
-
-</div>
-
-
-
-<!-- ACCOUNT PAGE -->
-
-<div id="account" class="page">
-
-  <div class="account-box">
-
-    <h2>Your Space</h2>
-
-    <p>
-      Favorites, uploads and collections
-      will appear here later.
-    </p>
-
-  </div>
-
-</div>
-
-
-
-<!-- POPUP -->
-
-<div id="popup" class="popup">
-
-  <iframe
-  id="videoFrame"
-  allowfullscreen>
-  </iframe>
-
-  <button onclick="closeVideo()">
-    Close
-  </button>
+</button>
 
 </div>
 
