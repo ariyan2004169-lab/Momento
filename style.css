@@ -486,3 +486,114 @@ body{
   }
 
 }
+/* =========================
+   MOBILE FIX
+========================= */
+
+@media(max-width:768px){
+
+  /* TOP BAR */
+
+  .top-bar{
+
+    flex-wrap:wrap;
+
+    padding:12px;
+
+    gap:12px;
+
+  }
+
+  .top-bar h2{
+
+    width:100%;
+
+    font-size:34px;
+
+  }
+
+  .top-bar input{
+
+    width:100%;
+
+    flex:none;
+
+  }
+
+  .top-bar button{
+
+    flex:1;
+
+    min-width:90px;
+
+  }
+
+
+
+  /* HERO */
+
+  .hero{
+
+    min-height:220px;
+
+    border-radius:28px;
+
+    padding:25px;
+
+  }
+
+  .hero h1{
+
+    font-size:48px;
+
+    line-height:1;
+
+  }
+
+  .hero p{
+
+    font-size:15px;
+
+    margin-top:15px;
+
+  }
+
+
+
+  /* CARDS */
+
+  .trend-card{
+
+    min-width:280px;
+
+  }
+
+  .trend-card img{
+
+    height:180px;
+
+  }
+
+
+
+  /* CATEGORY BAR */
+
+  .category-bar{
+
+    padding-top:5px;
+
+  }
+
+
+
+  /* SECTION TITLES */
+
+  .section-title{
+
+    font-size:38px;
+
+    padding-top:25px;
+
+  }
+
+}
