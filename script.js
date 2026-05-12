@@ -172,7 +172,7 @@ let videos = [];
 
 
 /* =========================
-   BUILD VIDEO DATABASE
+   BUILD VIDEOS
 ========================= */
 
 function buildVideos(){
@@ -225,6 +225,11 @@ function buildVideos(){
 
 const searchInput =
 document.getElementById("searchInput");
+
+
+
+const videoGrid =
+document.getElementById("videoGrid");
 
 
 
@@ -300,7 +305,7 @@ function createCard(video){
 
 
 /* =========================
-   RENDER CATEGORY ROW
+   CATEGORY ROWS
 ========================= */
 
 function renderRow(rowId,category){
@@ -364,7 +369,7 @@ function renderTrending(){
 
 
 /* =========================
-   RENDER ALL
+   RENDER ALL SECTIONS
 ========================= */
 
 function renderSections(){
@@ -416,12 +421,7 @@ searchInput.addEventListener("input", () => {
 
 
 
-  const results =
-  document.getElementById("videoGrid");
-
-
-
-  results.innerHTML = "";
+  videoGrid.innerHTML = "";
 
 
 
@@ -456,7 +456,7 @@ searchInput.addEventListener("input", () => {
 
   filtered.forEach(video => {
 
-    results.appendChild(
+    videoGrid.appendChild(
       createCard(video)
     );
 
@@ -472,12 +472,7 @@ searchInput.addEventListener("input", () => {
 
 function filterVideos(category){
 
-  const results =
-  document.getElementById("videoGrid");
-
-
-
-  results.innerHTML = "";
+  videoGrid.innerHTML = "";
 
 
 
@@ -502,7 +497,7 @@ function filterVideos(category){
 
   .forEach(video => {
 
-    results.appendChild(
+    videoGrid.appendChild(
       createCard(video)
     );
 
@@ -562,7 +557,7 @@ function closeVideo(){
 
 
 /* =========================
-   UPLOAD SYSTEM
+   UPLOAD
 ========================= */
 
 function addVideo(){
@@ -659,9 +654,62 @@ function addVideo(){
 
 
 /* =========================
+   INFINITE DISCOVERY
+========================= */
+
+function generateInfiniteFeed(){
+
+  const shuffled =
+  [...videos]
+  .sort(() => Math.random() - 0.5);
+
+
+
+  shuffled.forEach(video => {
+
+    videoGrid.appendChild(
+      createCard(video)
+    );
+
+  });
+
+}
+
+
+
+/* =========================
+   SCROLL DETECTION
+========================= */
+
+window.addEventListener("scroll", () => {
+
+  if(
+
+    window.innerHeight
+    +
+    window.scrollY
+
+    >=
+
+    document.body.offsetHeight
+    - 400
+
+  ){
+
+    generateInfiniteFeed();
+
+  }
+
+});
+
+
+
+/* =========================
    INITIAL LOAD
 ========================= */
 
 buildVideos();
 
 renderSections();
+
+generateInfiniteFeed();
