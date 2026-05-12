@@ -1,64 +1,151 @@
 /* =========================
-   MASSIVE CATEGORY DATABASE
+   REAL CATEGORY DATABASE
 ========================= */
 
 const categories = {
 
-  gaming: [
+  gaming:[
 
-    "tgbNymZ7vqY",
-    "2Vv-BfVoq4g",
-    "kXYiU_JCYtU"
+    {
+      id:"3fumBcKC6RE",
+      title:"Epic Gaming Moments"
+    },
 
-  ],
+    {
+      id:"1roy4o4tqQM",
+      title:"Competitive Gameplay"
+    },
 
-
-
-  music: [
-
-    "JGwWNGJdvx8",
-    "RgKAFK5djSk",
-    "09R8_2nJtjg"
-
-  ],
-
-
-
-  horror: [
-
-    "dQw4w9WgXcQ",
-    "9bZkp7q19f0",
-    "OPf0YbXqDm0"
+    {
+      id:"2g811Eo7K8U",
+      title:"Open World Adventure"
+    }
 
   ],
 
 
 
-  motivation: [
+  music:[
 
-    "ZXsQAXx_ao0",
-    "mgmVOuLgFB0",
-    "wnHW6o8WMas"
+    {
+      id:"JGwWNGJdvx8",
+      title:"Global Music Hits"
+    },
+
+    {
+      id:"RgKAFK5djSk",
+      title:"Chill Music Experience"
+    },
+
+    {
+      id:"09R8_2nJtjg",
+      title:"Modern Pop Visuals"
+    }
 
   ],
 
 
 
-  animation: [
+  horror:[
 
-    "aqz-KE-bpKQ",
-    "e-ORhEE9VVg",
-    "60ItHLz5WEA"
+    {
+      id:"7afcZaq1wY8",
+      title:"Dark Horror Atmosphere"
+    },
+
+    {
+      id:"9eDIMXxY9j0",
+      title:"Creepy Cinematic Mystery"
+    },
+
+    {
+      id:"gFDCHdKbKBY",
+      title:"Analog Horror Experience"
+    }
 
   ],
 
 
 
-  action: [
+  motivation:[
 
-    "uelHwf8o7_U",
-    "fLexgOxsZu0",
-    "hTWKbfoikeg"
+    {
+      id:"mgmVOuLgFB0",
+      title:"Powerful Motivation"
+    },
+
+    {
+      id:"wnHW6o8WMas",
+      title:"Discipline Mindset"
+    },
+
+    {
+      id:"ZXsQAXx_ao0",
+      title:"Success Journey"
+    }
+
+  ],
+
+
+
+  animation:[
+
+    {
+      id:"aqz-KE-bpKQ",
+      title:"Animated Worlds"
+    },
+
+    {
+      id:"e-ORhEE9VVg",
+      title:"Creative Motion Design"
+    },
+
+    {
+      id:"60ItHLz5WEA",
+      title:"Visual Animation Art"
+    }
+
+  ],
+
+
+
+  action:[
+
+    {
+      id:"uelHwf8o7_U",
+      title:"Action Cinematics"
+    },
+
+    {
+      id:"ktvTqknDobU",
+      title:"Intense Action Moments"
+    },
+
+    {
+      id:"hTWKbfoikeg",
+      title:"Energy & Adrenaline"
+    }
+
+  ],
+
+
+
+  cinematic:[
+
+    {
+      id:"D97FoacuYxY",
+      title:"Cinematic Discovery"
+    },
+
+    {
+      id:"ysz5S6PUM-U",
+      title:"Immersive Visual Journey"
+    },
+
+    {
+      id:"ScMzIvxBSi4",
+      title:"Premium Atmosphere"
+    }
 
   ]
 
@@ -77,7 +164,7 @@ let savedVideos = JSON.parse(
 
 
 /* =========================
-   VIDEO SYSTEM
+   VIDEO DATABASE
 ========================= */
 
 let videos = [];
@@ -85,7 +172,7 @@ let videos = [];
 
 
 /* =========================
-   BUILD VIDEOS
+   BUILD VIDEO DATABASE
 ========================= */
 
 function buildVideos(){
@@ -98,17 +185,19 @@ function buildVideos(){
   .forEach(category => {
 
     categories[category]
-    .forEach(id => {
+    .forEach(video => {
 
       videos.push({
 
-        id:id,
+        id:video.id,
 
-        title:
-        category.toUpperCase(),
+        title:video.title,
 
         desc:
-        "Immersive discovery content",
+        category.charAt(0)
+        .toUpperCase()
+        +
+        category.slice(1),
 
         category:category
 
@@ -184,7 +273,13 @@ function createCard(video){
     <img
     src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
 
-    <h4>${video.title}</h4>
+    <div class="card-content">
+
+      <h4>${video.title}</h4>
+
+      <p>${video.desc}</p>
+
+    </div>
 
   `;
 
@@ -205,7 +300,7 @@ function createCard(video){
 
 
 /* =========================
-   RENDER ROW
+   RENDER CATEGORY ROW
 ========================= */
 
 function renderRow(rowId,category){
@@ -527,9 +622,9 @@ function addVideo(){
 
     id:videoId,
 
-    title:"USER UPLOAD",
+    title:"User Upload",
 
-    desc:"Community content",
+    desc:"Community Content",
 
     category:"custom"
 
