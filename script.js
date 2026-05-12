@@ -1,155 +1,211 @@
 /* =========================
-   REAL CATEGORY DATABASE
+   CONTENT SOURCES
 ========================= */
 
-const categories = {
+const sources = [
 
-  gaming:[
+  {
 
-    {
-      id:"3fumBcKC6RE",
-      title:"Epic Gaming Moments"
-    },
+    category:"gaming",
 
-    {
-      id:"1roy4o4tqQM",
-      title:"Competitive Gameplay"
-    },
+    source:"Gaming Universe",
 
-    {
-      id:"2g811Eo7K8U",
-      title:"Open World Adventure"
-    }
+    videos:[
 
-  ],
+      {
+        id:"3fumBcKC6RE",
+        title:"Epic Gaming Moments"
+      },
 
+      {
+        id:"1roy4o4tqQM",
+        title:"Competitive Gameplay"
+      },
 
+      {
+        id:"2g811Eo7K8U",
+        title:"Open World Adventure"
+      }
 
-  music:[
+    ]
 
-    {
-      id:"JGwWNGJdvx8",
-      title:"Global Music Hits"
-    },
-
-    {
-      id:"RgKAFK5djSk",
-      title:"Chill Music Experience"
-    },
-
-    {
-      id:"09R8_2nJtjg",
-      title:"Modern Pop Visuals"
-    }
-
-  ],
+  },
 
 
 
-  horror:[
+  {
 
-    {
-      id:"7afcZaq1wY8",
-      title:"Dark Horror Atmosphere"
-    },
+    category:"music",
 
-    {
-      id:"9eDIMXxY9j0",
-      title:"Creepy Cinematic Mystery"
-    },
+    source:"Music World",
 
-    {
-      id:"gFDCHdKbKBY",
-      title:"Analog Horror Experience"
-    }
+    videos:[
 
-  ],
+      {
+        id:"JGwWNGJdvx8",
+        title:"Global Music Hits"
+      },
 
+      {
+        id:"RgKAFK5djSk",
+        title:"Chill Music Experience"
+      },
 
+      {
+        id:"09R8_2nJtjg",
+        title:"Modern Pop Visuals"
+      }
 
-  motivation:[
+    ]
 
-    {
-      id:"mgmVOuLgFB0",
-      title:"Powerful Motivation"
-    },
-
-    {
-      id:"wnHW6o8WMas",
-      title:"Discipline Mindset"
-    },
-
-    {
-      id:"ZXsQAXx_ao0",
-      title:"Success Journey"
-    }
-
-  ],
+  },
 
 
 
-  animation:[
+  {
 
-    {
-      id:"aqz-KE-bpKQ",
-      title:"Animated Worlds"
-    },
+    category:"horror",
 
-    {
-      id:"e-ORhEE9VVg",
-      title:"Creative Motion Design"
-    },
+    source:"Dark Stories",
 
-    {
-      id:"60ItHLz5WEA",
-      title:"Visual Animation Art"
-    }
+    videos:[
 
-  ],
+      {
+        id:"7afcZaq1wY8",
+        title:"Dark Horror Atmosphere"
+      },
 
+      {
+        id:"9eDIMXxY9j0",
+        title:"Creepy Cinematic Mystery"
+      },
 
+      {
+        id:"gFDCHdKbKBY",
+        title:"Analog Horror Experience"
+      }
 
-  action:[
+    ]
 
-    {
-      id:"uelHwf8o7_U",
-      title:"Action Cinematics"
-    },
-
-    {
-      id:"ktvTqknDobU",
-      title:"Intense Action Moments"
-    },
-
-    {
-      id:"hTWKbfoikeg",
-      title:"Energy & Adrenaline"
-    }
-
-  ],
+  },
 
 
 
-  cinematic:[
+  {
 
-    {
-      id:"D97FoacuYxY",
-      title:"Cinematic Discovery"
-    },
+    category:"motivation",
 
-    {
-      id:"ysz5S6PUM-U",
-      title:"Immersive Visual Journey"
-    },
+    source:"Mindset Evolution",
 
-    {
-      id:"ScMzIvxBSi4",
-      title:"Premium Atmosphere"
-    }
+    videos:[
 
-  ]
+      {
+        id:"mgmVOuLgFB0",
+        title:"Powerful Motivation"
+      },
 
-};
+      {
+        id:"wnHW6o8WMas",
+        title:"Discipline Mindset"
+      },
+
+      {
+        id:"ZXsQAXx_ao0",
+        title:"Success Journey"
+      }
+
+    ]
+
+  },
+
+
+
+  {
+
+    category:"animation",
+
+    source:"Animation Galaxy",
+
+    videos:[
+
+      {
+        id:"aqz-KE-bpKQ",
+        title:"Animated Worlds"
+      },
+
+      {
+        id:"e-ORhEE9VVg",
+        title:"Creative Motion Design"
+      },
+
+      {
+        id:"60ItHLz5WEA",
+        title:"Visual Animation Art"
+      }
+
+    ]
+
+  },
+
+
+
+  {
+
+    category:"action",
+
+    source:"Action Arena",
+
+    videos:[
+
+      {
+        id:"uelHwf8o7_U",
+        title:"Action Cinematics"
+      },
+
+      {
+        id:"ktvTqknDobU",
+        title:"Intense Action Moments"
+      },
+
+      {
+        id:"hTWKbfoikeg",
+        title:"Energy & Adrenaline"
+      }
+
+    ]
+
+  },
+
+
+
+  {
+
+    category:"cinematic",
+
+    source:"Cinematic Discovery",
+
+    videos:[
+
+      {
+        id:"D97FoacuYxY",
+        title:"Immersive Cinematic Journey"
+      },
+
+      {
+        id:"ysz5S6PUM-U",
+        title:"Premium Discovery Visuals"
+      },
+
+      {
+        id:"ScMzIvxBSi4",
+        title:"Atmospheric Exploration"
+      }
+
+    ]
+
+  }
+
+];
 
 
 
@@ -172,7 +228,7 @@ let videos = [];
 
 
 /* =========================
-   BUILD VIDEOS
+   BUILD VIDEO DATABASE
 ========================= */
 
 function buildVideos(){
@@ -181,11 +237,9 @@ function buildVideos(){
 
 
 
-  Object.keys(categories)
-  .forEach(category => {
+  sources.forEach(source => {
 
-    categories[category]
-    .forEach(video => {
+    source.videos.forEach(video => {
 
       videos.push({
 
@@ -193,13 +247,9 @@ function buildVideos(){
 
         title:video.title,
 
-        desc:
-        category.charAt(0)
-        .toUpperCase()
-        +
-        category.slice(1),
+        desc:source.source,
 
-        category:category
+        category:source.category
 
       });
 
@@ -369,7 +419,7 @@ function renderTrending(){
 
 
 /* =========================
-   RENDER ALL SECTIONS
+   RENDER SECTIONS
 ========================= */
 
 function renderSections(){
@@ -557,7 +607,7 @@ function closeVideo(){
 
 
 /* =========================
-   UPLOAD
+   UPLOAD SYSTEM
 ========================= */
 
 function addVideo(){
@@ -640,6 +690,8 @@ function addVideo(){
   buildVideos();
 
   renderSections();
+
+  generateInfiniteFeed();
 
 
 
