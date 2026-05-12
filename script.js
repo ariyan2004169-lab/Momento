@@ -116,93 +116,6 @@ const sources = [
 
     ]
 
-  },
-
-
-
-  {
-
-    category:"animation",
-
-    source:"Animation Galaxy",
-
-    videos:[
-
-      {
-        id:"aqz-KE-bpKQ",
-        title:"Animated Worlds"
-      },
-
-      {
-        id:"e-ORhEE9VVg",
-        title:"Creative Motion Design"
-      },
-
-      {
-        id:"60ItHLz5WEA",
-        title:"Visual Animation Art"
-      }
-
-    ]
-
-  },
-
-
-
-  {
-
-    category:"action",
-
-    source:"Action Arena",
-
-    videos:[
-
-      {
-        id:"uelHwf8o7_U",
-        title:"Action Cinematics"
-      },
-
-      {
-        id:"ktvTqknDobU",
-        title:"Intense Action Moments"
-      },
-
-      {
-        id:"hTWKbfoikeg",
-        title:"Energy & Adrenaline"
-      }
-
-    ]
-
-  },
-
-
-
-  {
-
-    category:"cinematic",
-
-    source:"Cinematic Discovery",
-
-    videos:[
-
-      {
-        id:"D97FoacuYxY",
-        title:"Immersive Cinematic Journey"
-      },
-
-      {
-        id:"ysz5S6PUM-U",
-        title:"Premium Discovery Visuals"
-      },
-
-      {
-        id:"ScMzIvxBSi4",
-        title:"Atmospheric Exploration"
-      }
-
-    ]
-
   }
 
 ];
@@ -220,7 +133,7 @@ let savedVideos = JSON.parse(
 
 
 /* =========================
-   VIDEO DATABASE
+   DATABASE
 ========================= */
 
 let videos = [];
@@ -228,51 +141,115 @@ let videos = [];
 
 
 /* =========================
-   BUILD VIDEOS
+   ELEMENTS
 ========================= */
 
-function buildVideos(){
-
-  videos = [];
-
+const searchInput =
+document.getElementById("searchInput");
 
 
-  sources.forEach(source => {
 
-    source.videos.forEach(video => {
+const videoGrid =
+document.getElementById("videoGrid");
 
-      videos.push({
 
-        id:video.id,
 
-        title:video.title,
+/* =========================
+   LOADING SCREEN
+========================= */
 
-        desc:source.source,
+function showLoader(){
 
-        category:source.category,
+  videoGrid.innerHTML = `
 
-        score:
-        Math.floor(
-          Math.random() * 100
-        )
+    <div class="loader">
+
+      Loading Discovery Universe...
+
+    </div>
+
+  `;
+
+}
+
+
+
+/* =========================
+   SIMULATED API FETCH
+========================= */
+
+async function fetchVideos(){
+
+  showLoader();
+
+
+
+  return new Promise(resolve => {
+
+    setTimeout(() => {
+
+      let fetchedVideos = [];
+
+
+
+      sources.forEach(source => {
+
+        source.videos.forEach(video => {
+
+          fetchedVideos.push({
+
+            id:video.id,
+
+            title:video.title,
+
+            desc:source.source,
+
+            category:source.category,
+
+            score:
+            Math.floor(
+              Math.random() * 100
+            )
+
+          });
+
+        });
 
       });
 
-    });
+
+
+      savedVideos.forEach(video => {
+
+        fetchedVideos.unshift(video);
+
+      });
+
+
+
+      resolve(fetchedVideos);
+
+    },1200);
 
   });
 
+}
 
 
-  savedVideos.forEach(video => {
 
-    videos.unshift(video);
+/* =========================
+   LOAD DATABASE
+========================= */
 
-  });
+async function loadPlatform(){
 
-
+  videos = await fetchVideos();
 
   intelligentSort();
+
+  renderSections();
+
+  generateInfiniteFeed();
 
 }
 
@@ -291,20 +268,6 @@ function intelligentSort(){
   });
 
 }
-
-
-
-/* =========================
-   ELEMENTS
-========================= */
-
-const searchInput =
-document.getElementById("searchInput");
-
-
-
-const videoGrid =
-document.getElementById("videoGrid");
 
 
 
@@ -351,6 +314,7 @@ function createCard(video){
   card.innerHTML = `
 
     <img
+    loading="lazy"
     src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
 
     <div class="card-content">
@@ -380,7 +344,7 @@ function createCard(video){
 
 
 /* =========================
-   CATEGORY ROWS
+   ROWS
 ========================= */
 
 function renderRow(rowId,category){
@@ -394,18 +358,16 @@ function renderRow(rowId,category){
 
 
 
-  const categoryVideos =
-  videos.filter(video => {
+  videos
+  .filter(video => {
 
     return (
       video.category === category
     );
 
-  });
+  })
 
-
-
-  categoryVideos.forEach(video => {
+  .forEach(video => {
 
     row.appendChild(
       createCard(video)
@@ -432,7 +394,7 @@ function renderTrending(){
 
 
 
-  videos.slice(0,12)
+  videos.slice(0,10)
   .forEach(video => {
 
     row.appendChild(
@@ -446,7 +408,7 @@ function renderTrending(){
 
 
 /* =========================
-   RENDER SECTIONS
+   RENDER
 ========================= */
 
 function renderSections(){
@@ -471,16 +433,6 @@ function renderSections(){
   renderRow(
     "motivationRow",
     "motivation"
-  );
-
-  renderRow(
-    "animationRow",
-    "animation"
-  );
-
-  renderRow(
-    "actionRow",
-    "action"
   );
 
 }
@@ -540,47 +492,6 @@ searchInput.addEventListener("input", () => {
   });
 
 });
-
-
-
-/* =========================
-   FILTER
-========================= */
-
-function filterVideos(category){
-
-  videoGrid.innerHTML = "";
-
-
-
-  if(category === "All"){
-
-    renderSections();
-
-    return;
-
-  }
-
-
-
-  videos
-  .filter(video => {
-
-    return (
-      video.category === category
-    );
-
-  })
-
-  .forEach(video => {
-
-    videoGrid.appendChild(
-      createCard(video)
-    );
-
-  });
-
-}
 
 
 
@@ -682,7 +593,7 @@ function addVideo(){
 
   if(!videoId){
 
-    alert("Invalid YouTube link");
+    alert("Invalid link");
 
     return;
 
@@ -716,11 +627,7 @@ function addVideo(){
 
 
 
-  buildVideos();
-
-  renderSections();
-
-  generateInfiniteFeed();
+  loadPlatform();
 
 
 
@@ -829,11 +736,7 @@ window.addEventListener("scroll", () => {
 
 
 /* =========================
-   INITIAL LOAD
+   INITIALIZE
 ========================= */
 
-buildVideos();
-
-renderSections();
-
-generateInfiniteFeed();
+loadPlatform();
