@@ -228,7 +228,7 @@ let videos = [];
 
 
 /* =========================
-   BUILD VIDEO DATABASE
+   BUILD VIDEOS
 ========================= */
 
 function buildVideos(){
@@ -249,7 +249,12 @@ function buildVideos(){
 
         desc:source.source,
 
-        category:source.category
+        category:source.category,
+
+        score:
+        Math.floor(
+          Math.random() * 100
+        )
 
       });
 
@@ -262,6 +267,26 @@ function buildVideos(){
   savedVideos.forEach(video => {
 
     videos.unshift(video);
+
+  });
+
+
+
+  intelligentSort();
+
+}
+
+
+
+/* =========================
+   INTELLIGENT SORT
+========================= */
+
+function intelligentSort(){
+
+  videos.sort((a,b) => {
+
+    return b.score - a.score;
 
   });
 
@@ -369,16 +394,18 @@ function renderRow(rowId,category){
 
 
 
-  videos
-  .filter(video => {
+  const categoryVideos =
+  videos.filter(video => {
 
     return (
       video.category === category
     );
 
-  })
+  });
 
-  .forEach(video => {
+
+
+  categoryVideos.forEach(video => {
 
     row.appendChild(
       createCard(video)
@@ -579,7 +606,7 @@ function openVideo(videoId){
 
 
   frame.src =
-  `https://www.youtube.com/embed/${videoId}`;
+  `https://www.youtube.com/embed/${videoId}?autoplay=1`;
 
 }
 
@@ -607,7 +634,7 @@ function closeVideo(){
 
 
 /* =========================
-   UPLOAD SYSTEM
+   UPLOAD
 ========================= */
 
 function addVideo(){
@@ -671,7 +698,9 @@ function addVideo(){
 
     desc:"Community Content",
 
-    category:"custom"
+    category:"custom",
+
+    score:999
 
   });
 
@@ -706,18 +735,45 @@ function addVideo(){
 
 
 /* =========================
-   INFINITE DISCOVERY
+   SMART DISCOVERY
 ========================= */
+
+let usedVideos = [];
+
+
 
 function generateInfiniteFeed(){
 
-  const shuffled =
-  [...videos]
-  .sort(() => Math.random() - 0.5);
+  const remaining =
+  videos.filter(video => {
+
+    return !usedVideos.includes(
+      video.id
+    );
+
+  });
 
 
 
-  shuffled.forEach(video => {
+  if(remaining.length === 0){
+
+    usedVideos = [];
+
+    return;
+  }
+
+
+
+  const nextVideos =
+  remaining
+  .sort(() => Math.random() - 0.5)
+  .slice(0,6);
+
+
+
+  nextVideos.forEach(video => {
+
+    usedVideos.push(video.id);
 
     videoGrid.appendChild(
       createCard(video)
@@ -730,10 +786,18 @@ function generateInfiniteFeed(){
 
 
 /* =========================
-   SCROLL DETECTION
+   SMART SCROLL
 ========================= */
 
+let loading = false;
+
+
+
 window.addEventListener("scroll", () => {
+
+  if(loading) return;
+
+
 
   if(
 
@@ -744,11 +808,19 @@ window.addEventListener("scroll", () => {
     >=
 
     document.body.offsetHeight
-    - 400
+    - 500
 
   ){
 
+    loading = true;
+
     generateInfiniteFeed();
+
+    setTimeout(() => {
+
+      loading = false;
+
+    },600);
 
   }
 
