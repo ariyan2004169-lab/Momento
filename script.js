@@ -14,25 +14,10 @@ tags:[
 
 videos:[
 
-{
-id:"3fumBcKC6RE",
-title:"Epic Gaming Moments"
-},
-
-{
-id:"1roy4o4tqQM",
-title:"Competitive Gameplay"
-},
-
-{
-id:"2g811Eo7K8U",
-title:"Open World Adventure"
-},
-
-{
-id:"kXYiU_JCYtU",
-title:"Battle Royale Chaos"
-}
+{id:"3fumBcKC6RE",title:"Epic Gaming Moments"},
+{id:"1roy4o4tqQM",title:"Competitive Gameplay"},
+{id:"2g811Eo7K8U",title:"Open World Adventure"},
+{id:"kXYiU_JCYtU",title:"Battle Royale Chaos"}
 
 ]
 },
@@ -53,25 +38,10 @@ tags:[
 
 videos:[
 
-{
-id:"JGwWNGJdvx8",
-title:"Global Music Hits"
-},
-
-{
-id:"RgKAFK5djSk",
-title:"Chill Music Experience"
-},
-
-{
-id:"09R8_2nJtjg",
-title:"Modern Pop Visuals"
-},
-
-{
-id:"kJQP7kiw5Fk",
-title:"Rhythm Universe"
-}
+{id:"JGwWNGJdvx8",title:"Global Music Hits"},
+{id:"RgKAFK5djSk",title:"Chill Music Experience"},
+{id:"09R8_2nJtjg",title:"Modern Pop Visuals"},
+{id:"kJQP7kiw5Fk",title:"Rhythm Universe"}
 
 ]
 },
@@ -92,20 +62,9 @@ tags:[
 
 videos:[
 
-{
-id:"7afcZaq1wY8",
-title:"Dark Horror Atmosphere"
-},
-
-{
-id:"9eDIMXxY9j0",
-title:"Creepy Cinematic Mystery"
-},
-
-{
-id:"gFDCHdKbKBY",
-title:"Analog Horror Experience"
-}
+{id:"7afcZaq1wY8",title:"Dark Horror Atmosphere"},
+{id:"9eDIMXxY9j0",title:"Creepy Cinematic Mystery"},
+{id:"gFDCHdKbKBY",title:"Analog Horror Experience"}
 
 ]
 },
@@ -126,20 +85,9 @@ tags:[
 
 videos:[
 
-{
-id:"mgmVOuLgFB0",
-title:"Powerful Motivation"
-},
-
-{
-id:"wnHW6o8WMas",
-title:"Discipline Mindset"
-},
-
-{
-id:"ZXsQAXx_ao0",
-title:"Success Journey"
-}
+{id:"mgmVOuLgFB0",title:"Powerful Motivation"},
+{id:"wnHW6o8WMas",title:"Discipline Mindset"},
+{id:"ZXsQAXx_ao0",title:"Success Journey"}
 
 ]
 }
@@ -173,7 +121,7 @@ document.getElementById(
 
 
 
-/* BUILD VIDEOS */
+/* BUILD */
 
 function buildVideos(){
 
@@ -196,9 +144,6 @@ desc:source.source,
 category:source.category,
 
 tags:source.tags,
-
-thumbnail:
-`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`,
 
 score:
 Math.floor(
@@ -231,7 +176,18 @@ return b.score-a.score;
 
 
 
-/* CREATE CARD */
+/* THUMBNAIL */
+
+function getThumbnail(videoId){
+
+return
+`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+
+}
+
+
+
+/* CARD */
 
 function createCard(video){
 
@@ -251,7 +207,7 @@ card.innerHTML=`
 
 <img
 loading="lazy"
-src="${video.thumbnail}">
+src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
 
 <div class="thumb-overlay">
 
@@ -287,7 +243,7 @@ return card;
 
 
 
-/* RENDER ROW */
+/* ROW */
 
 function renderRow(rowId,category){
 
@@ -384,7 +340,7 @@ renderRow(
 
 
 
-/* SMART SEARCH */
+/* SEARCH */
 
 function performSearch(){
 
@@ -411,31 +367,45 @@ return;
 
 
 
-const keywords =
-value.split(" ");
-
-
-
 const filtered =
 videos.filter(video=>{
 
-const searchable = `
+const title =
+(video.title || "")
+.toLowerCase();
 
-${video.title}
-${video.desc}
-${video.category}
-${video.tags.join(" ")}
+const desc =
+(video.desc || "")
+.toLowerCase();
 
-`
+const category =
+(video.category || "")
+.toLowerCase();
+
+const tags =
+(video.tags || [])
+.join(" ")
 .toLowerCase();
 
 
 
-return keywords.every(word=>{
+return (
 
-return searchable.includes(word);
+title.includes(value)
 
-});
+||
+
+desc.includes(value)
+
+||
+
+category.includes(value)
+
+||
+
+tags.includes(value)
+
+);
 
 });
 
@@ -445,15 +415,33 @@ if(filtered.length===0){
 
 videoGrid.innerHTML=`
 
+<div
+style="
+padding:60px;
+text-align:center;
+width:100%;
+">
+
 <h2
 style="
-padding:40px;
-opacity:0.7;
+font-size:32px;
+margin-bottom:10px;
 ">
 
 No Results Found
 
 </h2>
+
+<p
+style="
+opacity:0.7;
+">
+
+Try another keyword
+
+</p>
+
+</div>
 
 `;
 
@@ -475,8 +463,10 @@ createCard(video)
 
 
 
+/* LIVE SEARCH */
+
 searchInput.addEventListener(
-"input",
+"keyup",
 performSearch
 );
 
@@ -603,7 +593,7 @@ card.className =
 card.innerHTML=`
 
 <img
-src="${video.thumbnail}">
+src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
 
 <div class="recommend-info">
 
@@ -698,25 +688,13 @@ return;
 
 
 
-/* THUMBNAIL */
+/* CREATE VIDEO */
 
-const thumbnail =
-`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
-
-
-
-/* SMART TITLE */
-
-const smartTitle =
-`Uploaded Video ${Date.now()}`;
-
-
-
-savedVideos.unshift({
+const uploadedVideo={
 
 id:videoId,
 
-title:smartTitle,
+title:`Uploaded Video ${Date.now()}`,
 
 desc:"Community Upload",
 
@@ -725,15 +703,19 @@ category:"custom",
 tags:[
 "upload",
 "community",
-"custom",
-"youtube"
+"youtube",
+"custom"
 ],
-
-thumbnail:thumbnail,
 
 score:999
 
-});
+};
+
+
+
+savedVideos.unshift(
+uploadedVideo
+);
 
 
 
