@@ -4,13 +4,35 @@ const sources = [
 category:"gaming",
 source:"Gaming Universe",
 
+tags:[
+"gaming",
+"battle",
+"fps",
+"adventure",
+"esports"
+],
+
 videos:[
 
-{id:"3fumBcKC6RE",title:"Epic Gaming Moments"},
-{id:"1roy4o4tqQM",title:"Competitive Gameplay"},
-{id:"2g811Eo7K8U",title:"Open World Adventure"},
-{id:"kXYiU_JCYtU",title:"Battle Royale Chaos"},
-{id:"fJ9rUzIMcZQ",title:"Elite Gaming Skills"}
+{
+id:"3fumBcKC6RE",
+title:"Epic Gaming Moments"
+},
+
+{
+id:"1roy4o4tqQM",
+title:"Competitive Gameplay"
+},
+
+{
+id:"2g811Eo7K8U",
+title:"Open World Adventure"
+},
+
+{
+id:"kXYiU_JCYtU",
+title:"Battle Royale Chaos"
+}
 
 ]
 },
@@ -21,13 +43,35 @@ videos:[
 category:"music",
 source:"Music World",
 
+tags:[
+"music",
+"songs",
+"beats",
+"pop",
+"chill"
+],
+
 videos:[
 
-{id:"JGwWNGJdvx8",title:"Global Music Hits"},
-{id:"RgKAFK5djSk",title:"Chill Music Experience"},
-{id:"09R8_2nJtjg",title:"Modern Pop Visuals"},
-{id:"kJQP7kiw5Fk",title:"Rhythm Universe"},
-{id:"YQHsXMglC9A",title:"Emotional Music Journey"}
+{
+id:"JGwWNGJdvx8",
+title:"Global Music Hits"
+},
+
+{
+id:"RgKAFK5djSk",
+title:"Chill Music Experience"
+},
+
+{
+id:"09R8_2nJtjg",
+title:"Modern Pop Visuals"
+},
+
+{
+id:"kJQP7kiw5Fk",
+title:"Rhythm Universe"
+}
 
 ]
 },
@@ -38,12 +82,30 @@ videos:[
 category:"horror",
 source:"Dark Stories",
 
+tags:[
+"horror",
+"dark",
+"creepy",
+"ghost",
+"fear"
+],
+
 videos:[
 
-{id:"7afcZaq1wY8",title:"Dark Horror Atmosphere"},
-{id:"9eDIMXxY9j0",title:"Creepy Cinematic Mystery"},
-{id:"gFDCHdKbKBY",title:"Analog Horror Experience"},
-{id:"sNPnbI1arSE",title:"Haunted Discovery"}
+{
+id:"7afcZaq1wY8",
+title:"Dark Horror Atmosphere"
+},
+
+{
+id:"9eDIMXxY9j0",
+title:"Creepy Cinematic Mystery"
+},
+
+{
+id:"gFDCHdKbKBY",
+title:"Analog Horror Experience"
+}
 
 ]
 },
@@ -54,12 +116,30 @@ videos:[
 category:"motivation",
 source:"Mindset Evolution",
 
+tags:[
+"motivation",
+"discipline",
+"success",
+"mindset",
+"growth"
+],
+
 videos:[
 
-{id:"mgmVOuLgFB0",title:"Powerful Motivation"},
-{id:"wnHW6o8WMas",title:"Discipline Mindset"},
-{id:"ZXsQAXx_ao0",title:"Success Journey"},
-{id:"26U_seo0a1g",title:"Focus Evolution"}
+{
+id:"mgmVOuLgFB0",
+title:"Powerful Motivation"
+},
+
+{
+id:"wnHW6o8WMas",
+title:"Discipline Mindset"
+},
+
+{
+id:"ZXsQAXx_ao0",
+title:"Success Journey"
+}
 
 ]
 }
@@ -75,7 +155,7 @@ localStorage.getItem("videos")
 
 
 
-let videos = [];
+let videos=[];
 
 
 
@@ -92,6 +172,8 @@ document.getElementById(
 );
 
 
+
+/* BUILD VIDEOS */
 
 function buildVideos(){
 
@@ -112,6 +194,11 @@ title:video.title,
 desc:source.source,
 
 category:source.category,
+
+tags:source.tags,
+
+thumbnail:
+`https://img.youtube.com/vi/${video.id}/mqdefault.jpg`,
 
 score:
 Math.floor(
@@ -144,6 +231,8 @@ return b.score-a.score;
 
 
 
+/* CREATE CARD */
+
 function createCard(video){
 
 const card =
@@ -156,13 +245,13 @@ card.className =
 
 
 
-card.innerHTML = `
+card.innerHTML=`
 
 <div class="thumb-wrap">
 
 <img
 loading="lazy"
-src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
+src="${video.thumbnail}">
 
 <div class="thumb-overlay">
 
@@ -197,6 +286,8 @@ return card;
 }
 
 
+
+/* RENDER ROW */
 
 function renderRow(rowId,category){
 
@@ -234,6 +325,8 @@ createCard(video)
 
 
 
+/* TRENDING */
+
 function renderTrending(){
 
 const row =
@@ -260,6 +353,8 @@ createCard(video)
 }
 
 
+
+/* RENDER */
 
 function renderSections(){
 
@@ -289,7 +384,7 @@ renderRow(
 
 
 
-/* SEARCH */
+/* SMART SEARCH */
 
 function performSearch(){
 
@@ -306,6 +401,8 @@ videoGrid.innerHTML="";
 
 if(value===""){
 
+usedVideos=[];
+
 generateInfiniteFeed();
 
 return;
@@ -314,28 +411,31 @@ return;
 
 
 
+const keywords =
+value.split(" ");
+
+
+
 const filtered =
 videos.filter(video=>{
 
-return (
+const searchable = `
 
-video.title
-.toLowerCase()
-.includes(value)
+${video.title}
+${video.desc}
+${video.category}
+${video.tags.join(" ")}
 
-||
+`
+.toLowerCase();
 
-video.desc
-.toLowerCase()
-.includes(value)
 
-||
 
-video.category
-.toLowerCase()
-.includes(value)
+return keywords.every(word=>{
 
-);
+return searchable.includes(word);
+
+});
 
 });
 
@@ -382,7 +482,7 @@ performSearch
 
 
 
-/* PLAYER */
+/* OPEN VIDEO */
 
 function openVideo(videoId){
 
@@ -400,12 +500,12 @@ document.getElementById(
 
 
 
-popup.style.display =
+popup.style.display=
 "block";
 
 
 
-frame.src =
+frame.src=
 `https://www.youtube.com/embed/${videoId}?autoplay=1`;
 
 
@@ -451,7 +551,7 @@ function closeVideo(){
 
 document.getElementById(
 "popup"
-).style.display =
+).style.display=
 "none";
 
 
@@ -503,7 +603,7 @@ card.className =
 card.innerHTML=`
 
 <img
-src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
+src="${video.thumbnail}">
 
 <div class="recommend-info">
 
@@ -598,10 +698,17 @@ return;
 
 
 
-/* UNIQUE VIDEO */
+/* THUMBNAIL */
 
-const customTitle =
-`Custom Video ${Date.now()}`;
+const thumbnail =
+`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+
+
+
+/* SMART TITLE */
+
+const smartTitle =
+`Uploaded Video ${Date.now()}`;
 
 
 
@@ -609,11 +716,20 @@ savedVideos.unshift({
 
 id:videoId,
 
-title:customTitle,
+title:smartTitle,
 
 desc:"Community Upload",
 
 category:"custom",
+
+tags:[
+"upload",
+"community",
+"custom",
+"youtube"
+],
+
+thumbnail:thumbnail,
 
 score:999
 
@@ -691,7 +807,7 @@ toast.classList.remove(
 
 
 
-/* INFINITE FEED */
+/* FEED */
 
 let usedVideos=[];
 
