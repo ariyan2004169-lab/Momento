@@ -96,7 +96,7 @@ videos:[
 
 
 
-/* AUTO CLEAN OLD BROKEN STORAGE */
+/* CLEAN STORAGE */
 
 let savedVideos=[];
 
@@ -130,8 +130,6 @@ savedVideos=[];
 
 
 
-/* SAVE CLEAN DATA */
-
 localStorage.setItem(
 
 "videos",
@@ -157,6 +155,16 @@ const searchInput =
 document.getElementById(
 "searchInput"
 );
+
+
+
+/* THUMBNAIL */
+
+function getThumbnail(videoId){
+
+return `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+
+}
 
 
 
@@ -204,19 +212,15 @@ videos.unshift({
 id:video.id,
 
 title:video.title ||
-
-"Uploaded Video",
+"New Upload",
 
 desc:video.desc ||
-
-"Community Upload",
+"User Uploaded",
 
 category:video.category ||
-
 "custom",
 
 tags:video.tags ||
-
 ["upload"],
 
 score:999
@@ -232,17 +236,6 @@ videos.sort((a,b)=>{
 return b.score-a.score;
 
 });
-
-}
-
-
-
-/* THUMB */
-
-function getThumbnail(videoId){
-
-return
-`https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
 
 }
 
@@ -268,7 +261,8 @@ card.innerHTML=`
 
 <img
 loading="lazy"
-src="${getThumbnail(video.id)}">
+src="${getThumbnail(video.id)}"
+alt="${video.title}">
 
 <div class="thumb-overlay">
 
@@ -350,6 +344,10 @@ const row =
 document.getElementById(
 "trendingRow"
 );
+
+
+
+if(!row) return;
 
 
 
@@ -476,15 +474,13 @@ if(filtered.length===0){
 
 videoGrid.innerHTML=`
 
-<div
-style="
+<div style="
 padding:60px;
 text-align:center;
 width:100%;
 ">
 
-<h2
-style="
+<h2 style="
 font-size:32px;
 margin-bottom:10px;
 ">
@@ -493,8 +489,7 @@ No Results Found
 
 </h2>
 
-<p
-style="
+<p style="
 opacity:0.7;
 ">
 
@@ -533,7 +528,7 @@ performSearch
 
 
 
-/* PLAYER */
+/* OPEN VIDEO */
 
 function openVideo(videoId){
 
@@ -615,7 +610,7 @@ document.getElementById(
 
 
 
-/* RECOMMEND */
+/* RECOMMENDATIONS */
 
 function renderRecommendations(currentId){
 
@@ -623,6 +618,10 @@ const container =
 document.getElementById(
 "recommendedVideos"
 );
+
+
+
+if(!container) return;
 
 
 
@@ -654,7 +653,8 @@ card.className =
 card.innerHTML=`
 
 <img
-src="${getThumbnail(video.id)}">
+src="${getThumbnail(video.id)}"
+alt="${video.title}">
 
 <div class="recommend-info">
 
@@ -716,7 +716,7 @@ let videoId="";
 
 
 
-/* NORMAL */
+/* STANDARD LINK */
 
 if(url.includes("v=")){
 
@@ -728,7 +728,7 @@ url.split("v=")[1]
 
 
 
-/* SHORT */
+/* SHORT LINK */
 
 else if(
 url.includes("youtu.be/")
@@ -759,7 +759,7 @@ return;
 
 
 
-/* SAVE */
+/* SAVE VIDEO */
 
 const uploadedVideo={
 
@@ -834,6 +834,10 @@ const toast =
 document.getElementById(
 "toast"
 );
+
+
+
+if(!toast) return;
 
 
 
@@ -926,12 +930,12 @@ if(loading) return;
 
 if(
 
-window.innerHeight+
+window.innerHeight +
 window.scrollY
 
 >=
 
-document.body.offsetHeight-500
+document.body.offsetHeight - 500
 
 ){
 
