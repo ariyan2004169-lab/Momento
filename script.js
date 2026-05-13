@@ -207,7 +207,7 @@ card.innerHTML=`
 
 <img
 loading="lazy"
-src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
+src="${getThumbnail(video.id)}">
 
 <div class="thumb-overlay">
 
@@ -593,7 +593,7 @@ card.className =
 card.innerHTML=`
 
 <img
-src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
+src="${getThumbnail(video.id)}">
 
 <div class="recommend-info">
 
@@ -655,6 +655,8 @@ let videoId="";
 
 
 
+/* NORMAL URL */
+
 if(url.includes("v=")){
 
 videoId =
@@ -663,6 +665,10 @@ url.split("v=")[1]
 
 }
 
+
+
+/* SHORT URL */
+
 else if(
 url.includes("youtu.be/")
 ){
@@ -670,11 +676,15 @@ url.includes("youtu.be/")
 videoId =
 url.split(
 "youtu.be/"
-)[1];
+)[1]
+.split("?")[0]
+.split("&")[0];
 
 }
 
 
+
+/* INVALID */
 
 if(!videoId){
 
@@ -688,7 +698,7 @@ return;
 
 
 
-/* CREATE VIDEO */
+/* SAVE VIDEO */
 
 const uploadedVideo={
 
