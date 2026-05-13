@@ -96,10 +96,49 @@ videos:[
 
 
 
-let savedVideos =
+/* AUTO CLEAN OLD BROKEN STORAGE */
+
+let savedVideos=[];
+
+try{
+
+const parsed =
 JSON.parse(
 localStorage.getItem("videos")
 ) || [];
+
+
+
+savedVideos =
+parsed.filter(video=>{
+
+return (
+
+video &&
+video.id &&
+video.title
+
+);
+
+});
+
+}catch{
+
+savedVideos=[];
+
+}
+
+
+
+/* SAVE CLEAN DATA */
+
+localStorage.setItem(
+
+"videos",
+
+JSON.stringify(savedVideos)
+
+);
 
 
 
@@ -160,7 +199,29 @@ Math.random()*100
 
 savedVideos.forEach(video=>{
 
-videos.unshift(video);
+videos.unshift({
+
+id:video.id,
+
+title:video.title ||
+
+"Uploaded Video",
+
+desc:video.desc ||
+
+"Community Upload",
+
+category:video.category ||
+
+"custom",
+
+tags:video.tags ||
+
+["upload"],
+
+score:999
+
+});
 
 });
 
@@ -176,7 +237,7 @@ return b.score-a.score;
 
 
 
-/* THUMBNAIL */
+/* THUMB */
 
 function getThumbnail(videoId){
 
@@ -472,7 +533,7 @@ performSearch
 
 
 
-/* OPEN VIDEO */
+/* PLAYER */
 
 function openVideo(videoId){
 
@@ -655,7 +716,7 @@ let videoId="";
 
 
 
-/* NORMAL URL */
+/* NORMAL */
 
 if(url.includes("v=")){
 
@@ -667,7 +728,7 @@ url.split("v=")[1]
 
 
 
-/* SHORT URL */
+/* SHORT */
 
 else if(
 url.includes("youtu.be/")
@@ -698,15 +759,15 @@ return;
 
 
 
-/* SAVE VIDEO */
+/* SAVE */
 
 const uploadedVideo={
 
 id:videoId,
 
-title:`Uploaded Video ${Date.now()}`,
+title:"New Upload",
 
-desc:"Community Upload",
+desc:"User Uploaded",
 
 category:"custom",
 
