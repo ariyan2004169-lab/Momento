@@ -1,6 +1,6 @@
-/* ==================================
-   MOMENTO v21 — COMPACT PREMIUM UI
-================================== */
+/* =========================================
+   MOMENTO v23 — CINEMATIC MASONRY SYSTEM
+========================================= */
 
 *{
 margin:0;
@@ -27,7 +27,7 @@ overflow-x:hidden;
 
 
 
-/* BACKGROUND */
+/* ATMOSPHERE */
 
 body::before{
 
@@ -76,19 +76,19 @@ space-between;
 
 align-items:center;
 
-padding:14px 22px;
-
-background:
-rgba(255,255,255,0.04);
-
-backdrop-filter:
-blur(14px);
+padding:18px 22px;
 
 position:sticky;
 
 top:0;
 
 z-index:999;
+
+background:
+rgba(0,0,0,0.45);
+
+backdrop-filter:
+blur(18px);
 
 border-bottom:
 1px solid
@@ -98,21 +98,33 @@ rgba(255,255,255,0.05);
 
 
 
-/* MOMENTO LOGO */
+/* BRAND */
+
+.brand-zone{
+
+display:flex;
+
+flex-direction:column;
+
+gap:4px;
+
+}
+
+
 
 .logo{
 
-font-size:24px;
+font-size:30px;
 
 font-weight:900;
 
-letter-spacing:5px;
+letter-spacing:6px;
 
 background:
 linear-gradient(
 90deg,
 white,
-#7ccfff
+#8ec5ff
 );
 
 -webkit-background-clip:text;
@@ -124,50 +136,82 @@ transparent;
 
 
 
-/* SEARCH */
+.brand-sub{
 
-.search-box{
+font-size:11px;
 
-display:flex;
+opacity:0.55;
 
-gap:8px;
+letter-spacing:2px;
+
+text-transform:uppercase;
 
 }
 
 
 
-.search-box input{
+/* PREMIUM SEARCH */
 
-padding:11px 14px;
+.search-wrapper{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+background:
+rgba(255,255,255,0.05);
+
+padding:8px;
+
+border-radius:999px;
+
+backdrop-filter:blur(12px);
+
+border:
+1px solid
+rgba(255,255,255,0.05);
+
+box-shadow:
+0 10px 40px
+rgba(0,0,0,0.35);
+
+}
+
+
+
+.search-wrapper input{
+
+background:transparent;
 
 border:none;
 
 outline:none;
 
-border-radius:12px;
-
-background:
-rgba(255,255,255,0.07);
-
 color:white;
 
-width:220px;
+width:280px;
 
-font-size:13px;
+padding:10px 14px;
+
+font-size:14px;
 
 }
 
 
 
-.search-box button{
-
-padding:11px 16px;
+.search-wrapper button{
 
 border:none;
 
-border-radius:12px;
-
 background:white;
+
+color:black;
+
+padding:10px 18px;
+
+border-radius:999px;
 
 font-weight:bold;
 
@@ -179,10 +223,9 @@ transition:0.3s;
 
 
 
-.search-box button:hover{
+.search-wrapper button:hover{
 
-transform:
-translateY(-2px);
+transform:scale(1.04);
 
 }
 
@@ -196,23 +239,19 @@ padding:55px 20px 35px;
 
 text-align:center;
 
-position:relative;
-
-overflow:hidden;
-
 }
 
 
 
 .hero h2{
 
-font-size:38px;
-
-margin-bottom:10px;
+font-size:42px;
 
 font-weight:900;
 
 letter-spacing:2px;
+
+margin-bottom:10px;
 
 }
 
@@ -222,13 +261,85 @@ letter-spacing:2px;
 
 opacity:0.68;
 
-max-width:650px;
+max-width:700px;
 
 margin:auto;
 
-line-height:1.6;
+line-height:1.7;
 
 font-size:13px;
+
+}
+
+
+
+/* DISCOVERY CHIPS */
+
+.discover-chips{
+
+display:flex;
+
+gap:10px;
+
+overflow-x:auto;
+
+padding:0 20px 24px;
+
+scrollbar-width:none;
+
+}
+
+
+
+.discover-chips::-webkit-scrollbar{
+
+display:none;
+
+}
+
+
+
+.discover-chips button{
+
+border:none;
+
+background:
+rgba(255,255,255,0.06);
+
+color:white;
+
+padding:10px 16px;
+
+border-radius:999px;
+
+cursor:pointer;
+
+font-size:12px;
+
+letter-spacing:1px;
+
+backdrop-filter:blur(10px);
+
+border:
+1px solid
+rgba(255,255,255,0.05);
+
+transition:0.3s;
+
+white-space:nowrap;
+
+}
+
+
+
+.discover-chips button:hover{
+
+background:white;
+
+color:black;
+
+transform:
+translateY(-2px);
 
 }
 
@@ -244,7 +355,7 @@ justify-content:center;
 
 gap:10px;
 
-padding:15px;
+padding:18px;
 
 }
 
@@ -293,7 +404,7 @@ cursor:pointer;
 
 .category-section{
 
-padding:25px 16px;
+padding:22px 16px;
 
 }
 
@@ -303,7 +414,7 @@ padding:25px 16px;
 
 font-size:22px;
 
-margin-bottom:14px;
+margin-bottom:16px;
 
 font-weight:800;
 
@@ -313,7 +424,7 @@ letter-spacing:1px;
 
 
 
-/* ROW */
+/* ROWS */
 
 .row{
 
@@ -323,7 +434,7 @@ gap:10px;
 
 overflow-x:auto;
 
-padding-bottom:6px;
+padding-bottom:8px;
 
 scroll-behavior:smooth;
 
@@ -339,18 +450,36 @@ display:none;
 
 
 
-/* VIDEO CARD */
+/* =========================
+   MASONRY GRID
+========================= */
+
+.video-grid{
+
+column-count:5;
+
+column-gap:14px;
+
+padding:18px;
+
+}
+
+
+
+/* CARD */
 
 .trend-card{
 
-min-width:190px;
+display:inline-block;
 
-max-width:190px;
+width:100%;
+
+margin-bottom:14px;
 
 background:
 rgba(255,255,255,0.04);
 
-border-radius:16px;
+border-radius:18px;
 
 overflow:hidden;
 
@@ -358,27 +487,35 @@ cursor:pointer;
 
 transition:0.35s;
 
-backdrop-filter:blur(10px);
-
 border:
 1px solid
 rgba(255,255,255,0.04);
 
-box-shadow:
-0 6px 18px
-rgba(0,0,0,0.3);
-
 position:relative;
+
+break-inside:avoid;
+
+backdrop-filter:blur(12px);
+
+box-shadow:
+0 8px 24px
+rgba(0,0,0,0.3);
 
 }
 
 
+
+/* HOVER */
 
 .trend-card:hover{
 
 transform:
 translateY(-6px)
 scale(1.02);
+
+box-shadow:
+0 18px 40px
+rgba(0,0,0,0.45);
 
 }
 
@@ -392,24 +529,57 @@ position:relative;
 
 overflow:hidden;
 
-height:110px;
+height:auto;
 
 }
 
 
+
+/* IMAGES */
 
 .thumb-wrap img{
 
 width:100%;
-height:100%;
+
+display:block;
 
 object-fit:cover;
 
-transition:0.4s;
+transition:0.5s;
+
+aspect-ratio:16/9;
 
 }
 
 
+
+/* DYNAMIC SIZES */
+
+.trend-card:nth-child(3n) img{
+
+aspect-ratio:9/14;
+
+}
+
+
+
+.trend-card:nth-child(4n) img{
+
+aspect-ratio:1/1;
+
+}
+
+
+
+.trend-card:nth-child(5n) img{
+
+aspect-ratio:4/5;
+
+}
+
+
+
+/* IMAGE HOVER */
 
 .trend-card:hover img{
 
@@ -419,7 +589,7 @@ transform:scale(1.06);
 
 
 
-/* THUMB OVERLAY */
+/* OVERLAY */
 
 .thumb-overlay{
 
@@ -430,21 +600,38 @@ inset:0;
 background:
 linear-gradient(
 to top,
-rgba(0,0,0,0.88),
-rgba(0,0,0,0.08)
+rgba(0,0,0,0.92),
+rgba(0,0,0,0.05)
 );
 
 display:flex;
 
-justify-content:flex-end;
+justify-content:
+space-between;
 
 align-items:flex-end;
 
-padding:8px;
+padding:10px;
+
+opacity:0;
+
+transition:0.3s;
 
 }
 
 
+
+/* SHOW OVERLAY */
+
+.trend-card:hover .thumb-overlay{
+
+opacity:1;
+
+}
+
+
+
+/* CATEGORY CHIP */
 
 .thumb-overlay span{
 
@@ -477,13 +664,15 @@ padding:10px;
 
 
 
+/* TITLE */
+
 .card-content h4{
 
+font-size:12px;
+
+line-height:1.35;
+
 margin-bottom:4px;
-
-font-size:13px;
-
-line-height:1.3;
 
 font-weight:600;
 
@@ -499,11 +688,13 @@ overflow:hidden;
 
 
 
+/* DESCRIPTION */
+
 .card-content p{
 
-opacity:0.6;
-
 font-size:10px;
+
+opacity:0.55;
 
 line-height:1.3;
 
@@ -514,23 +705,6 @@ display:-webkit-box;
 -webkit-box-orient:vertical;
 
 overflow:hidden;
-
-}
-
-
-
-/* GRID */
-
-.video-grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fill,minmax(190px,1fr));
-
-gap:14px;
-
-padding:18px;
 
 }
 
@@ -574,7 +748,7 @@ padding:22px;
 
 
 
-/* PLAYER */
+/* MAIN PLAYER */
 
 .player-main iframe{
 
@@ -636,7 +810,7 @@ gap:10px;
 
 
 
-/* RECOMMEND */
+/* RECOMMEND CARD */
 
 .recommend-card{
 
@@ -668,6 +842,8 @@ translateX(4px);
 
 
 
+/* RECOMMEND IMAGE */
+
 .recommend-card img{
 
 width:110px;
@@ -678,6 +854,8 @@ object-fit:cover;
 }
 
 
+
+/* RECOMMEND INFO */
 
 .recommend-info{
 
@@ -709,7 +887,7 @@ opacity:0.6;
 
 
 
-/* CLOSE */
+/* CLOSE BUTTON */
 
 .close-btn{
 
@@ -780,7 +958,21 @@ translateY(0) !important;
 
 
 
-/* MOBILE */
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1200px){
+
+.video-grid{
+
+column-count:4;
+
+}
+
+}
+
+
 
 @media(max-width:900px){
 
@@ -788,9 +980,9 @@ translateY(0) !important;
 
 flex-direction:column;
 
-gap:12px;
+gap:14px;
 
-padding:14px;
+padding:16px;
 
 }
 
@@ -798,13 +990,13 @@ padding:14px;
 
 .hero h2{
 
-font-size:30px;
+font-size:32px;
 
 }
 
 
 
-.search-box{
+.search-wrapper{
 
 width:100%;
 
@@ -814,7 +1006,7 @@ justify-content:center;
 
 
 
-.search-box input{
+.search-wrapper input{
 
 width:70%;
 
@@ -850,30 +1042,21 @@ padding:16px;
 
 
 
-.trend-card{
+.video-grid{
 
-min-width:160px;
+column-count:3;
 
-max-width:160px;
+}
 
 }
 
 
 
-.thumb-wrap{
-
-height:95px;
-
-}
-
-
+@media(max-width:600px){
 
 .video-grid{
 
-grid-template-columns:
-repeat(auto-fill,minmax(160px,1fr));
-
-gap:10px;
+column-count:2;
 
 }
 
