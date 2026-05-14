@@ -1,3 +1,7 @@
+<!-- =====================================
+     MOMENTO v22 — CINEMATIC DISCOVERY UI
+====================================== -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +13,7 @@
 name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Discovery Universe</title>
+<title>MOMENTO</title>
 
 <link
 rel="stylesheet"
@@ -19,28 +23,42 @@ href="style.css">
 
 <body>
 
+
+
 <!-- NAVBAR -->
 
-<header class="navbar">
+<nav class="navbar">
+
+<div class="brand-zone">
 
 <h1 class="logo">
-DISCOVERY
+MOMENTO
 </h1>
 
-<div class="search-box">
+<p class="brand-sub">
+Discover Beyond Reality
+</p>
+
+</div>
+
+
+
+<div class="search-wrapper">
 
 <input
 type="text"
 id="searchInput"
-placeholder="Search the universe...">
+placeholder="Search worlds, moods, creators...">
 
 <button onclick="performSearch()">
+
 Search
+
 </button>
 
 </div>
 
-</header>
+</nav>
 
 
 
@@ -49,16 +67,53 @@ Search
 <section class="hero">
 
 <h2>
-Enter The Discovery Universe
+Enter The MOMENTO Universe
 </h2>
 
 <p>
+
 Explore cinematic worlds,
-gaming, music, horror,
-motivation and more.
+gaming, anime, horror,
+music, motivation,
+and immersive experiences.
+
 </p>
 
 </section>
+
+
+
+<!-- DISCOVERY CHIPS -->
+
+<div class="discover-chips">
+
+<button>Gaming</button>
+
+<button>Cinematic</button>
+
+<button>Marvel</button>
+
+<button>Anime</button>
+
+<button>Dark</button>
+
+<button>Motivation</button>
+
+<button>Music</button>
+
+<button>Horror</button>
+
+<button>Future</button>
+
+<button>Cyber</button>
+
+<button>Action</button>
+
+<button>Dreamcore</button>
+
+<button>Vibes</button>
+
+</div>
 
 
 
@@ -79,24 +134,18 @@ Upload
 
 
 
-<!-- VIDEO GRID -->
-
-<div
-id="videoGrid"
-class="video-grid">
-</div>
-
-
-
 <!-- TRENDING -->
 
 <section class="category-section">
 
-<h2>Trending</h2>
+<h2>
+Trending Universes
+</h2>
 
 <div
 class="row"
 id="trendingRow">
+
 </div>
 
 </section>
@@ -107,11 +156,14 @@ id="trendingRow">
 
 <section class="category-section">
 
-<h2>Gaming</h2>
+<h2>
+Gaming Realms
+</h2>
 
 <div
 class="row"
 id="gamingRow">
+
 </div>
 
 </section>
@@ -122,11 +174,14 @@ id="gamingRow">
 
 <section class="category-section">
 
-<h2>Music</h2>
+<h2>
+Music Atmospheres
+</h2>
 
 <div
 class="row"
 id="musicRow">
+
 </div>
 
 </section>
@@ -137,11 +192,14 @@ id="musicRow">
 
 <section class="category-section">
 
-<h2>Horror</h2>
+<h2>
+Dark Dimensions
+</h2>
 
 <div
 class="row"
 id="horrorRow">
+
 </div>
 
 </section>
@@ -152,66 +210,43 @@ id="horrorRow">
 
 <section class="category-section">
 
-<h2>Motivation</h2>
+<h2>
+Mind Awakening
+</h2>
 
 <div
 class="row"
 id="motivationRow">
+
 </div>
 
 </section>
 
 
 
-<!-- TOAST -->
+<!-- INFINITE GRID -->
 
-<div id="toast"></div>
+<section class="category-section">
+
+<h2>
+Infinite Discovery
+</h2>
+
+<div
+class="video-grid"
+id="videoGrid">
+
+</div>
+
+</section>
 
 
 
 <!-- PLAYER -->
 
 <div
-id="popup"
-class="premium-player">
-
-<div class="player-layout">
-
-<div class="player-main">
-
-<iframe
-id="videoFrame"
-allowfullscreen>
-</iframe>
-
-<div class="player-info">
-
-<h2 id="playerTitle">
-Cinematic Experience
-</h2>
-
-<p id="playerDesc">
-Discovery Universe
-</p>
-
-</div>
-
-</div>
-
-
-
-<div class="player-sidebar">
-
-<h3>
-More Discovery
-</h3>
-
-<div id="recommendedVideos">
-</div>
-
-</div>
-
-</div>
+class="premium-player"
+id="popup">
 
 
 
@@ -223,11 +258,62 @@ onclick="closeVideo()">
 
 </button>
 
+
+
+<div class="player-layout">
+
+
+
+<div class="player-main">
+
+<iframe
+id="videoFrame"
+allowfullscreen>
+
+</iframe>
+
+
+
+<div class="player-info">
+
+<h2 id="playerTitle">
+Now Playing
+</h2>
+
+<p id="playerDesc">
+
+Cinematic Discovery Experience
+
+</p>
+
 </div>
+
+</div>
+
+
+
+<div
+class="player-sidebar"
+id="recommendedVideos">
+
+</div>
+
+
+
+</div>
+
+</div>
+
+
+
+<!-- TOAST -->
+
+<div id="toast"></div>
 
 
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
