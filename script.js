@@ -577,3 +577,145 @@ toast.classList.remove(
 ========================= */
 
 renderVideos(videos);
+/* =========================
+   LIVE SEARCH OVERLAY
+========================= */
+
+const overlay =
+document.getElementById(
+"searchOverlay"
+);
+
+
+
+searchInput.addEventListener(
+"input",
+()=>{
+
+const value =
+searchInput.value
+.toLowerCase()
+.trim();
+
+if(value===""){
+
+overlay.style.display=
+"none";
+
+renderVideos(videos);
+
+return;
+
+}
+
+
+
+const filtered =
+videos.filter(video=>
+
+video.title
+.toLowerCase()
+.includes(value)
+
+||
+
+video.desc
+.toLowerCase()
+.includes(value)
+
+||
+
+video.category
+.toLowerCase()
+.includes(value)
+
+);
+
+
+
+renderSearchOverlay(filtered);
+
+}
+);
+
+
+
+function renderSearchOverlay(data){
+
+overlay.innerHTML="";
+
+
+
+if(data.length===0){
+
+overlay.style.display=
+"none";
+
+return;
+
+}
+
+
+
+overlay.style.display=
+"block";
+
+
+
+data.forEach(video=>{
+
+overlay.innerHTML += `
+
+<div
+class="search-card"
+onclick="playVideo(
+'${video.id}',
+'${video.title}',
+'${video.desc}'
+)">
+
+<img
+src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
+
+<div class="search-card-info">
+
+<h4>
+${video.title}
+</h4>
+
+<p>
+${video.category}
+</p>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+
+/* =========================
+   AUTO CLOSE OVERLAY
+========================= */
+
+document.addEventListener(
+"click",
+(e)=>{
+
+if(
+!e.target.closest(
+".search-wrapper"
+)
+){
+
+overlay.style.display=
+"none";
+
+}
+
+});
