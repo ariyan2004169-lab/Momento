@@ -1,6 +1,6 @@
-<!-- =====================================
-     MOMENTO v22 — CINEMATIC DISCOVERY UI
-====================================== -->
+<!-- =========================================
+     MOMENTO v24 — DISCOVERY ENGINE SYSTEM
+========================================= -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +25,9 @@ href="style.css">
 
 
 
-<!-- NAVBAR -->
+<!-- =========================
+     NAVBAR
+========================= -->
 
 <nav class="navbar">
 
@@ -62,7 +64,9 @@ Search
 
 
 
-<!-- HERO -->
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
@@ -74,7 +78,7 @@ Enter The MOMENTO Universe
 
 Explore cinematic worlds,
 gaming, anime, horror,
-music, motivation,
+music, action, motivation,
 and immersive experiences.
 
 </p>
@@ -83,41 +87,99 @@ and immersive experiences.
 
 
 
-<!-- DISCOVERY CHIPS -->
+<!-- =========================
+     DISCOVERY ENGINE
+========================= -->
 
 <div class="discover-chips">
 
-<button>Gaming</button>
+<button
+data-filter="all"
+class="active-chip">
 
-<button>Cinematic</button>
+Infinite Worlds
 
-<button>Marvel</button>
+</button>
 
-<button>Anime</button>
 
-<button>Dark</button>
 
-<button>Motivation</button>
+<button
+data-filter="gaming">
 
-<button>Music</button>
+Battle Worlds
 
-<button>Horror</button>
+</button>
 
-<button>Future</button>
 
-<button>Cyber</button>
 
-<button>Action</button>
+<button
+data-filter="music">
 
-<button>Dreamcore</button>
+Neon Soundscapes
 
-<button>Vibes</button>
+</button>
+
+
+
+<button
+data-filter="anime">
+
+Anime Energy
+
+</button>
+
+
+
+<button
+data-filter="dark">
+
+Dark Realms
+
+</button>
+
+
+
+<button
+data-filter="motivation">
+
+Mind Awakening
+
+</button>
+
+
+
+<button
+data-filter="future">
+
+Future Dimensions
+
+</button>
+
+
+
+<button
+data-filter="cinematic">
+
+Cinematic Universes
+
+</button>
+
+
+
+<button
+data-filter="action">
+
+Action Storm
+
+</button>
 
 </div>
 
 
 
-<!-- UPLOAD -->
+<!-- =========================
+     UPLOAD
+========================= -->
 
 <section class="upload-section">
 
@@ -127,104 +189,18 @@ id="videoLink"
 placeholder="Paste YouTube link">
 
 <button onclick="addVideo()">
+
 Upload
+
 </button>
 
 </section>
 
 
 
-<!-- TRENDING -->
-
-<section class="category-section">
-
-<h2>
-Trending Universes
-</h2>
-
-<div
-class="row"
-id="trendingRow">
-
-</div>
-
-</section>
-
-
-
-<!-- GAMING -->
-
-<section class="category-section">
-
-<h2>
-Gaming Realms
-</h2>
-
-<div
-class="row"
-id="gamingRow">
-
-</div>
-
-</section>
-
-
-
-<!-- MUSIC -->
-
-<section class="category-section">
-
-<h2>
-Music Atmospheres
-</h2>
-
-<div
-class="row"
-id="musicRow">
-
-</div>
-
-</section>
-
-
-
-<!-- HORROR -->
-
-<section class="category-section">
-
-<h2>
-Dark Dimensions
-</h2>
-
-<div
-class="row"
-id="horrorRow">
-
-</div>
-
-</section>
-
-
-
-<!-- MOTIVATION -->
-
-<section class="category-section">
-
-<h2>
-Mind Awakening
-</h2>
-
-<div
-class="row"
-id="motivationRow">
-
-</div>
-
-</section>
-
-
-
-<!-- INFINITE GRID -->
+<!-- =========================
+     DISCOVERY FEED
+========================= -->
 
 <section class="category-section">
 
@@ -242,7 +218,9 @@ id="videoGrid">
 
 
 
-<!-- PLAYER -->
+<!-- =========================
+     PLAYER
+========================= -->
 
 <div
 class="premium-player"
@@ -306,7 +284,9 @@ id="recommendedVideos">
 
 
 
-<!-- TOAST -->
+<!-- =========================
+     TOAST
+========================= -->
 
 <div id="toast"></div>
 
