@@ -1,6 +1,42 @@
 /* =========================================
-   MOMENTO v24 — PREMIUM DISCOVERY ENGINE
+   MOMENTO v27 — COMPLETE CACHE ENGINE
 ========================================= */
+
+
+
+/* =========================
+   CACHE ENGINE
+========================= */
+
+let cachedSearches =
+
+JSON.parse(
+localStorage.getItem(
+"momentoCache"
+)
+)
+
+||
+
+{};
+
+
+
+/* =========================
+   SAVE COLLECTIONS
+========================= */
+
+let savedVideos =
+
+JSON.parse(
+localStorage.getItem(
+"momentoSaved"
+)
+)
+
+||
+
+[];
 
 
 
@@ -130,6 +166,11 @@ document.getElementById(
 "searchInput"
 );
 
+const overlay =
+document.getElementById(
+"searchOverlay"
+);
+
 
 
 /* =========================
@@ -140,22 +181,28 @@ function renderVideos(data){
 
 videoGrid.innerHTML="";
 
+
+
 data.forEach(video=>{
 
 videoGrid.innerHTML += `
 
+<div class="trend-card">
+
+
+
 <div
-class="trend-card"
+class="thumb-wrap"
 onclick="playVideo(
 '${video.id}',
 '${video.title}',
 '${video.desc}'
 )">
 
-<div class="thumb-wrap">
-
 <img
 src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
+
+
 
 <div class="thumb-overlay">
 
@@ -167,6 +214,8 @@ ${video.category}
 
 </div>
 
+
+
 <div class="card-content">
 
 <h4>
@@ -176,6 +225,35 @@ ${video.title}
 <p>
 ${video.desc}
 </p>
+
+
+
+<div class="card-actions">
+
+
+
+<button
+onclick='saveVideo(${JSON.stringify(video)})'>
+
+Save
+
+</button>
+
+
+
+<button
+onclick="shareVideo(
+'${video.id}',
+'${video.title}'
+)">
+
+Share
+
+</button>
+
+
+
+</div>
 
 </div>
 
@@ -212,6 +290,9 @@ desc;
 
 renderRecommended(id);
 
+overlay.style.display=
+"none";
+
 }
 
 
@@ -237,6 +318,8 @@ frame.src="";
 function renderRecommended(current){
 
 recommended.innerHTML="";
+
+
 
 videos.forEach(video=>{
 
@@ -288,7 +371,40 @@ searchInput.addEventListener(
 ()=>{
 
 const value =
-searchInput.value.toLowerCase();
+searchInput.value
+.toLowerCase()
+.trim();
+
+
+
+if(value===""){
+
+overlay.style.display=
+"none";
+
+renderVideos(videos);
+
+return;
+
+}
+
+
+
+/* CACHE CHECK */
+
+if(cachedSearches[value]){
+
+renderSearchOverlay(
+cachedSearches[value]
+);
+
+return;
+
+}
+
+
+
+/* SEARCH */
 
 const filtered =
 videos.filter(video=>
@@ -311,10 +427,94 @@ video.category
 
 );
 
-renderVideos(filtered);
+
+
+/* SAVE CACHE */
+
+cachedSearches[value] =
+filtered;
+
+
+
+localStorage.setItem(
+
+"momentoCache",
+
+JSON.stringify(
+cachedSearches
+)
+
+);
+
+
+
+renderSearchOverlay(filtered);
 
 }
 );
+
+
+
+/* =========================
+   SEARCH OVERLAY
+========================= */
+
+function renderSearchOverlay(data){
+
+overlay.innerHTML="";
+
+
+
+if(data.length===0){
+
+overlay.style.display=
+"none";
+
+return;
+
+}
+
+
+
+overlay.style.display=
+"block";
+
+
+
+data.forEach(video=>{
+
+overlay.innerHTML += `
+
+<div
+class="search-card"
+onclick="playVideo(
+'${video.id}',
+'${video.title}',
+'${video.desc}'
+)">
+
+<img
+src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
+
+<div class="search-card-info">
+
+<h4>
+${video.title}
+</h4>
+
+<p>
+${video.category}
+</p>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
 
 
 
@@ -325,7 +525,41 @@ renderVideos(filtered);
 function performSearch(){
 
 const value =
-searchInput.value.toLowerCase();
+searchInput.value
+.toLowerCase()
+.trim();
+
+
+
+if(value===""){
+
+renderVideos(videos);
+
+return;
+
+}
+
+
+
+/* CACHE CHECK */
+
+if(cachedSearches[value]){
+
+renderVideos(
+cachedSearches[value]
+);
+
+showToast(
+"Loaded From Memory"
+);
+
+return;
+
+}
+
+
+
+/* SEARCH */
 
 const filtered =
 videos.filter(video=>
@@ -348,10 +582,31 @@ video.category
 
 );
 
+
+
+/* SAVE CACHE */
+
+cachedSearches[value] =
+filtered;
+
+
+
+localStorage.setItem(
+
+"momentoCache",
+
+JSON.stringify(
+cachedSearches
+)
+
+);
+
+
+
 renderVideos(filtered);
 
 showToast(
-"Discovery Updated"
+"Discovery Cached"
 );
 
 }
@@ -404,6 +659,8 @@ return;
 
 }
 
+
+
 const filtered =
 videos.filter(video=>
 
@@ -419,7 +676,105 @@ video.title
 
 );
 
+
+
 renderVideos(filtered);
+
+}
+
+
+
+/* =========================
+   SHARE VIDEO
+========================= */
+
+function shareVideo(
+id,
+title
+){
+
+const link =
+`https://youtu.be/${id}`;
+
+
+
+if(
+navigator.share
+){
+
+navigator.share({
+
+title:title,
+
+text:
+"Discover this on MOMENTO",
+
+url:link
+
+});
+
+}
+else{
+
+navigator.clipboard.writeText(
+link
+);
+
+showToast(
+"Video Link Copied"
+);
+
+}
+
+}
+
+
+
+/* =========================
+   SAVE VIDEO
+========================= */
+
+function saveVideo(video){
+
+const alreadySaved =
+savedVideos.find(v=>
+
+v.id === video.id
+);
+
+
+
+if(alreadySaved){
+
+showToast(
+"Already In Collection"
+);
+
+return;
+
+}
+
+
+
+savedVideos.push(video);
+
+
+
+localStorage.setItem(
+
+"momentoSaved",
+
+JSON.stringify(
+savedVideos
+)
+
+);
+
+
+
+showToast(
+"Saved To Collection"
+);
 
 }
 
@@ -438,6 +793,8 @@ document.getElementById(
 
 const link =
 input.value;
+
+
 
 if(!link){
 
@@ -549,7 +906,27 @@ showToast(
 
 
 /* =========================
-   PREMIUM TOAST
+   CLEAR CACHE
+========================= */
+
+function clearMomentoCache(){
+
+localStorage.removeItem(
+"momentoCache"
+);
+
+cachedSearches = {};
+
+showToast(
+"Memory Cleared"
+);
+
+}
+
+
+
+/* =========================
+   TOAST
 ========================= */
 
 function showToast(text){
@@ -567,133 +944,6 @@ toast.classList.remove(
 );
 
 },2500);
-
-}
-
-
-
-/* =========================
-   INITIALIZE
-========================= */
-
-renderVideos(videos);
-/* =========================
-   LIVE SEARCH OVERLAY
-========================= */
-
-const overlay =
-document.getElementById(
-"searchOverlay"
-);
-
-
-
-searchInput.addEventListener(
-"input",
-()=>{
-
-const value =
-searchInput.value
-.toLowerCase()
-.trim();
-
-if(value===""){
-
-overlay.style.display=
-"none";
-
-renderVideos(videos);
-
-return;
-
-}
-
-
-
-const filtered =
-videos.filter(video=>
-
-video.title
-.toLowerCase()
-.includes(value)
-
-||
-
-video.desc
-.toLowerCase()
-.includes(value)
-
-||
-
-video.category
-.toLowerCase()
-.includes(value)
-
-);
-
-
-
-renderSearchOverlay(filtered);
-
-}
-);
-
-
-
-function renderSearchOverlay(data){
-
-overlay.innerHTML="";
-
-
-
-if(data.length===0){
-
-overlay.style.display=
-"none";
-
-return;
-
-}
-
-
-
-overlay.style.display=
-"block";
-
-
-
-data.forEach(video=>{
-
-overlay.innerHTML += `
-
-<div
-class="search-card"
-onclick="playVideo(
-'${video.id}',
-'${video.title}',
-'${video.desc}'
-)">
-
-<img
-src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
-
-<div class="search-card-info">
-
-<h4>
-${video.title}
-</h4>
-
-<p>
-${video.category}
-</p>
-
-</div>
-
-</div>
-
-`;
-
-});
 
 }
 
@@ -719,213 +969,11 @@ overlay.style.display=
 }
 
 });
-/* =========================================
-   MOMENTO v26 — SHARE + SAVE SYSTEM
-========================================= */
 
 
 
 /* =========================
-   SAVE WATCHLIST
+   INITIALIZE
 ========================= */
 
-let savedVideos =
-
-JSON.parse(
-localStorage.getItem(
-"momentoSaved"
-)
-)
-
-||
-
-[];
-
-
-
-/* =========================
-   SHARE VIDEO
-========================= */
-
-function shareVideo(
-id,
-title
-){
-
-const link =
-`https://youtu.be/${id}`;
-
-
-
-if(
-navigator.share
-){
-
-navigator.share({
-
-title:title,
-
-text:
-"Discover this on MOMENTO",
-
-url:link
-
-});
-
-}
-else{
-
-navigator.clipboard.writeText(
-link
-);
-
-showToast(
-"Video Link Copied"
-);
-
-}
-
-}
-
-
-
-/* =========================
-   SAVE VIDEO
-========================= */
-
-function saveVideo(video){
-
-const alreadySaved =
-savedVideos.find(v=>
-
-v.id === video.id
-);
-
-
-
-if(alreadySaved){
-
-showToast(
-"Already In Collection"
-);
-
-return;
-
-}
-
-
-
-savedVideos.push(video);
-
-
-
-localStorage.setItem(
-
-"momentoSaved",
-
-JSON.stringify(
-savedVideos
-)
-
-);
-
-
-
-showToast(
-"Saved To Collection"
-);
-
-}
-
-
-
-/* =========================
-   UPDATED VIDEO RENDER
-========================= */
-
-function renderVideos(data){
-
-videoGrid.innerHTML="";
-
-
-
-data.forEach(video=>{
-
-videoGrid.innerHTML += `
-
-<div
-class="trend-card">
-
-<div
-class="thumb-wrap"
-onclick="playVideo(
-'${video.id}',
-'${video.title}',
-'${video.desc}'
-)">
-
-<img
-src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
-
-
-
-<div class="thumb-overlay">
-
-<span>
-${video.category}
-</span>
-
-</div>
-
-</div>
-
-
-
-<div class="card-content">
-
-<h4>
-${video.title}
-</h4>
-
-<p>
-${video.desc}
-</p>
-
-
-
-<div class="card-actions">
-
-
-
-<button
-onclick='saveVideo(${JSON.stringify(video)})'>
-
-Save
-
-</button>
-
-
-
-<button
-onclick="shareVideo(
-'${video.id}',
-'${video.title}'
-)">
-
-Share
-
-</button>
-
-
-
-</div>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-}
+renderVideos(videos);
