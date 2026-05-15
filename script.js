@@ -719,3 +719,213 @@ overlay.style.display=
 }
 
 });
+/* =========================================
+   MOMENTO v26 — SHARE + SAVE SYSTEM
+========================================= */
+
+
+
+/* =========================
+   SAVE WATCHLIST
+========================= */
+
+let savedVideos =
+
+JSON.parse(
+localStorage.getItem(
+"momentoSaved"
+)
+)
+
+||
+
+[];
+
+
+
+/* =========================
+   SHARE VIDEO
+========================= */
+
+function shareVideo(
+id,
+title
+){
+
+const link =
+`https://youtu.be/${id}`;
+
+
+
+if(
+navigator.share
+){
+
+navigator.share({
+
+title:title,
+
+text:
+"Discover this on MOMENTO",
+
+url:link
+
+});
+
+}
+else{
+
+navigator.clipboard.writeText(
+link
+);
+
+showToast(
+"Video Link Copied"
+);
+
+}
+
+}
+
+
+
+/* =========================
+   SAVE VIDEO
+========================= */
+
+function saveVideo(video){
+
+const alreadySaved =
+savedVideos.find(v=>
+
+v.id === video.id
+);
+
+
+
+if(alreadySaved){
+
+showToast(
+"Already In Collection"
+);
+
+return;
+
+}
+
+
+
+savedVideos.push(video);
+
+
+
+localStorage.setItem(
+
+"momentoSaved",
+
+JSON.stringify(
+savedVideos
+)
+
+);
+
+
+
+showToast(
+"Saved To Collection"
+);
+
+}
+
+
+
+/* =========================
+   UPDATED VIDEO RENDER
+========================= */
+
+function renderVideos(data){
+
+videoGrid.innerHTML="";
+
+
+
+data.forEach(video=>{
+
+videoGrid.innerHTML += `
+
+<div
+class="trend-card">
+
+<div
+class="thumb-wrap"
+onclick="playVideo(
+'${video.id}',
+'${video.title}',
+'${video.desc}'
+)">
+
+<img
+src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
+
+
+
+<div class="thumb-overlay">
+
+<span>
+${video.category}
+</span>
+
+</div>
+
+</div>
+
+
+
+<div class="card-content">
+
+<h4>
+${video.title}
+</h4>
+
+<p>
+${video.desc}
+</p>
+
+
+
+<div class="card-actions">
+
+
+
+<button
+onclick='saveVideo(${JSON.stringify(video)})'>
+
+Save
+
+</button>
+
+
+
+<button
+onclick="shareVideo(
+'${video.id}',
+'${video.title}'
+)">
+
+Share
+
+</button>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
