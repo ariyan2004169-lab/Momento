@@ -1,25 +1,24 @@
 /* =========================================
-   MOMENTO v23 — CINEMATIC MASONRY SYSTEM
+   MOMENTO v29 — COMPLETE PREMIUM UI
 ========================================= */
 
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
 }
+
+
 
 body{
 
-background:
-linear-gradient(
-180deg,
-#020202,
-#050505,
-#090909
-);
+background:#050505;
 
 color:white;
+
+font-family:
+Arial,
+sans-serif;
 
 overflow-x:hidden;
 
@@ -27,56 +26,11 @@ overflow-x:hidden;
 
 
 
-/* ATMOSPHERE */
-
-body::before{
-
-content:"";
-
-position:fixed;
-
-inset:0;
-
-background:
-
-radial-gradient(
-circle at top left,
-rgba(255,255,255,0.04),
-transparent 30%
-),
-
-radial-gradient(
-circle at top right,
-rgba(0,140,255,0.05),
-transparent 35%
-),
-
-radial-gradient(
-circle at bottom,
-rgba(255,0,120,0.04),
-transparent 40%
-);
-
-pointer-events:none;
-
-z-index:-1;
-
-}
-
-
-
-/* NAVBAR */
+/* =========================
+   NAVBAR
+========================= */
 
 .navbar{
-
-display:flex;
-
-justify-content:
-space-between;
-
-align-items:center;
-
-padding:18px 22px;
 
 position:sticky;
 
@@ -84,11 +38,19 @@ top:0;
 
 z-index:999;
 
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:20px;
+
 background:
-rgba(0,0,0,0.45);
+rgba(0,0,0,0.7);
 
 backdrop-filter:
-blur(18px);
+blur(20px);
 
 border-bottom:
 1px solid
@@ -98,39 +60,13 @@ rgba(255,255,255,0.05);
 
 
 
-/* BRAND */
-
-.brand-zone{
-
-display:flex;
-
-flex-direction:column;
-
-gap:4px;
-
-}
-
-
-
 .logo{
 
-font-size:30px;
+font-size:28px;
 
 font-weight:900;
 
-letter-spacing:6px;
-
-background:
-linear-gradient(
-90deg,
-white,
-#8ec5ff
-);
-
--webkit-background-clip:text;
-
--webkit-text-fill-color:
-transparent;
+letter-spacing:3px;
 
 }
 
@@ -140,42 +76,25 @@ transparent;
 
 font-size:11px;
 
-opacity:0.55;
+opacity:0.6;
 
-letter-spacing:2px;
-
-text-transform:uppercase;
+margin-top:4px;
 
 }
 
 
 
-/* PREMIUM SEARCH */
+/* =========================
+   SEARCH
+========================= */
 
 .search-wrapper{
 
+position:relative;
+
 display:flex;
 
-align-items:center;
-
 gap:10px;
-
-background:
-rgba(255,255,255,0.05);
-
-padding:8px;
-
-border-radius:999px;
-
-backdrop-filter:blur(12px);
-
-border:
-1px solid
-rgba(255,255,255,0.05);
-
-box-shadow:
-0 10px 40px
-rgba(0,0,0,0.35);
 
 }
 
@@ -183,19 +102,20 @@ rgba(0,0,0,0.35);
 
 .search-wrapper input{
 
-background:transparent;
+width:260px;
+
+padding:14px;
 
 border:none;
 
 outline:none;
 
+border-radius:14px;
+
+background:
+rgba(255,255,255,0.06);
+
 color:white;
-
-width:280px;
-
-padding:10px 14px;
-
-font-size:14px;
 
 }
 
@@ -203,949 +123,67 @@ font-size:14px;
 
 .search-wrapper button{
 
-border:none;
-
-background:white;
-
-color:black;
-
-padding:10px 18px;
-
-border-radius:999px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-transition:0.3s;
-
-}
-
-
-
-.search-wrapper button:hover{
-
-transform:scale(1.04);
-
-}
-
-
-
-/* HERO */
-
-.hero{
-
-padding:55px 20px 35px;
-
-text-align:center;
-
-}
-
-
-
-.hero h2{
-
-font-size:42px;
-
-font-weight:900;
-
-letter-spacing:2px;
-
-margin-bottom:10px;
-
-}
-
-
-
-.hero p{
-
-opacity:0.68;
-
-max-width:700px;
-
-margin:auto;
-
-line-height:1.7;
-
-font-size:13px;
-
-}
-
-
-
-/* DISCOVERY CHIPS */
-
-.discover-chips{
-
-display:flex;
-
-gap:10px;
-
-overflow-x:auto;
-
-padding:0 20px 24px;
-
-scrollbar-width:none;
-
-}
-
-
-
-.discover-chips::-webkit-scrollbar{
-
-display:none;
-
-}
-
-
-
-.discover-chips button{
+padding:14px 18px;
 
 border:none;
-
-background:
-rgba(255,255,255,0.06);
-
-color:white;
-
-padding:10px 16px;
-
-border-radius:999px;
-
-cursor:pointer;
-
-font-size:12px;
-
-letter-spacing:1px;
-
-backdrop-filter:blur(10px);
-
-border:
-1px solid
-rgba(255,255,255,0.05);
-
-transition:0.3s;
-
-white-space:nowrap;
-
-}
-
-
-
-.discover-chips button:hover{
-
-background:white;
-
-color:black;
-
-transform:
-translateY(-2px);
-
-}
-
-
-
-/* UPLOAD */
-
-.upload-section{
-
-display:flex;
-
-justify-content:center;
-
-gap:10px;
-
-padding:18px;
-
-}
-
-
-
-.upload-section input{
-
-width:320px;
-
-padding:12px;
-
-border:none;
-
-outline:none;
-
-border-radius:12px;
-
-background:
-rgba(255,255,255,0.06);
-
-color:white;
-
-}
-
-
-
-.upload-section button{
-
-padding:12px 18px;
-
-border:none;
-
-border-radius:12px;
-
-background:white;
-
-font-weight:bold;
-
-cursor:pointer;
-
-}
-
-
-
-/* CATEGORY */
-
-.category-section{
-
-padding:22px 16px;
-
-}
-
-
-
-.category-section h2{
-
-font-size:22px;
-
-margin-bottom:16px;
-
-font-weight:800;
-
-letter-spacing:1px;
-
-}
-
-
-
-/* ROWS */
-
-.row{
-
-display:flex;
-
-gap:10px;
-
-overflow-x:auto;
-
-padding-bottom:8px;
-
-scroll-behavior:smooth;
-
-}
-
-
-
-.row::-webkit-scrollbar{
-
-display:none;
-
-}
-
-
-
-/* =========================
-   MASONRY GRID
-========================= */
-
-.video-grid{
-
-column-count:5;
-
-column-gap:14px;
-
-padding:18px;
-
-}
-
-
-
-/* CARD */
-
-.trend-card{
-
-display:inline-block;
-
-width:100%;
-
-margin-bottom:14px;
-
-background:
-rgba(255,255,255,0.04);
-
-border-radius:18px;
-
-overflow:hidden;
-
-cursor:pointer;
-
-transition:0.35s;
-
-border:
-1px solid
-rgba(255,255,255,0.04);
-
-position:relative;
-
-break-inside:avoid;
-
-backdrop-filter:blur(12px);
-
-box-shadow:
-0 8px 24px
-rgba(0,0,0,0.3);
-
-}
-
-
-
-/* HOVER */
-
-.trend-card:hover{
-
-transform:
-translateY(-6px)
-scale(1.02);
-
-box-shadow:
-0 18px 40px
-rgba(0,0,0,0.45);
-
-}
-
-
-
-/* THUMB */
-
-.thumb-wrap{
-
-position:relative;
-
-overflow:hidden;
-
-height:auto;
-
-}
-
-
-
-/* IMAGES */
-
-.thumb-wrap img{
-
-width:100%;
-
-display:block;
-
-object-fit:cover;
-
-transition:0.5s;
-
-aspect-ratio:16/9;
-
-}
-
-
-
-/* DYNAMIC SIZES */
-
-.trend-card:nth-child(3n) img{
-
-aspect-ratio:9/14;
-
-}
-
-
-
-.trend-card:nth-child(4n) img{
-
-aspect-ratio:1/1;
-
-}
-
-
-
-.trend-card:nth-child(5n) img{
-
-aspect-ratio:4/5;
-
-}
-
-
-
-/* IMAGE HOVER */
-
-.trend-card:hover img{
-
-transform:scale(1.06);
-
-}
-
-
-
-/* OVERLAY */
-
-.thumb-overlay{
-
-position:absolute;
-
-inset:0;
-
-background:
-linear-gradient(
-to top,
-rgba(0,0,0,0.92),
-rgba(0,0,0,0.05)
-);
-
-display:flex;
-
-justify-content:
-space-between;
-
-align-items:flex-end;
-
-padding:10px;
-
-opacity:0;
-
-transition:0.3s;
-
-}
-
-
-
-/* SHOW OVERLAY */
-
-.trend-card:hover .thumb-overlay{
-
-opacity:1;
-
-}
-
-
-
-/* CATEGORY CHIP */
-
-.thumb-overlay span{
-
-background:
-rgba(255,255,255,0.12);
-
-padding:5px 8px;
-
-border-radius:999px;
-
-font-size:9px;
-
-letter-spacing:1px;
-
-font-weight:bold;
-
-text-transform:uppercase;
-
-}
-
-
-
-/* CARD CONTENT */
-
-.card-content{
-
-padding:10px;
-
-}
-
-
-
-/* TITLE */
-
-.card-content h4{
-
-font-size:12px;
-
-line-height:1.35;
-
-margin-bottom:4px;
-
-font-weight:600;
-
-display:-webkit-box;
-
--webkit-line-clamp:2;
-
--webkit-box-orient:vertical;
-
-overflow:hidden;
-
-}
-
-
-
-/* DESCRIPTION */
-
-.card-content p{
-
-font-size:10px;
-
-opacity:0.55;
-
-line-height:1.3;
-
-display:-webkit-box;
-
--webkit-line-clamp:1;
-
--webkit-box-orient:vertical;
-
-overflow:hidden;
-
-}
-
-
-
-/* PLAYER */
-
-.premium-player{
-
-position:fixed;
-
-inset:0;
-
-background:
-rgba(0,0,0,0.96);
-
-display:none;
-
-z-index:9999;
-
-overflow:auto;
-
-}
-
-
-
-/* PLAYER LAYOUT */
-
-.player-layout{
-
-display:grid;
-
-grid-template-columns:
-2fr 1fr;
-
-gap:18px;
-
-padding:22px;
-
-}
-
-
-
-/* MAIN PLAYER */
-
-.player-main iframe{
-
-width:100%;
-
-aspect-ratio:16/9;
-
-border:none;
-
-border-radius:18px;
-
-}
-
-
-
-/* PLAYER INFO */
-
-.player-info{
-
-margin-top:14px;
-
-}
-
-
-
-.player-info h2{
-
-font-size:22px;
-
-margin-bottom:8px;
-
-}
-
-
-
-.player-info p{
-
-opacity:0.7;
-
-font-size:13px;
-
-line-height:1.6;
-
-}
-
-
-
-/* SIDEBAR */
-
-.player-sidebar{
-
-display:flex;
-
-flex-direction:column;
-
-gap:10px;
-
-}
-
-
-
-/* RECOMMEND CARD */
-
-.recommend-card{
-
-display:flex;
-
-gap:8px;
-
-background:
-rgba(255,255,255,0.05);
 
 border-radius:14px;
 
-overflow:hidden;
-
-cursor:pointer;
-
-transition:0.3s;
-
-}
-
-
-
-.recommend-card:hover{
-
-transform:
-translateX(4px);
-
-}
-
-
-
-/* RECOMMEND IMAGE */
-
-.recommend-card img{
-
-width:110px;
-height:72px;
-
-object-fit:cover;
-
-}
-
-
-
-/* RECOMMEND INFO */
-
-.recommend-info{
-
-padding:8px;
-
-}
-
-
-
-.recommend-info h4{
-
-font-size:12px;
-
-margin-bottom:4px;
-
-line-height:1.3;
-
-}
-
-
-
-.recommend-info p{
-
-font-size:10px;
-
-opacity:0.6;
-
-}
-
-
-
-/* CLOSE BUTTON */
-
-.close-btn{
-
-position:fixed;
-
-top:16px;
-right:16px;
-
-width:44px;
-height:44px;
-
-border:none;
-
-border-radius:50%;
-
-background:white;
-
-font-size:20px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-}
-
-
-
-/* TOAST */
-
-#toast{
-
-position:fixed;
-
-bottom:20px;
-right:20px;
-
 background:white;
 
 color:black;
 
-padding:12px 18px;
+font-weight:700;
 
-border-radius:12px;
-
-font-weight:bold;
-
-opacity:0;
-
-transform:
-translateY(20px);
-
-transition:0.4s;
-
-z-index:10000;
-
-}
-
-
-
-.show-toast{
-
-opacity:1 !important;
-
-transform:
-translateY(0) !important;
+cursor:pointer;
 
 }
 
 
 
 /* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:1200px){
-
-.video-grid{
-
-column-count:4;
-
-}
-
-}
-
-
-
-@media(max-width:900px){
-
-.navbar{
-
-flex-direction:column;
-
-gap:14px;
-
-padding:16px;
-
-}
-
-
-
-.hero h2{
-
-font-size:32px;
-
-}
-
-
-
-.search-wrapper{
-
-width:100%;
-
-justify-content:center;
-
-}
-
-
-
-.search-wrapper input{
-
-width:70%;
-
-}
-
-
-
-.upload-section{
-
-flex-direction:column;
-
-align-items:center;
-
-}
-
-
-
-.upload-section input{
-
-width:90%;
-
-}
-
-
-
-.player-layout{
-
-grid-template-columns:1fr;
-
-padding:16px;
-
-}
-
-
-
-.video-grid{
-
-column-count:3;
-
-}
-
-}
-
-
-
-@media(max-width:600px){
-
-.video-grid{
-
-column-count:2;
-
-}
-
-}
-/* =========================
-   LIVE SEARCH OVERLAY
+   SEARCH OVERLAY
 ========================= */
 
 .search-overlay{
 
 position:absolute;
 
-top:88px;
+top:70px;
 
-right:24px;
-
-width:360px;
-
-max-height:500px;
-
-overflow-y:auto;
+width:100%;
 
 background:
-rgba(0,0,0,0.82);
+rgba(0,0,0,0.96);
 
-backdrop-filter:
-blur(18px);
+border-radius:18px;
 
-border:
-1px solid
-rgba(255,255,255,0.06);
-
-border-radius:22px;
-
-padding:12px;
+overflow:hidden;
 
 display:none;
 
-z-index:1000;
+border:
+1px solid
+rgba(255,255,255,0.05);
 
-box-shadow:
-0 20px 60px
-rgba(0,0,0,0.45);
-
-}
-
-
-
-/* SCROLLBAR */
-
-.search-overlay::-webkit-scrollbar{
-
-width:4px;
+backdrop-filter:
+blur(20px);
 
 }
 
 
-
-.search-overlay::-webkit-scrollbar-thumb{
-
-background:
-rgba(255,255,255,0.2);
-
-border-radius:999px;
-
-}
-
-
-
-/* SEARCH CARD */
 
 .search-card{
 
 display:flex;
 
-gap:10px;
+gap:12px;
 
-padding:10px;
-
-border-radius:16px;
+padding:12px;
 
 cursor:pointer;
 
 transition:0.3s;
-
-margin-bottom:8px;
-
-background:
-rgba(255,255,255,0.03);
 
 }
 
@@ -1154,32 +192,21 @@ rgba(255,255,255,0.03);
 .search-card:hover{
 
 background:
-rgba(255,255,255,0.08);
-
-transform:
-translateX(4px);
+rgba(255,255,255,0.06);
 
 }
 
 
 
-/* IMAGE */
-
 .search-card img{
 
 width:120px;
-
-height:72px;
-
-object-fit:cover;
 
 border-radius:12px;
 
 }
 
 
-
-/* INFO */
 
 .search-card-info{
 
@@ -1195,11 +222,9 @@ justify-content:center;
 
 .search-card-info h4{
 
-font-size:12px;
+font-size:14px;
 
-margin-bottom:5px;
-
-line-height:1.4;
+margin-bottom:6px;
 
 }
 
@@ -1207,59 +232,360 @@ line-height:1.4;
 
 .search-card-info p{
 
-font-size:10px;
+font-size:11px;
 
-opacity:0.6;
+opacity:0.7;
 
 }
+
+
+
 /* =========================
-   CARD ACTIONS
+   HERO
 ========================= */
 
-.card-actions{
+.hero{
+
+padding:80px 20px 40px;
+
+text-align:center;
+
+}
+
+
+
+.hero h2{
+
+font-size:48px;
+
+margin-bottom:20px;
+
+}
+
+
+
+.hero p{
+
+max-width:800px;
+
+margin:auto;
+
+line-height:1.8;
+
+opacity:0.75;
+
+}
+
+
+
+/* =========================
+   DISCOVERY CHIPS
+========================= */
+
+.discover-chips{
 
 display:flex;
 
-gap:8px;
+gap:10px;
 
-margin-top:10px;
+overflow:auto;
+
+padding:10px 20px 30px;
 
 }
 
 
 
-/* BUTTONS */
+.discover-chips button{
 
-.card-actions button{
+border:none;
+
+padding:12px 18px;
+
+border-radius:999px;
+
+background:
+rgba(255,255,255,0.05);
+
+color:white;
+
+cursor:pointer;
+
+white-space:nowrap;
+
+transition:0.3s;
+
+}
+
+
+
+.discover-chips button:hover,
+
+.active-chip{
+
+background:white;
+
+color:black;
+
+}
+
+
+
+/* =========================
+   UPLOAD
+========================= */
+
+.upload-section{
+
+display:flex;
+
+gap:10px;
+
+padding:0 20px 30px;
+
+}
+
+
+
+.upload-section input{
 
 flex:1;
 
+padding:16px;
+
 border:none;
+
+outline:none;
+
+border-radius:14px;
 
 background:
 rgba(255,255,255,0.06);
 
 color:white;
 
-padding:8px;
+}
 
-border-radius:10px;
 
-font-size:11px;
+
+.upload-section button{
+
+padding:16px 20px;
+
+border:none;
+
+border-radius:14px;
+
+background:white;
+
+color:black;
+
+font-weight:700;
 
 cursor:pointer;
-
-transition:0.3s;
-
-border:
-1px solid
-rgba(255,255,255,0.05);
 
 }
 
 
 
-/* HOVER */
+/* =========================
+   CATEGORY
+========================= */
+
+.category-section{
+
+padding:20px;
+
+}
+
+
+
+.category-section h2{
+
+margin-bottom:24px;
+
+font-size:32px;
+
+}
+
+
+
+/* =========================
+   VIDEO GRID
+========================= */
+
+.video-grid{
+
+columns:2 320px;
+
+column-gap:18px;
+
+}
+
+
+
+/* =========================
+   CARD
+========================= */
+
+.trend-card{
+
+break-inside:avoid;
+
+margin-bottom:18px;
+
+background:
+rgba(255,255,255,0.04);
+
+border-radius:22px;
+
+overflow:hidden;
+
+border:
+1px solid
+rgba(255,255,255,0.05);
+
+transition:0.4s;
+
+backdrop-filter:
+blur(12px);
+
+}
+
+
+
+.trend-card:hover{
+
+transform:
+translateY(-6px);
+
+}
+
+
+
+/* =========================
+   THUMB
+========================= */
+
+.thumb-wrap{
+
+position:relative;
+
+cursor:pointer;
+
+}
+
+
+
+.thumb-wrap img{
+
+width:100%;
+
+display:block;
+
+}
+
+
+
+.thumb-overlay{
+
+position:absolute;
+
+bottom:10px;
+
+left:10px;
+
+}
+
+
+
+.thumb-overlay span{
+
+background:
+rgba(0,0,0,0.7);
+
+padding:8px 12px;
+
+border-radius:999px;
+
+font-size:11px;
+
+}
+
+
+
+/* =========================
+   CARD CONTENT
+========================= */
+
+.card-content{
+
+padding:16px;
+
+}
+
+
+
+.card-content h4{
+
+font-size:16px;
+
+margin-bottom:10px;
+
+}
+
+
+
+.card-content p{
+
+font-size:13px;
+
+opacity:0.7;
+
+line-height:1.5;
+
+}
+
+
+
+/* =========================
+   ACTIONS
+========================= */
+
+.card-actions{
+
+display:flex;
+
+gap:10px;
+
+margin-top:14px;
+
+}
+
+
+
+.card-actions button{
+
+flex:1;
+
+padding:10px;
+
+border:none;
+
+border-radius:12px;
+
+background:
+rgba(255,255,255,0.06);
+
+color:white;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+
 
 .card-actions button:hover{
 
@@ -1267,12 +593,238 @@ background:white;
 
 color:black;
 
-transform:
-translateY(-2px);
+}
+
+
+
+/* =========================================
+   IMMERSIVE PLAYER
+========================================= */
+
+.premium-player{
+
+position:fixed;
+
+inset:0;
+
+display:none;
+
+justify-content:center;
+
+align-items:center;
+
+background:
+rgba(0,0,0,0.92);
+
+backdrop-filter:
+blur(20px);
+
+z-index:5000;
+
+overflow:hidden;
+
+animation:
+fadePlayer 0.4s ease;
 
 }
+
+
+
+@keyframes fadePlayer{
+
+from{
+opacity:0;
+transform:scale(1.03);
+}
+
+to{
+opacity:1;
+transform:scale(1);
+}
+
+}
+
+
+
+.cinematic-backdrop{
+
+position:absolute;
+
+inset:0;
+
+background-size:cover;
+
+background-position:center;
+
+filter:blur(90px);
+
+opacity:0.22;
+
+transform:scale(1.2);
+
+z-index:-1;
+
+}
+
+
+
+.player-layout{
+
+width:94%;
+
+height:92%;
+
+display:grid;
+
+grid-template-columns:
+2fr 360px;
+
+gap:20px;
+
+position:relative;
+
+z-index:2;
+
+}
+
+
+
+.player-main{
+
+display:flex;
+
+flex-direction:column;
+
+background:
+rgba(255,255,255,0.05);
+
+border:
+1px solid
+rgba(255,255,255,0.08);
+
+border-radius:26px;
+
+overflow:hidden;
+
+backdrop-filter:
+blur(20px);
+
+}
+
+
+
+.player-main iframe{
+
+width:100%;
+
+height:100%;
+
+min-height:70vh;
+
+border:none;
+
+}
+
+
+
+.player-info{
+
+padding:20px;
+
+}
+
+
+
+.player-sidebar{
+
+overflow-y:auto;
+
+display:flex;
+
+flex-direction:column;
+
+gap:14px;
+
+}
+
+
+
+.recommend-card{
+
+display:flex;
+
+gap:12px;
+
+background:
+rgba(255,255,255,0.05);
+
+padding:10px;
+
+border-radius:18px;
+
+cursor:pointer;
+
+transition:0.3s;
+
+}
+
+
+
+.recommend-card:hover{
+
+transform:
+translateY(-4px);
+
+}
+
+
+
+.recommend-card img{
+
+width:140px;
+
+height:90px;
+
+object-fit:cover;
+
+border-radius:12px;
+
+}
+
+
+
+.close-btn{
+
+position:absolute;
+
+top:24px;
+
+right:24px;
+
+width:50px;
+
+height:50px;
+
+border:none;
+
+border-radius:50%;
+
+background:white;
+
+color:black;
+
+font-size:22px;
+
+cursor:pointer;
+
+z-index:10;
+
+}
+
+
+
 /* =========================
-   COLLECTION BUTTON
+   COLLECTION
 ========================= */
 
 .collection-btn{
@@ -1299,28 +851,9 @@ font-weight:700;
 
 cursor:pointer;
 
-box-shadow:
-0 10px 30px
-rgba(0,0,0,0.3);
-
-transition:0.3s;
-
 }
 
 
-
-.collection-btn:hover{
-
-transform:
-translateY(-3px);
-
-}
-
-
-
-/* =========================
-   COLLECTION POPUP
-========================= */
 
 .collection-popup{
 
@@ -1342,7 +875,7 @@ rgba(0,0,0,0.95);
 backdrop-filter:
 blur(18px);
 
-z-index:2000;
+z-index:6000;
 
 transition:0.5s;
 
@@ -1354,17 +887,13 @@ padding:20px;
 
 
 
-.collection-popup.active-collection{
+.active-collection{
 
 right:0;
 
 }
 
 
-
-/* =========================
-   HEADER
-========================= */
 
 .collection-header{
 
@@ -1380,40 +909,6 @@ margin-bottom:20px;
 
 
 
-.collection-header h2{
-
-font-size:24px;
-
-}
-
-
-
-.collection-header button{
-
-border:none;
-
-background:white;
-
-color:black;
-
-width:36px;
-
-height:36px;
-
-border-radius:50%;
-
-cursor:pointer;
-
-font-size:18px;
-
-}
-
-
-
-/* =========================
-   COLLECTION GRID
-========================= */
-
 .collection-grid{
 
 display:grid;
@@ -1424,10 +919,6 @@ gap:14px;
 
 
 
-/* =========================
-   SAVED CARD
-========================= */
-
 .saved-card{
 
 background:
@@ -1437,10 +928,6 @@ border-radius:18px;
 
 overflow:hidden;
 
-border:
-1px solid
-rgba(255,255,255,0.05);
-
 }
 
 
@@ -1448,8 +935,6 @@ rgba(255,255,255,0.05);
 .saved-card img{
 
 width:100%;
-
-display:block;
 
 }
 
@@ -1463,39 +948,13 @@ padding:12px;
 
 
 
-.saved-info h4{
-
-margin-bottom:6px;
-
-font-size:14px;
-
-}
-
-
-
-.saved-info p{
-
-font-size:11px;
-
-opacity:0.7;
-
-margin-bottom:10px;
-
-}
-
-
-
-/* =========================
-   REMOVE BUTTON
-========================= */
-
 .saved-info button{
 
 width:100%;
 
-border:none;
-
 padding:10px;
+
+border:none;
 
 border-radius:10px;
 
@@ -1507,15 +966,91 @@ font-weight:700;
 
 cursor:pointer;
 
-transition:0.3s;
+}
+
+
+
+/* =========================
+   TOAST
+========================= */
+
+#toast{
+
+position:fixed;
+
+bottom:30px;
+
+left:50%;
+
+transform:
+translateX(-50%);
+
+background:white;
+
+color:black;
+
+padding:14px 20px;
+
+border-radius:999px;
+
+font-weight:700;
+
+opacity:0;
+
+pointer-events:none;
+
+transition:0.4s;
+
+z-index:9999;
 
 }
 
 
 
-.saved-info button:hover{
+.show-toast{
 
-transform:
-translateY(-2px);
+opacity:1 !important;
+
+}
+
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:980px){
+
+.player-layout{
+
+grid-template-columns:1fr;
+
+overflow-y:auto;
+
+}
+
+
+
+.player-main iframe{
+
+min-height:320px;
+
+}
+
+
+
+.search-wrapper input{
+
+width:180px;
+
+}
+
+
+
+.hero h2{
+
+font-size:34px;
+
+}
 
 }
