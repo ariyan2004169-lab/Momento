@@ -1054,3 +1054,307 @@ font-size:34px;
 }
 
 }
+/* =========================================
+   MOMENTO DENSE PREMIUM GRID
+========================================= */
+
+
+
+/* =========================
+   GRID DENSITY
+========================= */
+
+.video-grid{
+
+columns:2 180px !important;
+
+column-gap:10px;
+
+padding-bottom:40px;
+
+}
+
+
+
+/* =========================
+   COMPACT CARD
+========================= */
+
+.trend-card{
+
+margin-bottom:10px;
+
+border-radius:18px;
+
+overflow:hidden;
+
+background:
+rgba(255,255,255,0.03);
+
+border:
+1px solid
+rgba(255,255,255,0.04);
+
+transition:0.25s;
+
+}
+
+
+
+.trend-card:hover{
+
+transform:
+translateY(-3px);
+
+}
+
+
+
+/* =========================
+   THUMBNAIL
+========================= */
+
+.thumb-wrap{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+
+
+.thumb-wrap img{
+
+width:100%;
+
+display:block;
+
+transition:0.4s;
+
+}
+
+
+
+.trend-card:hover img{
+
+transform:scale(1.03);
+
+}
+
+
+
+/* =========================
+   OVERLAY CATEGORY
+========================= */
+
+.thumb-overlay{
+
+position:absolute;
+
+bottom:8px;
+
+left:8px;
+
+}
+
+
+
+.thumb-overlay span{
+
+padding:5px 10px;
+
+font-size:9px;
+
+border-radius:999px;
+
+background:
+rgba(0,0,0,0.65);
+
+backdrop-filter:
+blur(8px);
+
+}
+
+
+
+/* =========================
+   COMPACT CONTENT
+========================= */
+
+.card-content{
+
+padding:10px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:6px;
+
+}
+
+
+
+/* =========================
+   TITLE
+========================= */
+
+.card-content h4{
+
+font-size:12px;
+
+line-height:1.3;
+
+font-weight:600;
+
+display:-webkit-box;
+
+-webkit-line-clamp:2;
+
+-webkit-box-orient:vertical;
+
+overflow:hidden;
+
+}
+
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.card-content p{
+
+font-size:10px;
+
+opacity:0.55;
+
+line-height:1.4;
+
+display:-webkit-box;
+
+-webkit-line-clamp:1;
+
+-webkit-box-orient:vertical;
+
+overflow:hidden;
+
+}
+
+
+
+/* =========================
+   ICON ACTIONS
+========================= */
+
+.card-actions{
+
+display:flex;
+
+justify-content:flex-end;
+
+gap:8px;
+
+margin-top:2px;
+
+}
+
+
+
+/* =========================
+   ICON BUTTONS
+========================= */
+
+.card-actions button{
+
+width:30px;
+
+height:30px;
+
+border-radius:50%;
+
+padding:0;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:13px;
+
+background:
+rgba(255,255,255,0.06);
+
+border:none;
+
+transition:0.25s;
+
+}
+
+
+
+.card-actions button:hover{
+
+background:white;
+
+color:black;
+
+transform:scale(1.08);
+
+}
+
+
+
+/* =========================
+   MOBILE ULTRA DENSITY
+========================= */
+
+@media(max-width:700px){
+
+.video-grid{
+
+columns:2 150px !important;
+
+column-gap:8px;
+
+}
+
+
+
+.card-content{
+
+padding:8px;
+
+}
+
+
+
+.card-content h4{
+
+font-size:11px;
+
+}
+
+
+
+.card-content p{
+
+font-size:9px;
+
+}
+
+
+
+.card-actions button{
+
+width:28px;
+
+height:28px;
+
+font-size:12px;
+
+}
+
+   }
