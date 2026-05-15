@@ -430,3 +430,635 @@ cachedSearches
 renderSearchOverlay(filtered);
 
 });
+/* =========================
+   SEARCH OVERLAY
+========================= */
+
+function renderSearchOverlay(data){
+
+overlay.innerHTML="";
+
+
+
+if(data.length===0){
+
+overlay.style.display="none";
+
+return;
+
+}
+
+
+
+overlay.style.display="block";
+
+
+
+data.forEach(video=>{
+
+overlay.innerHTML += `
+
+<div
+class="search-card"
+onclick="playVideo(
+'${video.id}',
+'${video.title}',
+'${video.desc}'
+)">
+
+<img
+src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
+
+<div class="search-card-info">
+
+<h4>
+${video.title}
+</h4>
+
+<p>
+${video.category}
+</p>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+
+/* =========================
+   SEARCH BUTTON
+========================= */
+
+function performSearch(){
+
+const value =
+searchInput.value
+.toLowerCase()
+.trim();
+
+
+
+if(value===""){
+
+renderVideos(videos);
+
+return;
+
+}
+
+
+
+/* CACHE */
+
+if(cachedSearches[value]){
+
+renderVideos(
+cachedSearches[value]
+);
+
+showToast(
+"Loaded From Memory"
+);
+
+return;
+
+}
+
+
+
+/* SEARCH */
+
+const filtered =
+videos.filter(video=>
+
+video.title
+.toLowerCase()
+.includes(value)
+
+||
+
+video.desc
+.toLowerCase()
+.includes(value)
+
+||
+
+video.category
+.toLowerCase()
+.includes(value)
+
+);
+
+
+
+cachedSearches[value] =
+filtered;
+
+
+
+localStorage.setItem(
+
+"momentoCache",
+
+JSON.stringify(
+cachedSearches
+)
+
+);
+
+
+
+renderVideos(filtered);
+
+showToast(
+"Discovery Cached"
+);
+
+}
+
+
+
+/* =========================
+   FILTER SYSTEM
+========================= */
+
+const chips =
+document.querySelectorAll(
+".discover-chips button"
+);
+
+chips.forEach(chip=>{
+
+chip.addEventListener(
+"click",
+()=>{
+
+chips.forEach(c=>
+c.classList.remove(
+"active-chip"
+)
+);
+
+chip.classList.add(
+"active-chip"
+);
+
+const filter =
+chip.dataset.filter;
+
+filterVideos(filter);
+
+});
+
+});
+
+
+
+function filterVideos(filter){
+
+if(filter==="all"){
+
+renderVideos(videos);
+
+return;
+
+}
+
+
+
+const filtered =
+videos.filter(video=>
+
+video.category
+.toLowerCase()
+.includes(filter)
+
+||
+
+video.title
+.toLowerCase()
+.includes(filter)
+
+);
+
+
+
+renderVideos(filtered);
+
+}
+
+
+
+/* =========================
+   SHARE VIDEO
+========================= */
+
+function shareVideo(
+id,
+title
+){
+
+const link =
+`https://youtu.be/${id}`;
+
+
+
+if(navigator.share){
+
+navigator.share({
+
+title:title,
+
+text:
+"Discover this on MOMENTO",
+
+url:link
+
+});
+
+}
+else{
+
+navigator.clipboard.writeText(
+link
+);
+
+showToast(
+"Video Link Copied"
+);
+
+}
+
+}
+
+
+
+/* =========================
+   SAVE VIDEO
+========================= */
+
+function saveVideo(video){
+
+const alreadySaved =
+savedVideos.find(v=>
+
+v.id === video.id
+
+);
+
+
+
+if(alreadySaved){
+
+showToast(
+"Already In Collection"
+);
+
+return;
+
+}
+
+
+
+savedVideos.push(video);
+
+
+
+localStorage.setItem(
+
+"momentoSaved",
+
+JSON.stringify(
+savedVideos
+)
+
+);
+
+
+
+showToast(
+"Saved To Collection"
+);
+
+}
+
+
+
+/* =========================
+   COLLECTION
+========================= */
+
+function openCollection(){
+
+document
+.getElementById(
+"collectionPopup"
+)
+
+.classList.add(
+"active-collection"
+);
+
+renderCollection();
+
+}
+
+
+
+function closeCollection(){
+
+document
+.getElementById(
+"collectionPopup"
+)
+
+.classList.remove(
+"active-collection"
+);
+
+}
+
+
+
+function renderCollection(){
+
+const grid =
+document.getElementById(
+"collectionGrid"
+);
+
+
+
+grid.innerHTML="";
+
+
+
+if(savedVideos.length===0){
+
+grid.innerHTML = `
+
+<p>
+No Saved Discoveries Yet
+</p>
+
+`;
+
+return;
+
+}
+
+
+
+savedVideos.forEach(video=>{
+
+grid.innerHTML += `
+
+<div class="saved-card">
+
+<img
+src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
+
+
+
+<div class="saved-info">
+
+<h4>
+${video.title}
+</h4>
+
+<p>
+${video.category}
+</p>
+
+
+
+<button
+onclick="removeSaved(
+'${video.id}'
+)">
+
+Remove
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+
+function removeSaved(id){
+
+savedVideos =
+savedVideos.filter(video=>
+
+video.id !== id
+
+);
+
+
+
+localStorage.setItem(
+
+"momentoSaved",
+
+JSON.stringify(
+savedVideos
+)
+
+);
+
+
+
+renderCollection();
+
+
+
+showToast(
+"Removed From Universe"
+);
+
+}
+
+
+
+/* =========================
+   ADD VIDEO
+========================= */
+
+function addVideo(){
+
+const input =
+document.getElementById(
+"videoLink"
+);
+
+const link =
+input.value;
+
+
+
+if(!link){
+
+showToast(
+"Paste YouTube Link"
+);
+
+return;
+
+}
+
+
+
+let id = "";
+
+
+
+if(
+link.includes("watch?v=")
+){
+
+id =
+link.split("watch?v=")[1]
+.split("&")[0];
+
+}
+
+else if(
+link.includes("youtu.be/")
+){
+
+id =
+link.split("youtu.be/")[1]
+.split("?")[0];
+
+}
+
+
+
+if(!id){
+
+showToast(
+"Invalid YouTube Link"
+);
+
+return;
+
+}
+
+
+
+const moods = [
+
+"gaming",
+"future",
+"music",
+"anime",
+"dark",
+"cinematic",
+"motivation",
+"action"
+
+];
+
+
+
+const randomMood =
+moods[
+Math.floor(
+Math.random()*moods.length
+)
+];
+
+
+
+videos.unshift({
+
+title:"Uploaded Universe",
+
+desc:"new cinematic discovery",
+
+category:randomMood,
+
+id:id
+
+});
+
+
+
+renderVideos(videos);
+
+input.value="";
+
+showToast(
+"Universe Added Successfully"
+);
+
+}
+
+
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(text){
+
+toast.innerText=text;
+
+toast.classList.add(
+"show-toast"
+);
+
+setTimeout(()=>{
+
+toast.classList.remove(
+"show-toast"
+);
+
+},2500);
+
+}
+
+
+
+/* =========================
+   AUTO CLOSE OVERLAY
+========================= */
+
+document.addEventListener(
+"click",
+(e)=>{
+
+if(
+!e.target.closest(
+".search-wrapper"
+)
+){
+
+overlay.style.display=
+"none";
+
+}
+
+});
+
+
+
+/* =========================
+   INITIALIZE
+========================= */
+
+renderVideos(videos);
