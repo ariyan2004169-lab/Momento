@@ -1,5 +1,5 @@
 /* =========================================
-   MOMENTO v29 — COMPLETE SYSTEM
+   MOMENTO v30 — COMPLETE PREMIUM SYSTEM
 ========================================= */
 
 
@@ -151,6 +151,8 @@ function renderVideos(data){
 
 videoGrid.innerHTML="";
 
+
+
 data.forEach(video=>{
 
 videoGrid.innerHTML += `
@@ -167,6 +169,8 @@ onclick="playVideo(
 
 <img
 src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
+
+
 
 <div class="thumb-overlay">
 
@@ -197,7 +201,7 @@ ${video.desc}
 <button
 onclick='saveVideo(${JSON.stringify(video)})'>
 
-Save
+❤
 
 </button>
 
@@ -209,7 +213,7 @@ onclick="shareVideo(
 '${video.title}'
 )">
 
-Share
+↗
 
 </button>
 
@@ -302,6 +306,8 @@ function renderRecommended(current){
 
 recommended.innerHTML="";
 
+
+
 videos.forEach(video=>{
 
 if(video.id !== current){
@@ -371,7 +377,7 @@ return;
 
 
 
-/* CACHE */
+/* CACHE CHECK */
 
 if(cachedSearches[value]){
 
@@ -430,6 +436,9 @@ cachedSearches
 renderSearchOverlay(filtered);
 
 });
+
+
+
 /* =========================
    SEARCH OVERLAY
 ========================= */
@@ -442,7 +451,8 @@ overlay.innerHTML="";
 
 if(data.length===0){
 
-overlay.style.display="none";
+overlay.style.display=
+"none";
 
 return;
 
@@ -450,7 +460,8 @@ return;
 
 
 
-overlay.style.display="block";
+overlay.style.display=
+"block";
 
 
 
@@ -884,8 +895,6 @@ savedVideos
 
 renderCollection();
 
-
-
 showToast(
 "Removed From Universe"
 );
@@ -987,11 +996,8 @@ Math.random()*moods.length
 videos.unshift({
 
 title:"Uploaded Universe",
-
 desc:"new cinematic discovery",
-
 category:randomMood,
-
 id:id
 
 });
@@ -1035,7 +1041,7 @@ toast.classList.remove(
 
 
 /* =========================
-   AUTO CLOSE OVERLAY
+   AUTO CLOSE SEARCH
 ========================= */
 
 document.addEventListener(
