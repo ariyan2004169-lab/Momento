@@ -1,5 +1,5 @@
 /* =========================================
-   MOMENTO v27 — COMPLETE CACHE ENGINE
+   MOMENTO v29 — COMPLETE SYSTEM
 ========================================= */
 
 
@@ -23,7 +23,7 @@ localStorage.getItem(
 
 
 /* =========================
-   SAVE COLLECTIONS
+   SAVED COLLECTIONS
 ========================= */
 
 let savedVideos =
@@ -47,75 +47,45 @@ localStorage.getItem(
 let videos = [
 
 {
-
 title:"Cyber Future City",
-
 desc:"future cinematic neon world",
-
 category:"future cinematic",
-
 id:"8Qn_spdM5Zg"
-
 },
 
 {
-
 title:"Dark Horror Realm",
-
 desc:"dark horror cinematic atmosphere",
-
 category:"dark horror",
-
 id:"kXYiU_JCYtU"
-
 },
 
 {
-
 title:"Battle Gaming Energy",
-
 desc:"gaming action intense world",
-
 category:"gaming action",
-
 id:"2Vv-BfVoq4g"
-
 },
 
 {
-
 title:"Mind Awakening",
-
 desc:"motivation powerful mindset",
-
 category:"motivation",
-
 id:"ZXsQAXx_ao0"
-
 },
 
 {
-
 title:"Anime Storm",
-
 desc:"anime cinematic emotional world",
-
 category:"anime cinematic",
-
 id:"dQw4w9WgXcQ"
-
 },
 
 {
-
 title:"Neon Soundscape",
-
 desc:"music futuristic atmosphere",
-
 category:"music future",
-
 id:"RgKAFK5djSk"
-
 }
 
 ];
@@ -181,15 +151,11 @@ function renderVideos(data){
 
 videoGrid.innerHTML="";
 
-
-
 data.forEach(video=>{
 
 videoGrid.innerHTML += `
 
 <div class="trend-card">
-
-
 
 <div
 class="thumb-wrap"
@@ -201,8 +167,6 @@ onclick="playVideo(
 
 <img
 src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
-
-
 
 <div class="thumb-overlay">
 
@@ -230,8 +194,6 @@ ${video.desc}
 
 <div class="card-actions">
 
-
-
 <button
 onclick='saveVideo(${JSON.stringify(video)})'>
 
@@ -250,8 +212,6 @@ onclick="shareVideo(
 Share
 
 </button>
-
-
 
 </div>
 
@@ -277,16 +237,18 @@ title,
 desc
 ){
 
-popup.style.display="block";
+popup.style.display="flex";
 
-frame.src=
+frame.src =
 `https://www.youtube.com/embed/${id}?autoplay=1`;
 
-titleText.innerText=
+titleText.innerText =
 title;
 
-descText.innerText=
+descText.innerText =
 desc;
+
+updateBackdrop(id);
 
 renderRecommended(id);
 
@@ -312,14 +274,33 @@ frame.src="";
 
 
 /* =========================
+   BACKDROP
+========================= */
+
+function updateBackdrop(id){
+
+const backdrop =
+document.getElementById(
+"cinematicBackdrop"
+);
+
+backdrop.style.backgroundImage =
+
+`url(
+https://img.youtube.com/vi/${id}/maxresdefault.jpg
+)`;
+
+}
+
+
+
+/* =========================
    RECOMMENDATIONS
 ========================= */
 
 function renderRecommended(current){
 
 recommended.innerHTML="";
-
-
 
 videos.forEach(video=>{
 
@@ -390,7 +371,7 @@ return;
 
 
 
-/* CACHE CHECK */
+/* CACHE */
 
 if(cachedSearches[value]){
 
@@ -429,8 +410,6 @@ video.category
 
 
 
-/* SAVE CACHE */
-
 cachedSearches[value] =
 filtered;
 
@@ -450,689 +429,4 @@ cachedSearches
 
 renderSearchOverlay(filtered);
 
-}
-);
-
-
-
-/* =========================
-   SEARCH OVERLAY
-========================= */
-
-function renderSearchOverlay(data){
-
-overlay.innerHTML="";
-
-
-
-if(data.length===0){
-
-overlay.style.display=
-"none";
-
-return;
-
-}
-
-
-
-overlay.style.display=
-"block";
-
-
-
-data.forEach(video=>{
-
-overlay.innerHTML += `
-
-<div
-class="search-card"
-onclick="playVideo(
-'${video.id}',
-'${video.title}',
-'${video.desc}'
-)">
-
-<img
-src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
-
-<div class="search-card-info">
-
-<h4>
-${video.title}
-</h4>
-
-<p>
-${video.category}
-</p>
-
-</div>
-
-</div>
-
-`;
-
 });
-
-}
-
-
-
-/* =========================
-   SEARCH BUTTON
-========================= */
-
-function performSearch(){
-
-const value =
-searchInput.value
-.toLowerCase()
-.trim();
-
-
-
-if(value===""){
-
-renderVideos(videos);
-
-return;
-
-}
-
-
-
-/* CACHE CHECK */
-
-if(cachedSearches[value]){
-
-renderVideos(
-cachedSearches[value]
-);
-
-showToast(
-"Loaded From Memory"
-);
-
-return;
-
-}
-
-
-
-/* SEARCH */
-
-const filtered =
-videos.filter(video=>
-
-video.title
-.toLowerCase()
-.includes(value)
-
-||
-
-video.desc
-.toLowerCase()
-.includes(value)
-
-||
-
-video.category
-.toLowerCase()
-.includes(value)
-
-);
-
-
-
-/* SAVE CACHE */
-
-cachedSearches[value] =
-filtered;
-
-
-
-localStorage.setItem(
-
-"momentoCache",
-
-JSON.stringify(
-cachedSearches
-)
-
-);
-
-
-
-renderVideos(filtered);
-
-showToast(
-"Discovery Cached"
-);
-
-}
-
-
-
-/* =========================
-   DISCOVERY CHIPS
-========================= */
-
-const chips =
-document.querySelectorAll(
-".discover-chips button"
-);
-
-chips.forEach(chip=>{
-
-chip.addEventListener(
-"click",
-()=>{
-
-chips.forEach(c=>
-c.classList.remove(
-"active-chip"
-)
-);
-
-chip.classList.add(
-"active-chip"
-);
-
-const filter =
-chip.dataset.filter;
-
-filterVideos(filter);
-
-});
-
-});
-
-
-
-function filterVideos(filter){
-
-if(filter==="all"){
-
-renderVideos(videos);
-
-return;
-
-}
-
-
-
-const filtered =
-videos.filter(video=>
-
-video.category
-.toLowerCase()
-.includes(filter)
-
-||
-
-video.title
-.toLowerCase()
-.includes(filter)
-
-);
-
-
-
-renderVideos(filtered);
-
-}
-
-
-
-/* =========================
-   SHARE VIDEO
-========================= */
-
-function shareVideo(
-id,
-title
-){
-
-const link =
-`https://youtu.be/${id}`;
-
-
-
-if(
-navigator.share
-){
-
-navigator.share({
-
-title:title,
-
-text:
-"Discover this on MOMENTO",
-
-url:link
-
-});
-
-}
-else{
-
-navigator.clipboard.writeText(
-link
-);
-
-showToast(
-"Video Link Copied"
-);
-
-}
-
-}
-
-
-
-/* =========================
-   SAVE VIDEO
-========================= */
-
-function saveVideo(video){
-
-const alreadySaved =
-savedVideos.find(v=>
-
-v.id === video.id
-);
-
-
-
-if(alreadySaved){
-
-showToast(
-"Already In Collection"
-);
-
-return;
-
-}
-
-
-
-savedVideos.push(video);
-
-
-
-localStorage.setItem(
-
-"momentoSaved",
-
-JSON.stringify(
-savedVideos
-)
-
-);
-
-
-
-showToast(
-"Saved To Collection"
-);
-
-}
-
-
-
-/* =========================
-   ADD VIDEO
-========================= */
-
-function addVideo(){
-
-const input =
-document.getElementById(
-"videoLink"
-);
-
-const link =
-input.value;
-
-
-
-if(!link){
-
-showToast(
-"Paste YouTube Link"
-);
-
-return;
-
-}
-
-
-
-let id = "";
-
-
-
-if(
-link.includes("watch?v=")
-){
-
-id =
-link.split("watch?v=")[1]
-.split("&")[0];
-
-}
-
-else if(
-link.includes("youtu.be/")
-){
-
-id =
-link.split("youtu.be/")[1]
-.split("?")[0];
-
-}
-
-
-
-if(!id){
-
-showToast(
-"Invalid YouTube Link"
-);
-
-return;
-
-}
-
-
-
-/* RANDOM CATEGORY */
-
-const moods = [
-
-"gaming",
-
-"future",
-
-"music",
-
-"anime",
-
-"dark",
-
-"cinematic",
-
-"motivation",
-
-"action"
-
-];
-
-
-
-const randomMood =
-moods[
-Math.floor(
-Math.random()*moods.length
-)
-];
-
-
-
-videos.unshift({
-
-title:"Uploaded Universe",
-
-desc:"new cinematic discovery",
-
-category:randomMood,
-
-id:id
-
-});
-
-
-
-renderVideos(videos);
-
-input.value="";
-
-showToast(
-"Universe Added Successfully"
-);
-
-}
-
-
-
-/* =========================
-   CLEAR CACHE
-========================= */
-
-function clearMomentoCache(){
-
-localStorage.removeItem(
-"momentoCache"
-);
-
-cachedSearches = {};
-
-showToast(
-"Memory Cleared"
-);
-
-}
-
-
-
-/* =========================
-   TOAST
-========================= */
-
-function showToast(text){
-
-toast.innerText=text;
-
-toast.classList.add(
-"show-toast"
-);
-
-setTimeout(()=>{
-
-toast.classList.remove(
-"show-toast"
-);
-
-},2500);
-
-}
-
-
-
-/* =========================
-   AUTO CLOSE OVERLAY
-========================= */
-
-document.addEventListener(
-"click",
-(e)=>{
-
-if(
-!e.target.closest(
-".search-wrapper"
-)
-){
-
-overlay.style.display=
-"none";
-
-}
-
-});
-
-
-
-/* =========================
-   INITIALIZE
-========================= */
-
-renderVideos(videos);
-/* =========================================
-   MOMENTO COLLECTION SYSTEM
-========================================= */
-
-
-
-/* =========================
-   OPEN COLLECTION
-========================= */
-
-function openCollection(){
-
-document
-.getElementById(
-"collectionPopup"
-)
-
-.classList.add(
-"active-collection"
-);
-
-renderCollection();
-
-}
-
-
-
-/* =========================
-   CLOSE COLLECTION
-========================= */
-
-function closeCollection(){
-
-document
-.getElementById(
-"collectionPopup"
-)
-
-.classList.remove(
-"active-collection"
-);
-
-}
-
-
-
-/* =========================
-   RENDER COLLECTION
-========================= */
-
-function renderCollection(){
-
-const grid =
-document.getElementById(
-"collectionGrid"
-);
-
-
-
-grid.innerHTML="";
-
-
-
-if(savedVideos.length===0){
-
-grid.innerHTML = `
-
-<p>
-No Saved Discoveries Yet
-</p>
-
-`;
-
-return;
-
-}
-
-
-
-savedVideos.forEach(video=>{
-
-grid.innerHTML += `
-
-<div class="saved-card">
-
-<img
-src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
-
-
-
-<div class="saved-info">
-
-<h4>
-${video.title}
-</h4>
-
-<p>
-${video.category}
-</p>
-
-
-
-<button
-onclick="removeSaved(
-'${video.id}'
-)">
-
-Remove
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-});
-
-}
-
-
-
-/* =========================
-   REMOVE SAVED
-========================= */
-
-function removeSaved(id){
-
-savedVideos =
-savedVideos.filter(video=>
-
-video.id !== id
-
-);
-
-
-
-localStorage.setItem(
-
-"momentoSaved",
-
-JSON.stringify(
-savedVideos
-)
-
-);
-
-
-
-renderCollection();
-
-
-
-showToast(
-"Removed From Universe"
-);
-
-}
