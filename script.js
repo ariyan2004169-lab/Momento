@@ -977,3 +977,162 @@ overlay.style.display=
 ========================= */
 
 renderVideos(videos);
+/* =========================================
+   MOMENTO COLLECTION SYSTEM
+========================================= */
+
+
+
+/* =========================
+   OPEN COLLECTION
+========================= */
+
+function openCollection(){
+
+document
+.getElementById(
+"collectionPopup"
+)
+
+.classList.add(
+"active-collection"
+);
+
+renderCollection();
+
+}
+
+
+
+/* =========================
+   CLOSE COLLECTION
+========================= */
+
+function closeCollection(){
+
+document
+.getElementById(
+"collectionPopup"
+)
+
+.classList.remove(
+"active-collection"
+);
+
+}
+
+
+
+/* =========================
+   RENDER COLLECTION
+========================= */
+
+function renderCollection(){
+
+const grid =
+document.getElementById(
+"collectionGrid"
+);
+
+
+
+grid.innerHTML="";
+
+
+
+if(savedVideos.length===0){
+
+grid.innerHTML = `
+
+<p>
+No Saved Discoveries Yet
+</p>
+
+`;
+
+return;
+
+}
+
+
+
+savedVideos.forEach(video=>{
+
+grid.innerHTML += `
+
+<div class="saved-card">
+
+<img
+src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
+
+
+
+<div class="saved-info">
+
+<h4>
+${video.title}
+</h4>
+
+<p>
+${video.category}
+</p>
+
+
+
+<button
+onclick="removeSaved(
+'${video.id}'
+)">
+
+Remove
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+
+
+/* =========================
+   REMOVE SAVED
+========================= */
+
+function removeSaved(id){
+
+savedVideos =
+savedVideos.filter(video=>
+
+video.id !== id
+
+);
+
+
+
+localStorage.setItem(
+
+"momentoSaved",
+
+JSON.stringify(
+savedVideos
+)
+
+);
+
+
+
+renderCollection();
+
+
+
+showToast(
+"Removed From Universe"
+);
+
+}
