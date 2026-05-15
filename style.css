@@ -1212,3 +1212,62 @@ font-size:10px;
 opacity:0.6;
 
 }
+/* =========================
+   CARD ACTIONS
+========================= */
+
+.card-actions{
+
+display:flex;
+
+gap:8px;
+
+margin-top:10px;
+
+}
+
+
+
+/* BUTTONS */
+
+.card-actions button{
+
+flex:1;
+
+border:none;
+
+background:
+rgba(255,255,255,0.06);
+
+color:white;
+
+padding:8px;
+
+border-radius:10px;
+
+font-size:11px;
+
+cursor:pointer;
+
+transition:0.3s;
+
+border:
+1px solid
+rgba(255,255,255,0.05);
+
+}
+
+
+
+/* HOVER */
+
+.card-actions button:hover{
+
+background:white;
+
+color:black;
+
+transform:
+translateY(-2px);
+
+}
