@@ -1,5 +1,5 @@
 /* =========================================
-   MOMENTO v31 — IMMERSIVE MASONRY FEED
+   MOMENTO v32 — LIVE MOTION FEED
 ========================================= */
 
 
@@ -153,11 +153,13 @@ videoGrid.innerHTML="";
 
 
 
-data.forEach(video=>{
+data.forEach((video,index)=>{
 
 videoGrid.innerHTML += `
 
-<div class="trend-card">
+<div
+class="trend-card"
+style="animation-delay:${index * 0.05}s">
 
 <div
 class="thumb-wrap"
@@ -168,6 +170,7 @@ onclick="playVideo(
 )">
 
 <img
+loading="lazy"
 src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
 
 
@@ -337,6 +340,7 @@ onclick="playVideo(
 )">
 
 <img
+loading="lazy"
 src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
 
 <div class="recommend-info">
@@ -492,6 +496,7 @@ onclick="playVideo(
 )">
 
 <img
+loading="lazy"
 src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
 
 <div class="search-card-info">
@@ -855,6 +860,7 @@ grid.innerHTML += `
 <div class="saved-card">
 
 <img
+loading="lazy"
 src="https://img.youtube.com/vi/${video.id}/hqdefault.jpg">
 
 
