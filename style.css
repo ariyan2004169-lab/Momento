@@ -1358,3 +1358,417 @@ font-size:12px;
 }
 
    }
+/* =========================================
+   MOMENTO IMMERSIVE FEED SYSTEM
+========================================= */
+
+
+
+/* =========================
+   ULTRA DENSE GRID
+========================= */
+
+.video-grid{
+
+columns:2 160px !important;
+
+column-gap:6px;
+
+padding:0 8px 40px;
+
+}
+
+
+
+/* =========================
+   FEED CARD
+========================= */
+
+.trend-card{
+
+position:relative;
+
+margin-bottom:6px;
+
+border-radius:18px;
+
+overflow:hidden;
+
+background:black;
+
+break-inside:avoid;
+
+border:none;
+
+box-shadow:none;
+
+}
+
+
+
+/* =========================
+   THUMBNAIL
+========================= */
+
+.thumb-wrap{
+
+position:relative;
+
+cursor:pointer;
+
+}
+
+
+
+.thumb-wrap img{
+
+width:100%;
+
+display:block;
+
+object-fit:cover;
+
+transition:0.3s;
+
+}
+
+
+
+/* =========================
+   HOVER
+========================= */
+
+.trend-card:hover img{
+
+transform:scale(1.02);
+
+}
+
+
+
+/* =========================
+   DARK GRADIENT
+========================= */
+
+.thumb-wrap::after{
+
+content:"";
+
+position:absolute;
+
+left:0;
+right:0;
+bottom:0;
+
+height:55%;
+
+background:
+linear-gradient(
+to top,
+rgba(0,0,0,0.95),
+rgba(0,0,0,0)
+);
+
+}
+
+
+
+/* =========================
+   CATEGORY CHIP
+========================= */
+
+.thumb-overlay{
+
+position:absolute;
+
+left:8px;
+
+bottom:38px;
+
+z-index:3;
+
+}
+
+
+
+.thumb-overlay span{
+
+padding:4px 10px;
+
+border-radius:999px;
+
+font-size:9px;
+
+background:
+rgba(0,0,0,0.7);
+
+backdrop-filter:blur(8px);
+
+}
+
+
+
+/* =========================
+   TITLE OVERLAY
+========================= */
+
+.card-content{
+
+position:absolute;
+
+left:10px;
+right:10px;
+bottom:8px;
+
+z-index:3;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:flex-end;
+
+gap:6px;
+
+}
+
+
+
+/* =========================
+   TITLE
+========================= */
+
+.text-side{
+
+flex:1;
+
+min-width:0;
+
+}
+
+
+
+.text-side h4{
+
+font-size:12px;
+
+font-weight:600;
+
+line-height:1.25;
+
+margin:0;
+
+display:-webkit-box;
+
+-webkit-line-clamp:2;
+
+-webkit-box-orient:vertical;
+
+overflow:hidden;
+
+}
+
+
+
+.text-side p{
+
+display:none;
+
+}
+
+
+
+/* =========================
+   FLOATING ICONS
+========================= */
+
+.card-actions{
+
+display:flex;
+
+gap:4px;
+
+align-items:center;
+
+}
+
+
+
+/* =========================
+   ICON BUTTONS
+========================= */
+
+.card-actions button{
+
+width:26px;
+
+height:26px;
+
+border-radius:50%;
+
+border:none;
+
+background:
+rgba(0,0,0,0.65);
+
+backdrop-filter:blur(8px);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+font-size:11px;
+
+padding:0;
+
+color:white;
+
+transition:0.2s;
+
+}
+
+
+
+.card-actions button:hover{
+
+transform:scale(1.08);
+
+background:white;
+
+color:black;
+
+}
+
+
+
+/* =========================
+   REMOVE EXTRA SPACING
+========================= */
+
+section{
+
+margin-bottom:12px !important;
+
+}
+
+
+
+.hero{
+
+padding-bottom:20px !important;
+
+}
+
+
+
+.discover-chips{
+
+margin-bottom:12px !important;
+
+gap:8px;
+
+overflow-x:auto;
+
+padding-bottom:4px;
+
+}
+
+
+
+/* =========================
+   COMPACT CHIPS
+========================= */
+
+.discover-chips button{
+
+padding:8px 14px;
+
+font-size:11px;
+
+border-radius:999px;
+
+}
+
+
+
+/* =========================
+   SMALLER TITLES
+========================= */
+
+.section-title{
+
+font-size:22px !important;
+
+margin-bottom:14px !important;
+
+}
+
+
+
+/* =========================
+   MOBILE ULTRA FEED
+========================= */
+
+@media(max-width:700px){
+
+.video-grid{
+
+columns:2 145px !important;
+
+column-gap:5px;
+
+padding:0 6px 30px;
+
+}
+
+
+
+.trend-card{
+
+border-radius:15px;
+
+margin-bottom:5px;
+
+}
+
+
+
+.text-side h4{
+
+font-size:11px;
+
+}
+
+
+
+.card-actions button{
+
+width:24px;
+
+height:24px;
+
+font-size:10px;
+
+}
+
+
+
+.thumb-overlay{
+
+bottom:34px;
+
+}
+
+
+
+.thumb-overlay span{
+
+font-size:8px;
+
+padding:4px 8px;
+
+}
+
+}
