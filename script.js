@@ -1,5 +1,6 @@
 /* =========================================
-   MOMENTO v30 — COMPLETE PREMIUM SYSTEM
+   MOMENTO — COMPLETE UPDATED JS
+   IMMERSIVE FEED EDITION
 ========================================= */
 
 
@@ -54,20 +55,6 @@ id:"8Qn_spdM5Zg"
 },
 
 {
-title:"Dark Horror Realm",
-desc:"dark horror cinematic atmosphere",
-category:"dark horror",
-id:"kXYiU_JCYtU"
-},
-
-{
-title:"Battle Gaming Energy",
-desc:"gaming action intense world",
-category:"gaming action",
-id:"2Vv-BfVoq4g"
-},
-
-{
 title:"Mind Awakening",
 desc:"motivation powerful mindset",
 category:"motivation",
@@ -75,10 +62,24 @@ id:"ZXsQAXx_ao0"
 },
 
 {
+title:"Dark Horror Realm",
+desc:"dark horror cinematic atmosphere",
+category:"dark horror",
+id:"kXYiU_JCYtU"
+},
+
+{
 title:"Anime Storm",
 desc:"anime cinematic emotional world",
 category:"anime cinematic",
 id:"dQw4w9WgXcQ"
+},
+
+{
+title:"Battle Gaming Energy",
+desc:"gaming action intense world",
+category:"gaming action",
+id:"2Vv-BfVoq4g"
 },
 
 {
@@ -180,11 +181,11 @@ ${video.category}
 
 </div>
 
-</div>
-
 
 
 <div class="card-content">
+
+<div class="text-side">
 
 <h4>
 ${video.title}
@@ -194,12 +195,14 @@ ${video.title}
 ${video.desc}
 </p>
 
+</div>
+
 
 
 <div class="card-actions">
 
 <button
-onclick='saveVideo(${JSON.stringify(video)})'>
+onclick='event.stopPropagation();saveVideo(${JSON.stringify(video)})'>
 
 ❤
 
@@ -208,7 +211,7 @@ onclick='saveVideo(${JSON.stringify(video)})'>
 
 
 <button
-onclick="shareVideo(
+onclick="event.stopPropagation();shareVideo(
 '${video.id}',
 '${video.title}'
 )">
@@ -216,6 +219,8 @@ onclick="shareVideo(
 ↗
 
 </button>
+
+</div>
 
 </div>
 
@@ -288,11 +293,15 @@ document.getElementById(
 "cinematicBackdrop"
 );
 
+if(backdrop){
+
 backdrop.style.backgroundImage =
 
 `url(
 https://img.youtube.com/vi/${id}/maxresdefault.jpg
 )`;
+
+}
 
 }
 
@@ -303,6 +312,8 @@ https://img.youtube.com/vi/${id}/maxresdefault.jpg
 ========================= */
 
 function renderRecommended(current){
+
+if(!recommended) return;
 
 recommended.innerHTML="";
 
@@ -377,7 +388,7 @@ return;
 
 
 
-/* CACHE CHECK */
+/* CACHE */
 
 if(cachedSearches[value]){
 
@@ -728,7 +739,7 @@ v.id === video.id
 if(alreadySaved){
 
 showToast(
-"Already In Collection"
+"Already Saved"
 );
 
 return;
@@ -762,7 +773,7 @@ showToast(
 
 
 /* =========================
-   COLLECTION
+   COLLECTION POPUP
 ========================= */
 
 function openCollection(){
@@ -797,12 +808,20 @@ document
 
 
 
+/* =========================
+   RENDER COLLECTION
+========================= */
+
 function renderCollection(){
 
 const grid =
 document.getElementById(
 "collectionGrid"
 );
+
+
+
+if(!grid) return;
 
 
 
@@ -870,6 +889,10 @@ Remove
 
 
 
+/* =========================
+   REMOVE SAVED
+========================= */
+
 function removeSaved(id){
 
 savedVideos =
@@ -896,7 +919,7 @@ savedVideos
 renderCollection();
 
 showToast(
-"Removed From Universe"
+"Removed"
 );
 
 }
@@ -960,7 +983,7 @@ link.split("youtu.be/")[1]
 if(!id){
 
 showToast(
-"Invalid YouTube Link"
+"Invalid Link"
 );
 
 return;
@@ -1009,7 +1032,7 @@ renderVideos(videos);
 input.value="";
 
 showToast(
-"Universe Added Successfully"
+"Universe Added"
 );
 
 }
@@ -1021,6 +1044,8 @@ showToast(
 ========================= */
 
 function showToast(text){
+
+if(!toast) return;
 
 toast.innerText=text;
 
@@ -1034,7 +1059,7 @@ toast.classList.remove(
 "show-toast"
 );
 
-},2500);
+},2200);
 
 }
 
