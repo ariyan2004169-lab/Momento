@@ -1,6 +1,5 @@
 /* =========================================
-   MOMENTO — COMPLETE UPDATED JS
-   IMMERSIVE FEED EDITION
+   MOMENTO v31 — IMMERSIVE MASONRY FEED
 ========================================= */
 
 
@@ -283,7 +282,7 @@ frame.src="";
 
 
 /* =========================
-   BACKDROP
+   UPDATE BACKDROP
 ========================= */
 
 function updateBackdrop(id){
@@ -292,6 +291,8 @@ const backdrop =
 document.getElementById(
 "cinematicBackdrop"
 );
+
+
 
 if(backdrop){
 
@@ -314,6 +315,8 @@ https://img.youtube.com/vi/${id}/maxresdefault.jpg
 function renderRecommended(current){
 
 if(!recommended) return;
+
+
 
 recommended.innerHTML="";
 
@@ -1046,6 +1049,8 @@ showToast(
 function showToast(text){
 
 if(!toast) return;
+
+
 
 toast.innerText=text;
 
