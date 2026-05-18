@@ -2541,6 +2541,185 @@ border-radius:999px;
 background:transparent;
 
 }
+   /* ======================================
+   MOMENTO RESPONSIVE SYSTEM
+   END ONLY UPDATE
+====================================== */
+
+/* make everything size correctly */
+
+*{
+box-sizing:border-box;
+}
+
+img{
+max-width:100%;
+display:block;
+}
+
+body{
+overflow-x:hidden;
+}
+
+
+
+/* =====================
+TOP SECTION
+===================== */
+
+.navbar{
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+flex-wrap:wrap;
+
+}
+
+.search-wrapper{
+
+flex:1;
+min-width:140px;
+
+}
+
+
+
+/* =====================
+UPLOAD SECTION
+===================== */
+
+.upload-container{
+
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+
+}
+
+.upload-container input{
+
+flex:1;
+min-width:140px;
+
+}
+
+.upload-container button{
+
+width:auto;
+padding:14px 24px;
+
+}
+
+
+
+/* =====================
+VIDEO GRID
+===================== */
+
+.video-grid{
+
+display:grid !important;
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(170px,1fr)
+);
+
+gap:10px;
+
+}
+
+
+
+/* =====================
+TABLET
+===================== */
+
+@media (min-width:768px){
+
+.video-grid{
+
+grid-template-columns:
+repeat(3,1fr);
+
+}
+
+}
+
+
+
+/* =====================
+LAPTOP
+===================== */
+
+@media (min-width:1024px){
+
+.video-grid{
+
+grid-template-columns:
+repeat(4,1fr);
+
+max-width:1400px;
+margin:auto;
+
+}
+
+}
+
+
+
+/* =====================
+BIG DESKTOP
+===================== */
+
+@media (min-width:1400px){
+
+.video-grid{
+
+grid-template-columns:
+repeat(5,1fr);
+
+}
+
+}
+
+
+
+/* =====================
+PHONE FIXES
+===================== */
+
+@media(max-width:600px){
+
+.logo{
+
+font-size:34px;
+
+}
+
+.hero h1{
+
+font-size:38px;
+
+}
+
+.discover-chips{
+
+overflow-x:auto;
+white-space:nowrap;
+
+}
+
+.card-actions button{
+
+width:22px;
+height:22px;
+
+}
+
+}
 
 
 
