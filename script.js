@@ -1104,3 +1104,272 @@ overlay.style.display=
 ========================= */
 
 renderVideos(videos);
+/* =========================================
+   MOMENTO SMART RECOMMENDATION ENGINE
+   END-ONLY UPDATE
+========================================= */
+
+
+
+/* =========================
+   WATCH HISTORY
+========================= */
+
+let watchHistory =
+
+JSON.parse(
+localStorage.getItem(
+"momentoHistory"
+))
+
+||
+
+[];
+
+
+
+/* =========================
+   TRACK WATCH
+========================= */
+
+function trackWatch(video){
+
+watchHistory =
+watchHistory.filter(v=>
+
+v.id!==video.id
+
+);
+
+watchHistory.unshift(video);
+
+
+
+if(
+watchHistory.length>20
+){
+
+watchHistory.pop();
+
+}
+
+
+
+localStorage.setItem(
+
+"momentoHistory",
+
+JSON.stringify(
+watchHistory
+)
+
+);
+
+}
+
+
+
+/* =========================
+   UPGRADE PLAY VIDEO
+========================= */
+
+const oldPlayVideo =
+playVideo;
+
+
+
+playVideo = function(
+
+id,
+title,
+desc
+
+){
+
+oldPlayVideo(
+id,
+title,
+desc
+);
+
+
+
+const current =
+
+videos.find(v=>
+
+v.id===id
+
+);
+
+
+
+if(current){
+
+trackWatch(current);
+
+}
+
+};
+
+
+
+/* =========================
+   SMART RECOMMENDATIONS
+========================= */
+
+renderRecommended =
+function(current){
+
+if(!recommended)
+return;
+
+
+
+recommended.innerHTML="";
+
+
+
+const currentVideo=
+
+videos.find(v=>
+
+v.id===current
+);
+
+
+
+let smartFeed=
+
+[...videos]
+
+.filter(v=>
+
+v.id!==current
+
+)
+
+.sort((a,b)=>{
+
+let aScore=0;
+let bScore=0;
+
+
+
+/* similar category */
+
+if(
+
+currentVideo &&
+
+a.category.includes(
+currentVideo.category
+)
+
+){
+
+aScore+=10;
+
+}
+
+
+
+if(
+
+currentVideo &&
+
+b.category.includes(
+currentVideo.category
+)
+
+){
+
+bScore+=10;
+
+}
+
+
+
+/* watch history boost */
+
+watchHistory.forEach(item=>{
+
+if(
+
+a.category===item.category
+
+){
+
+aScore+=3;
+
+}
+
+
+
+if(
+
+b.category===item.category
+
+){
+
+bScore+=3;
+
+}
+
+});
+
+
+
+return bScore-aScore;
+
+});
+
+
+
+smartFeed
+
+.slice(0,6)
+
+.forEach(video=>{
+
+recommended.innerHTML += `
+
+<div
+class="recommend-card"
+onclick="playVideo(
+'${video.id}',
+'${video.title}',
+'${video.desc}'
+)">
+
+<img
+loading="lazy"
+src="https://img.youtube.com/vi/${video.id}/mqdefault.jpg">
+
+
+
+<div class="recommend-info">
+
+<h4>
+${video.title}
+</h4>
+
+<p>
+${video.category}
+</p>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+};
+
+
+
+console.log(
+"Smart Recommendation Engine Loaded"
+);
